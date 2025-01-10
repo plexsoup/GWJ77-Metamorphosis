@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyip2qf1iaco1"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_xkj3o"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xkj3o")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+tabs_visible = false
+
+[node name="TitleScreen" type="MarginContainer" parent="TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+metadata/_tab_index = 0
+
+[node name="Buttons" type="VBoxContainer" parent="TabContainer/TitleScreen"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="TabContainer/TitleScreen/Buttons"]
+layout_mode = 2
+text = "Play"
