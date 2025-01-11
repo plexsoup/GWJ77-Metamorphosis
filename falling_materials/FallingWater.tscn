@@ -14,7 +14,7 @@ fill = 2
 fill_from = Vector2(0.5, 0.5)
 
 [node name="Water" instance=ExtResource("1_4cnja")]
-short_name = "sand"
+short_name = "Water"
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 texture = SubResource("GradientTexture2D_sp1fk")

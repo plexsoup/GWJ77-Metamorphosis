@@ -5,7 +5,8 @@ signal material_changed(new_material)
 
 var current_material : # phantom - passthru var
 	set(v): # nothing to set
-		return
+		current_material = v
+		material_changed.emit()
 	get:
 		return $MaterialPicker.current_material_scene
 

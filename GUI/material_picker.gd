@@ -3,6 +3,7 @@ extends HBoxContainer
 var materials = [
 	preload("res://falling_materials/FallingSand.tscn"),
 	preload("res://falling_materials/FallingWater.tscn"),
+	preload("res://falling_materials/FallingSeed.tscn"),
 ]
 
 var current_material_idx = 0

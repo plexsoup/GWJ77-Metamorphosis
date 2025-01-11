@@ -17,7 +17,11 @@ func slide_dev_notes():
 		Vector2(316, 210)
 	]
 	var tween = create_tween()
-	var current_pos_idx = positions.find($DevNotes.position)
-	var new_pos_idx = ( current_pos_idx +1 ) % positions.size()
-	tween.tween_property($DevNotes, "position", positions[new_pos_idx], 0.5)
+	var next_pos : Vector2
+	if $DevNotes.position.x < 0:
+		next_pos = positions[1]
+	else:
+		next_pos = positions[0]
+
+	tween.tween_property($DevNotes, "position", next_pos, 0.5)
 	

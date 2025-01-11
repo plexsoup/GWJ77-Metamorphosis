@@ -85,12 +85,13 @@ size_flags_stretch_ratio = 0.2
 [node name="DevNotes" type="TextEdit" parent="."]
 custom_minimum_size = Vector2(384, 256)
 layout_mode = 0
-offset_left = 316.0
+offset_left = -421.0
 offset_top = 210.0
-offset_right = 700.0
+offset_right = -37.0
 offset_bottom = 466.0
 text = "If falling particles proves to be too resource intensive, we'll switch to bombs which spawn objects (lake, tree, mountain, whatever). Because falling sand games may require a custom pixel-based physics engine.
 "
+wrap_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/TabContainer/TitleScreen/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/TabContainer/TitleScreen/Buttons/StrangeButton" to="." method="_on_strange_button_pressed"]

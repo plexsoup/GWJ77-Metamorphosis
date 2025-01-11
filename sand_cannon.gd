@@ -38,12 +38,12 @@ func _process(delta: float) -> void:
 		pass
 
 
-func move_through_particles(remaining_velocity):
-	var collision : KinematicCollision2D = move_and_collide(velocity)
+func move_through_particles(_remaining_velocity):
+	var collision : KinematicCollision2D = move_and_collide(_remaining_velocity)
 	if collision:
 		var collider = collision.get_collider()
 		if collider.is_in_group("particles"):
-			#move_through_particles(collision.get_remainder())
+			#move_through_particles(_remaining_velocity)
 			var push_force = 10.0 * thrust
 			collider.apply_central_impulse(-1*collision.get_normal()*push_force)
 		elif collider.owner.is_in_group("planets"):
