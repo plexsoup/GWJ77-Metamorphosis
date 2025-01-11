@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq1k2g4vbkopg"]
+
+[ext_resource type="PackedScene" uid="uid://dsv8to32p8knp" path="res://GUI/material_picker.tscn" id="1_62glj"]
+[ext_resource type="Script" path="res://GUI/hud.gd" id="1_n11ch"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_n11ch")
+
+[node name="MaterialPicker" parent="." instance=ExtResource("1_62glj")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 0.0
+offset_right = 83.0
+grow_horizontal = 1

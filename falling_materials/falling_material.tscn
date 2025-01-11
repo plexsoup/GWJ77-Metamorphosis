@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy277iegdegrc"]
+
+[ext_resource type="Script" path="res://falling_materials/falling_material.gd" id="1_i5jb7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dknj4"]
+size = Vector2(16, 16)
+
+[node name="FallingMaterial" type="RigidBody2D" groups=["particles"]]
+script = ExtResource("1_i5jb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dknj4")

@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://1xo8d3t1gu6t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cv07b"]
+radius = 384.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ipo4h"]
+radius = 640.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c3iww"]
+radius = 216.002
+
+[sub_resource type="Gradient" id="Gradient_1gubi"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.5, 0.6)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dumqk"]
+gradient = SubResource("Gradient_1gubi")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Planet" type="Node2D" groups=["planets"]]
+
+[node name="Troposphere" type="Area2D" parent="."]
+gravity_space_override = 2
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 440.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Troposphere"]
+shape = SubResource("CircleShape2D_cv07b")
+
+[node name="Stratosphere" type="Area2D" parent="."]
+gravity_space_override = 4
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 440.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stratosphere"]
+shape = SubResource("CircleShape2D_ipo4h")
+
+[node name="PlanetStaticBody" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetStaticBody"]
+shape = SubResource("CircleShape2D_c3iww")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_dumqk")

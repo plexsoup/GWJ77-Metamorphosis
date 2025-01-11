@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi1ti5anfdrh2"]
+
+[ext_resource type="PackedScene" uid="uid://bnciv3ns4hnpe" path="res://solar_system.tscn" id="1_cd1ob"]
+[ext_resource type="PackedScene" uid="uid://dq1k2g4vbkopg" path="res://GUI/hud.tscn" id="2_ao1wb"]
+
+[node name="GameLevel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SolarSystem" parent="." instance=ExtResource("1_cd1ob")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("2_ao1wb")]

@@ -1,0 +1,274 @@
+[gd_scene load_steps=8 format=3 uid="uid://c44n3b33v6mob"]
+
+[ext_resource type="Script" path="res://sand_cannon.gd" id="1_rbohq"]
+[ext_resource type="Texture2D" uid="uid://co1qbxio8ys8x" path="res://assets/images/whale_pieces.png" id="2_m8b3q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gcg5"]
+size = Vector2(72, 72)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxdwf"]
+radius = 23.0
+height = 82.0
+
+[sub_resource type="Animation" id="Animation_j62lo"]
+resource_name = "swim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WhaleBody/HeadTop/Middle/Thigh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.26529, -0.404916, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WhaleBody/HeadTop/Middle/Thigh/L_Tail:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.443314, -0.486947, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WhaleBody/HeadTop/Middle/Thigh/L_Tail/Fin:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.708604, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WhaleBody/HeadTop/Fin_F:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.733333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.513127, 0.354302, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WhaleBody/HeadTop/Fin_B:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.619592, 0.221657, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WhaleBody/HeadTop:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -0.0890118, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_6it82"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WhaleBody/HeadTop/Middle/Thigh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WhaleBody/HeadTop/Middle/Thigh/L_Tail:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WhaleBody/HeadTop/Middle/Thigh/L_Tail/Fin:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WhaleBody/HeadTop/Fin_F:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WhaleBody/HeadTop/Fin_B:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WhaleBody/HeadTop:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yqwqh"]
+_data = {
+"RESET": SubResource("Animation_6it82"),
+"swim": SubResource("Animation_j62lo")
+}
+
+[node name="SandCannon" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_rbohq")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(-41, 2)
+polygon = PackedVector2Array(12, -17, 78, -42, 77, 38, 12, 15)
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(57, 2)
+
+[node name="BiosphereDetector" type="Area2D" parent="."]
+position = Vector2(-41, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiosphereDetector"]
+position = Vector2(41, -2)
+shape = SubResource("RectangleShape2D_3gcg5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rxdwf")
+
+[node name="Legs" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-98, -63, -52, -55, -28, -16, -29, 17, -49, 55, -94, 71, -95, 54, -62, 33, -51, 12, -98, 7, -98, -10, -54, -14, -64, -44, -96, -49)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="WhaleBody" type="Node2D" parent="."]
+scale = Vector2(0.25, 0.25)
+
+[node name="HeadTop" type="Sprite2D" parent="WhaleBody"]
+position = Vector2(0, 4)
+texture = ExtResource("2_m8b3q")
+offset = Vector2(168, -11)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(33.2726, 46.0943, 457.554, 179.249)
+
+[node name="HeadBottom" type="Sprite2D" parent="WhaleBody/HeadTop"]
+position = Vector2(104, 65)
+texture = ExtResource("2_m8b3q")
+offset = Vector2(89, -22)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(76.4791, 231.469, 394.082, 141.068)
+
+[node name="Middle" type="Sprite2D" parent="WhaleBody/HeadTop"]
+position = Vector2(-23, -16)
+texture = ExtResource("2_m8b3q")
+offset = Vector2(-50, 2)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(494.697, 47.8252, 224.65, 177.753)
+
+[node name="Thigh" type="Sprite2D" parent="WhaleBody/HeadTop/Middle"]
+position = Vector2(-141, 18)
+texture = ExtResource("2_m8b3q")
+offset = Vector2(-35, 0)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(722.297, 65.0713, 141.068, 152.036)
+
+[node name="L_Tail" type="Sprite2D" parent="WhaleBody/HeadTop/Middle/Thigh"]
+position = Vector2(-88, 28)
+texture = ExtResource("2_m8b3q")
+offset = Vector2(-21, -5)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(882.078, 106.946, 100.979, 111.19)
+
+[node name="Fin" type="Sprite2D" parent="WhaleBody/HeadTop/Middle/Thigh/L_Tail"]
+position = Vector2(-69, 33)
+texture = ExtResource("2_m8b3q")
+offset = Vector2(-25, 47)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(852.916, 248.783, 165.651, 164.138)
+
+[node name="Fin_F" type="Sprite2D" parent="WhaleBody/HeadTop"]
+position = Vector2(73, 31)
+texture = ExtResource("2_m8b3q")
+offset = Vector2(-63, 61)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(626.28, 227.842, 230.323, 179.266)
+
+[node name="Fin_B" type="Sprite2D" parent="WhaleBody/HeadTop"]
+show_behind_parent = true
+position = Vector2(143, 53)
+texture = ExtResource("2_m8b3q")
+offset = Vector2(-14, 34)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(499.296, 248.452, 92.6586, 123.671)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yqwqh")
+}
+autoplay = "swim"
+
+[connection signal="area_entered" from="BiosphereDetector" to="." method="_on_biosphere_detector_area_entered"]
+[connection signal="area_exited" from="BiosphereDetector" to="." method="_on_biosphere_detector_area_exited"]

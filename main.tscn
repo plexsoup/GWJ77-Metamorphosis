@@ -11,17 +11,42 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xkj3o")
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Label" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderLarge"
+text = "GWJ77 - Metamorphosis"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 current_tab = 0
 tabs_visible = false
 
-[node name="TitleScreen" type="MarginContainer" parent="TabContainer"]
+[node name="TitleScreen" type="MarginContainer" parent="VBoxContainer/HBoxContainer3/TabContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 64
@@ -29,9 +54,43 @@ theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 metadata/_tab_index = 0
 
-[node name="Buttons" type="VBoxContainer" parent="TabContainer/TitleScreen"]
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer/HBoxContainer3/TabContainer/TitleScreen"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="TabContainer/TitleScreen/Buttons"]
+[node name="PlayButton" type="Button" parent="VBoxContainer/HBoxContainer3/TabContainer/TitleScreen/Buttons"]
 layout_mode = 2
 text = "Play"
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer3/TabContainer/TitleScreen/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Little Prince meets Noita - falling sand game with small round planets. 
+
+Planets can be transformed by the various materials. 
+If planets rotate, the materials might be affected by the sun. (Ice -> Water -> Steam)
+The seed material grows into plants, which absord water.
+Steam can coalesce into clouds in the biosphere of each planet
+"
+wrap_mode = 1
+
+[node name="StrangeButton" type="Button" parent="VBoxContainer/HBoxContainer3/TabContainer/TitleScreen/Buttons"]
+layout_mode = 2
+text = "?"
+
+[node name="Footer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="DevNotes" type="TextEdit" parent="."]
+custom_minimum_size = Vector2(384, 256)
+layout_mode = 0
+offset_left = 316.0
+offset_top = 210.0
+offset_right = 700.0
+offset_bottom = 466.0
+text = "If falling particles proves to be too resource intensive, we'll switch to bombs which spawn objects (lake, tree, mountain, whatever). Because falling sand games may require a custom pixel-based physics engine.
+"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/TabContainer/TitleScreen/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/TabContainer/TitleScreen/Buttons/StrangeButton" to="." method="_on_strange_button_pressed"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsv8to32p8knp"]
+
+[ext_resource type="Script" path="res://GUI/material_picker.gd" id="1_eeg3m"]
+
+[node name="MaterialPicker" type="HBoxContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.5
+offset_right = 41.5
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("1_eeg3m")
+
+[node name="NextButton" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "<"
+
+[node name="MaterialLabel" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "Sand"
+
+[node name="PrevButton" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = ">"
+
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="PrevButton" to="." method="_on_prev_button_pressed"]
