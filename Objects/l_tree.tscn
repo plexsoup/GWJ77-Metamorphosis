@@ -3,5 +3,4 @@
 [ext_resource type="Script" path="res://Objects/l_tree.gd" id="1_1txut"]
 
 [node name="L-Tree" type="Node2D"]
-position = Vector2(554, 330)
 script = ExtResource("1_1txut")

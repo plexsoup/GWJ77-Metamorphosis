@@ -21,7 +21,8 @@ var state = states.FLYING
 func _ready() -> void:
 	
 	Globals.current_hud.material_changed.connect(_on_material_changed)
-	Globals.current_hud.ready.connect(_on_hud_ready)
+	Globals.current_hud.hud_ready.connect(_on_hud_ready)
+	
 	$Legs.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,10 +67,13 @@ func _unhandled_input(_event: InputEvent) -> void:
 			var current_time = Time.get_ticks_msec()
 			if current_time > time_of_last_shot + interval_between_shots:
 				time_of_last_shot = current_time
-				spawn_projectile(current_material)
+				spawn_projectile(get_current_material())
 	if state == states.LANDED:
 		if Input.is_action_just_pressed("move_forward"):
 			take_off()
+
+func get_current_material():
+	return Globals.current_hud.current_material
 
 func spawn_projectile(projectile_scene):
 	# drop falling sand/water/fire/plant toward planet
@@ -96,6 +100,7 @@ func _on_biosphere_detector_area_exited(area: Area2D) -> void:
 func _on_material_changed(new_material):
 	current_material = new_material
 	
-func _on_hud_ready():
+func _on_hud_ready(hud):
+	print("Player sand_cannon thinks hud is ready: ", hud.name)
 	current_material = Globals.current_hud.current_material
-	
+	hud.current_player_controller = self

@@ -1,4 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://1xo8d3t1gu6t"]
+[gd_scene load_steps=8 format=3 uid="uid://1xo8d3t1gu6t"]
+
+[ext_resource type="Script" path="res://Objects/planet.gd" id="1_w8dfo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rh6j5"]
+radius = 230.02
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cv07b"]
 radius = 384.0
@@ -7,7 +12,7 @@ radius = 384.0
 radius = 640.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c3iww"]
-radius = 216.002
+radius = 192.065
 
 [sub_resource type="Gradient" id="Gradient_1gubi"]
 interpolation_mode = 2
@@ -22,6 +27,12 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [node name="Planet" type="Node2D" groups=["planets"]]
+script = ExtResource("1_w8dfo")
+
+[node name="Biosphere" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Biosphere"]
+shape = SubResource("CircleShape2D_rh6j5")
 
 [node name="Troposphere" type="Area2D" parent="."]
 gravity_space_override = 2
@@ -50,3 +61,5 @@ shape = SubResource("CircleShape2D_c3iww")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_dumqk")
+
+[connection signal="body_entered" from="Biosphere" to="." method="_on_biosphere_body_entered"]
