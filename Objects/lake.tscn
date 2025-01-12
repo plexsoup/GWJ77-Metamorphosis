@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ps2i0itxr0ix"]
+
+[ext_resource type="Texture2D" uid="uid://dgovks168d7l4" path="res://assets/images/lake.png" id="1_a2sat"]
+
+[node name="Lake" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_a2sat")

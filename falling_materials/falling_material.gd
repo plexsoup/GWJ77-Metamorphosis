@@ -10,7 +10,8 @@ extends RigidBody2D
 func _ready() -> void:
 	validate_dependencies()
 	
-	$Sprite2D.texture.gradient.colors[0] = color
+	if $Sprite2D.texture is GradientTexture2D:
+		$Sprite2D.texture.gradient.colors[0] = color
 	
 func validate_dependencies():
 	# Needs Sprite2D, because each material has a different color

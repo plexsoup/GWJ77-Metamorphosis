@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg5h6abeoai34"]
+
+[ext_resource type="Script" path="res://Components/disappear_after_delay.gd" id="1_l4tn5"]
+
+[node name="disappear_after_delay" type="Node"]
+script = ExtResource("1_l4tn5")

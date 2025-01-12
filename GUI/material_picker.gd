@@ -14,6 +14,7 @@ signal material_changed(new_material) #connected from parent
 func _ready():
 	current_material_scene = materials[current_material_idx]
 	$MaterialLabel.grab_focus()
+	material_changed.connect()
 
 func _on_next_button_pressed() -> void:
 	switch_material(1)
@@ -26,7 +27,8 @@ func switch_material(direction : int):
 	current_material_scene = materials[current_material_idx]
 	update_material_name_label(current_material_idx)
 	$MaterialLabel.grab_focus()
-	
+	material_changed.emit(current_material_scene)
+	print(material_changed.get_connections())
 
 func update_material_name_label(index):
 	# Where "material" means sand, water, etc. Not mesh.material or texture
@@ -35,7 +37,6 @@ func update_material_name_label(index):
 	var reference_material = packed_material.instantiate()
 	var mat_name = reference_material.short_name
 	$MaterialLabel.text = mat_name
-	material_changed.emit(packed_material)
 	reference_material.queue_free()
 
 

@@ -1,0 +1,109 @@
+[gd_scene load_steps=24 format=3 uid="uid://cu54161nvbbk0"]
+
+[ext_resource type="Script" path="res://GUI/button_bar.gd" id="1_1ethb"]
+[ext_resource type="Texture2D" uid="uid://ts54jk1m00dy" path="res://assets/images/buttons/dirt_normal.png" id="2_xyiho"]
+[ext_resource type="Script" path="res://GUI/material_button.gd" id="3_d3sln"]
+[ext_resource type="Texture2D" uid="uid://mf7bbkev0otp" path="res://assets/images/buttons/dirt_pressed.png" id="3_drc5y"]
+[ext_resource type="PackedScene" uid="uid://cy6nlmgt1ughn" path="res://falling_materials/FallingSand.tscn" id="4_3t81s"]
+[ext_resource type="Texture2D" uid="uid://cbkwwq0lpyvp7" path="res://assets/images/buttons/dirt_hover.png" id="4_ixekl"]
+[ext_resource type="PackedScene" uid="uid://cqkaox8s44rxi" path="res://falling_materials/FallingSeed.tscn" id="5_g8oew"]
+[ext_resource type="Texture2D" uid="uid://bi070kuivonda" path="res://assets/images/buttons/dirt_disabled.png" id="5_roak6"]
+[ext_resource type="PackedScene" uid="uid://csmamxbnvheki" path="res://falling_materials/FallingWater.tscn" id="7_40mey"]
+[ext_resource type="Texture2D" uid="uid://crqlcxovv0ttd" path="res://assets/images/buttons/seed_normal.png" id="8_86b42"]
+[ext_resource type="Texture2D" uid="uid://ujlu10k40wx" path="res://assets/images/buttons/seed_pressed.png" id="9_sq6ju"]
+[ext_resource type="Texture2D" uid="uid://d1v8leaobakqr" path="res://assets/images/buttons/seed_hovered.png" id="10_kixgu"]
+[ext_resource type="Texture2D" uid="uid://bk1idqmfbdqee" path="res://assets/images/buttons/seed_disabled.png" id="11_qtcgv"]
+[ext_resource type="Texture2D" uid="uid://fj7dy1qxqxy2" path="res://assets/images/buttons/water_normal.png" id="13_ga25b"]
+[ext_resource type="Texture2D" uid="uid://ocknukolqdou" path="res://assets/images/buttons/water_pressed.png" id="14_e4dvk"]
+[ext_resource type="Texture2D" uid="uid://c46ju3efhbgma" path="res://assets/images/buttons/water_hovered.png" id="15_cerva"]
+[ext_resource type="Texture2D" uid="uid://ccbs166aa6ty2" path="res://assets/images/buttons/water_disabled.png" id="16_naan7"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_iya1n"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_cx7tp"]
+events = [SubResource("InputEventKey_iya1n")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ltas8"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_mvd7y"]
+events = [SubResource("InputEventKey_ltas8")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_q26je"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_2iod2"]
+events = [SubResource("InputEventKey_q26je")]
+
+[node name="ButtonBar" type="GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -98.5
+offset_top = -91.0
+offset_right = 98.5
+grow_horizontal = 2
+grow_vertical = 0
+columns = 3
+script = ExtResource("1_1ethb")
+
+[node name="SandButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+shortcut = SubResource("Shortcut_cx7tp")
+texture_normal = ExtResource("2_xyiho")
+texture_pressed = ExtResource("3_drc5y")
+texture_hover = ExtResource("4_ixekl")
+texture_disabled = ExtResource("5_roak6")
+script = ExtResource("3_d3sln")
+material_scene = ExtResource("4_3t81s")
+
+[node name="SeedButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+shortcut = SubResource("Shortcut_mvd7y")
+texture_normal = ExtResource("8_86b42")
+texture_pressed = ExtResource("9_sq6ju")
+texture_hover = ExtResource("10_kixgu")
+texture_disabled = ExtResource("11_qtcgv")
+script = ExtResource("3_d3sln")
+material_scene = ExtResource("5_g8oew")
+
+[node name="WaterButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+shortcut = SubResource("Shortcut_2iod2")
+texture_normal = ExtResource("13_ga25b")
+texture_pressed = ExtResource("14_e4dvk")
+texture_hover = ExtResource("15_cerva")
+texture_disabled = ExtResource("16_naan7")
+script = ExtResource("3_d3sln")
+material_scene = ExtResource("7_40mey")
+
+[node name="SandLabel" type="Label" parent="."]
+layout_mode = 2
+text = "1 Sand"
+
+[node name="SeedLabel" type="Label" parent="."]
+layout_mode = 2
+text = "2 Seed"
+
+[node name="WaterLabel" type="Label" parent="."]
+layout_mode = 2
+text = "3 Water"

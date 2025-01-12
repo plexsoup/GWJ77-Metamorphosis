@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://falling_materials/falling_material.gd" id="1_i5jb7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dknj4"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_3bphk"]
+radius = 32.0
 
 [node name="FallingMaterial" type="RigidBody2D" groups=["particles"]]
 script = ExtResource("1_i5jb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_dknj4")
+shape = SubResource("CircleShape2D_3bphk")

@@ -6,9 +6,10 @@ signal hud_ready(hud)
 var current_material : # phantom - passthru var
 	set(v): # nothing to set
 		current_material = v
-		material_changed.emit()
+		material_changed.emit(current_material)
+		update_material_label()
 	get:
-		return $MaterialPicker.current_material_scene
+		return current_material
 
 var current_player_controller
 
@@ -18,3 +19,13 @@ func _init() -> void:
 
 func _ready():
 	hud_ready.emit(self) # for the player controller
+
+func update_material_label():
+	var reference_material = current_material.instantiate()
+	var material_name = reference_material.short_name
+	reference_material.queue_free()
+	$VBoxContainer/MaterialLabel.text = material_name
+	
+
+func _on_material_button_pressed(new_material):
+	current_material = new_material

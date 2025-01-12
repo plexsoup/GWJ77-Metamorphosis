@@ -22,6 +22,7 @@ Globals="*res://globals.gd"
 [display]
 
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 
@@ -71,3 +72,7 @@ change_all_trees={
 [physics]
 
 2d/default_gravity_vector=Vector2(0, 0)
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.0159718, 0.0159718, 0.0159718, 1)

@@ -18,37 +18,41 @@ var rule_sets = [
 var axiom = "F"
 var angle = 25.7
 var iterations = 3
-var segment_length = 55.0
+var segment_length = 128
+var line_width = 12
+var tree_num : int = -1
 
 func _ready():
 	generate_tree()
 
 func generate_tree():
+	tree_num += 1
 	var tree_root = Node2D.new()
-	tree_root.name = "tree"+str(Time.get_ticks_msec()/100)
+	tree_root.name = "tree"+str(tree_num)
 	add_child(tree_root)
 
 	# Randomly choose one set of rules
-	var rules = rule_sets[randi() % rule_sets.size()]
-	angle = 25.7 + randi_range(-22.5, 22.5)
-	iterations = randf_range(2,4)
+	var rules = rule_sets.pick_random()
+	angle = 25.7 + randf_range(-22.5, 22.5)
+	iterations = randi_range(1,3)
 	segment_length = randf_range(10.0, 30.0)
 	var sentence = process_l_system(axiom, rules, iterations)
 	draw_tree(sentence, tree_root)
 
-func process_l_system(initial, rules, iterations):
+
+func process_l_system(initial, rules, system_iterations):
 	var current = initial
-	for _i in range(iterations):
+	for _i in range(system_iterations):
 		var next = ""
-		for char in current:
-			if char in rules:
-				next += rules[char]
+		for character in current:
+			if character in rules:
+				next += rules[character]
 			else:
-				next += char
+				next += character
 		current = next
 	return current
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("change_all_trees"):
 		delete_tree()
 		generate_tree()
@@ -63,13 +67,14 @@ func draw_tree(sentence : String, root_node : Node2D):
 	var dir = Vector2.RIGHT
 	var current_line = null
 	
-	for char in sentence:
-		match char:
+	for character in sentence:
+		match character:
 			"F", "B", "X":  # Handle all drawing characters here
 				if current_line == null:
-					current_line = Line2D.new()
+					current_line = $ReferenceLine.duplicate()
+					current_line.show()
 					current_line.default_color = Color.WHITE
-					current_line.width = 2
+					current_line.width = line_width
 					current_line.add_point(pos)
 					root_node.add_child(current_line)
 				current_line.add_point(pos + dir * segment_length)

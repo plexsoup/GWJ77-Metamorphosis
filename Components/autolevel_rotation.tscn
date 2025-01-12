@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://by12awp5qpoce"]
+
+[ext_resource type="Script" path="res://Components/autolevel_rotation.gd" id="1_otikl"]
+
+[node name="autolevel_rotation" type="Node"]
+script = ExtResource("1_otikl")

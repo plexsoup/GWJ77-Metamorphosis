@@ -7,7 +7,8 @@ var current_material : PackedScene
 var current_planet : Node2D # get this so you know where projectiles go
 
 var rotation_speed : float = 5.0
-var thrust : float = 7.5
+var max_velocity : float = 7.5
+var thrust : float = 5.0
 
 var projectile_charge : float = 500.0 # speed to eject particles out of cannon
 var projectile_jitter : float = 0.2 # radians of aim deviation
@@ -31,7 +32,7 @@ func _process(delta: float) -> void:
 		var desired_rotation = Input.get_axis("rotate_left", "rotate_right")
 		rotate(desired_rotation * delta * rotation_speed)
 		if Input.is_action_pressed("move_forward"):
-			velocity = lerp(velocity, transform.x * thrust, 10.0 * delta)
+			velocity = lerp(velocity, transform.x * max_velocity, thrust * delta)
 		else:
 			velocity = lerp(velocity, Vector2.ZERO, 10.0 * delta)
 		move_through_particles(velocity)
@@ -52,6 +53,7 @@ func move_through_particles(_remaining_velocity):
 
 
 func land_on_planet(collider):
+	velocity = Vector2.ZERO
 	state = states.LANDED
 	look_at(collider.owner.global_position)
 	rotate(PI)
@@ -76,6 +78,7 @@ func get_current_material():
 	return Globals.current_hud.current_material
 
 func spawn_projectile(projectile_scene):
+	$AnimationPlayer.play("shoot")
 	# drop falling sand/water/fire/plant toward planet
 	var new_projectile : Node2D = projectile_scene.instantiate()
 	new_projectile.global_position = $Muzzle.global_position
@@ -104,3 +107,8 @@ func _on_hud_ready(hud):
 	print("Player sand_cannon thinks hud is ready: ", hud.name)
 	current_material = Globals.current_hud.current_material
 	hud.current_player_controller = self
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name in ["shoot"]:
+		$AnimationPlayer.play("swim")

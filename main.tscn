@@ -92,14 +92,13 @@ offset_bottom = 466.0
 text = "Initial concept was a falling sand game, but falling particles proved to be too resource intensive, so I switched to bombs which spawn objects (lake, tree, mountain, whatever). Because falling sand games may require a custom pixel-based physics engine.
 
 TODO:
-Add sprites for Seed, Water, Sand, etc. (or figure out why these ones aren't working)
+Make the whal sprite flip_v if it's rotated so it's upside down and no keys are pressed
 Make trees grow slowly
 Make water spawn lake
 Make warm lake spawn clouds
 Make clouds spawn rain
 Make rain grow trees
-Add more planets
-Add a sun
+
 Make planets rotate (maybe)
 
 Add alien spaceships that harvest water? - or maybe they use a tractor beam to move wet planets away from sun, so they freeze
@@ -107,6 +106,16 @@ Add solar flares that burn trees?
 
 Allow planets to warm / cool based on distance from sun
 Give planets some kind of kepler movement?
+
+If you have a space whale, it needs petunias (Douglas Adams), or maybe something from Star Trek IV.
+
+For the theme of metamorphosis, a cockroach from Kafka would be good.
+
+Jan 11, 2025: (Day 2):  Ok, so it seemed like fun if dirt got bigger when they bumped into each other, like Suika, but free form.
+When balls of dirt get too big, they turn into planets.
+But that begs the question, why is a planet different than a ball of dirt? Maybe they should be the same.
+-- which means, seeds should spawn on any ball of dirt.
+
 "
 wrap_mode = 1
 

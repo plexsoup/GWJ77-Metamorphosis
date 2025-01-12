@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c44n3b33v6mob"]
+[gd_scene load_steps=12 format=3 uid="uid://c44n3b33v6mob"]
 
-[ext_resource type="Script" path="res://sand_cannon.gd" id="1_rbohq"]
+[ext_resource type="Script" path="res://space_whale.gd" id="1_rbohq"]
+[ext_resource type="PackedScene" uid="uid://bicayb7c0ulgb" path="res://camera_2d.tscn" id="2_ktu2y"]
 [ext_resource type="Texture2D" uid="uid://co1qbxio8ys8x" path="res://assets/images/whale_pieces.png" id="2_m8b3q"]
+[ext_resource type="PackedScene" uid="uid://bg5h6abeoai34" path="res://Components/disappear_after_delay.tscn" id="4_y7tlb"]
+[ext_resource type="PackedScene" uid="uid://by12awp5qpoce" path="res://Components/autolevel_rotation.tscn" id="5_k3bs2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gcg5"]
 size = Vector2(72, 72)
@@ -84,6 +87,34 @@ tracks/5/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WhaleBody/HeadTop/HeadBottom:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_bv3aq"]
+resource_name = "shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WhaleBody/HeadTop/HeadBottom:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.443314, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_j62lo"]
 resource_name = "swim"
@@ -164,10 +195,12 @@ tracks/5/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqwqh"]
 _data = {
 "RESET": SubResource("Animation_6it82"),
+"shoot": SubResource("Animation_bv3aq"),
 "swim": SubResource("Animation_j62lo")
 }
 
-[node name="SandCannon" type="CharacterBody2D"]
+[node name="SpaceWhale" type="CharacterBody2D"]
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_rbohq")
 
@@ -177,7 +210,7 @@ position = Vector2(-41, 2)
 polygon = PackedVector2Array(12, -17, 78, -42, 77, 38, 12, 15)
 
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(57, 2)
+position = Vector2(83, 6)
 
 [node name="BiosphereDetector" type="Area2D" parent="."]
 position = Vector2(-41, 2)
@@ -194,7 +227,7 @@ shape = SubResource("CapsuleShape2D_rxdwf")
 [node name="Legs" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-98, -63, -52, -55, -28, -16, -29, 17, -49, 55, -94, 71, -95, 54, -62, 33, -51, 12, -98, 7, -98, -10, -54, -14, -64, -44, -96, -49)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" parent="." instance=ExtResource("2_ktu2y")]
 
 [node name="WhaleBody" type="Node2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -270,5 +303,29 @@ libraries = {
 }
 autoplay = "swim"
 
+[node name="Instructions" type="Sprite2D" parent="."]
+position = Vector2(0, -94)
+
+[node name="Label" type="Label" parent="Instructions"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.5
+offset_top = -17.0
+offset_right = 81.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "WASD + Space"
+horizontal_alignment = 1
+
+[node name="disappear_after_delay" parent="Instructions" instance=ExtResource("4_y7tlb")]
+
+[node name="autolevel_rotation" parent="Instructions" instance=ExtResource("5_k3bs2")]
+
 [connection signal="area_entered" from="BiosphereDetector" to="." method="_on_biosphere_detector_area_entered"]
 [connection signal="area_exited" from="BiosphereDetector" to="." method="_on_biosphere_detector_area_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://m0huryqx6d4t"]
+[gd_scene load_steps=3 format=3 uid="uid://m0huryqx6d4t"]
 
 [ext_resource type="Script" path="res://Objects/l_tree.gd" id="1_1txut"]
+[ext_resource type="Texture2D" uid="uid://c0kgc6k2skess" path="res://assets/images/log_segment_01.png" id="2_tjmpt"]
 
 [node name="L-Tree" type="Node2D"]
 script = ExtResource("1_1txut")
+
+[node name="ReferenceLine" type="Line2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("2_tjmpt")
+texture_mode = 1
+joint_mode = 2

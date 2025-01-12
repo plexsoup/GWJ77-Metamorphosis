@@ -1,12 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnciv3ns4hnpe"]
+[gd_scene load_steps=5 format=3 uid="uid://bnciv3ns4hnpe"]
 
 [ext_resource type="PackedScene" uid="uid://1xo8d3t1gu6t" path="res://Objects/planet.tscn" id="1_a81uj"]
-[ext_resource type="PackedScene" uid="uid://c44n3b33v6mob" path="res://sand_cannon.tscn" id="2_r6gnl"]
+[ext_resource type="Script" path="res://solar_system.gd" id="1_rltww"]
+[ext_resource type="PackedScene" uid="uid://c44n3b33v6mob" path="res://space_whale.tscn" id="2_r6gnl"]
+[ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="3_0y0nq"]
 
 [node name="SolarSystem" type="Node2D"]
+script = ExtResource("1_rltww")
 
 [node name="Planet" parent="." instance=ExtResource("1_a81uj")]
-position = Vector2(588, 356)
+position = Vector2(3142, 488)
 
-[node name="SandCannon" parent="." instance=ExtResource("2_r6gnl")]
-position = Vector2(578, 54)
+[node name="Planet2" parent="." instance=ExtResource("1_a81uj")]
+position = Vector2(7040, 923)
+
+[node name="Planet3" parent="." instance=ExtResource("1_a81uj")]
+position = Vector2(5249, -301)
+
+[node name="Planet4" parent="." instance=ExtResource("1_a81uj")]
+position = Vector2(-4987, 710)
+
+[node name="Planet5" parent="." instance=ExtResource("1_a81uj")]
+position = Vector2(-1543, -78)
+
+[node name="Planet6" parent="." instance=ExtResource("1_a81uj")]
+position = Vector2(-2880, -79)
+
+[node name="SpaceWhale" parent="." instance=ExtResource("2_r6gnl")]
+position = Vector2(2325, 496)
+
+[node name="Sun" parent="." instance=ExtResource("3_0y0nq")]
