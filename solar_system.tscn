@@ -1,32 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnciv3ns4hnpe"]
+[gd_scene load_steps=6 format=3 uid="uid://bnciv3ns4hnpe"]
 
 [ext_resource type="PackedScene" uid="uid://1xo8d3t1gu6t" path="res://Objects/planet.tscn" id="1_a81uj"]
 [ext_resource type="Script" path="res://solar_system.gd" id="1_rltww"]
 [ext_resource type="PackedScene" uid="uid://c44n3b33v6mob" path="res://space_whale.tscn" id="2_r6gnl"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="3_0y0nq"]
+[ext_resource type="PackedScene" uid="uid://omnsk31lqmu5" path="res://Components/ball_merger.tscn" id="5_yshbf"]
 
 [node name="SolarSystem" type="Node2D"]
 script = ExtResource("1_rltww")
-
-[node name="Planet" parent="." instance=ExtResource("1_a81uj")]
-position = Vector2(3142, 488)
-
-[node name="Planet2" parent="." instance=ExtResource("1_a81uj")]
-position = Vector2(7040, 923)
-
-[node name="Planet3" parent="." instance=ExtResource("1_a81uj")]
-position = Vector2(5249, -301)
-
-[node name="Planet4" parent="." instance=ExtResource("1_a81uj")]
-position = Vector2(-4987, 710)
-
-[node name="Planet5" parent="." instance=ExtResource("1_a81uj")]
-position = Vector2(-1543, -78)
-
-[node name="Planet6" parent="." instance=ExtResource("1_a81uj")]
-position = Vector2(-2880, -79)
 
 [node name="SpaceWhale" parent="." instance=ExtResource("2_r6gnl")]
 position = Vector2(2325, 496)
 
 [node name="Sun" parent="." instance=ExtResource("3_0y0nq")]
+
+[node name="Planets" type="Node2D" parent="."]
+
+[node name="Planet" parent="Planets" instance=ExtResource("1_a81uj")]
+position = Vector2(3142, 488)
+
+[node name="Planet2" parent="Planets" instance=ExtResource("1_a81uj")]
+position = Vector2(7040, 923)
+
+[node name="Planet3" parent="Planets" instance=ExtResource("1_a81uj")]
+position = Vector2(5249, -301)
+
+[node name="Planet4" parent="Planets" instance=ExtResource("1_a81uj")]
+position = Vector2(-4987, 710)
+
+[node name="Planet5" parent="Planets" instance=ExtResource("1_a81uj")]
+position = Vector2(-1543, -78)
+
+[node name="Planet6" parent="Planets" instance=ExtResource("1_a81uj")]
+position = Vector2(-2880, -79)
+
+[node name="Helpers" type="Node2D" parent="."]
+
+[node name="BallMerger" parent="Helpers" instance=ExtResource("5_yshbf")]

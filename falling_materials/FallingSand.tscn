@@ -8,8 +8,6 @@
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("2_4da2g")
-short_name = "Sand"
-color = Color(0.407941, 0.403181, 0.162266, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_p7me0")

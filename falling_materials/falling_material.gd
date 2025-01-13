@@ -1,4 +1,4 @@
-extends RigidBody2D
+class_name falling_material extends RigidBody2D
 
 
 
@@ -12,6 +12,7 @@ func _ready() -> void:
 	
 	if $Sprite2D.texture is GradientTexture2D:
 		$Sprite2D.texture.gradient.colors[0] = color
+	$CollisionShape2D.shape.resource_local_to_scene = true
 	
 func validate_dependencies():
 	# Needs Sprite2D, because each material has a different color

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://falling_materials/falling_material.gd" id="1_i5jb7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3bphk"]
+resource_local_to_scene = true
 radius = 32.0
 
 [node name="FallingMaterial" type="RigidBody2D" groups=["particles"]]

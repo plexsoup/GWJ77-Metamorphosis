@@ -98,6 +98,8 @@ Make water spawn lake
 Make warm lake spawn clouds
 Make clouds spawn rain
 Make rain grow trees
+Mature trees should spawn seed pods
+Some, very rare seed pods should contain baby whales (which will flock with the player)
 
 Make planets rotate (maybe)
 
@@ -116,6 +118,7 @@ When balls of dirt get too big, they turn into planets.
 But that begs the question, why is a planet different than a ball of dirt? Maybe they should be the same.
 -- which means, seeds should spawn on any ball of dirt.
 
+Jan 12, 2025: (Day 3): I'll need some music, so we recorded a few bars of ukulele picking and I'll try to arrange them into some sort of track. I don't know musical theory though, so this might be awful.
 "
 wrap_mode = 1
 

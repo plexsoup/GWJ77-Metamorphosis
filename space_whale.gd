@@ -75,7 +75,10 @@ func _unhandled_input(_event: InputEvent) -> void:
 			take_off()
 
 func get_current_material():
-	return Globals.current_hud.current_material
+	var material = Globals.current_hud.current_material
+	if material == null:
+		material = load("res://falling_materials/FallingSand.tscn")
+	return material
 
 func spawn_projectile(projectile_scene):
 	$AnimationPlayer.play("shoot")

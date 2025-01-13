@@ -1,4 +1,4 @@
-extends "res://falling_materials/falling_material.gd"
+extends falling_material
 
 var size = 32
 
@@ -9,13 +9,13 @@ signal request_planet(location)
 func set_size(diameter):
 	if diameter > 256:
 		become_planet()
-	
-	# make a new Circle CollisionShape2D with the correct diameter
-	# resize the sprite scale based on original sprite size and new diameter
-	$CollisionShape2D.shape = CircleShape2D.new()
-	$CollisionShape2D.shape.radius = diameter / 2
-	$Sprite2D.scale = Vector2.ONE * (diameter / $Sprite2D.texture.get_size().x)
-	size = $Sprite2D.scale.x * $Sprite2D.texture.get_size().x
+	else:
+		# resize the sprite scale based on original sprite size and new diameter
+		
+		#$CollisionShape2D.shape = CircleShape2D.new() # shapes are shared between nodes, so we need a new shape.
+		$CollisionShape2D.shape.radius = diameter / 2
+		$Sprite2D.scale = Vector2.ONE * (diameter / $Sprite2D.texture.get_size().x)
+		size = $Sprite2D.scale.x * $Sprite2D.texture.get_size().x
 
 func become_planet():
 	disable_collisions()
@@ -38,27 +38,25 @@ func get_diameter() -> float:
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("SandBall"):
 		# make a new ball twice as big, and remove the previous two
-		if size > 256 or body.get_diameter() > 256:
-			return
-		if self.get_index() > body.get_index(): # only one of us should make the merge..
-			merge_sand_balls([self, body])
+		if can_merge(body): # only one of us should make the merge..
+			absorb_sand_ball(body)
 
-func merge_sand_balls(balls):
-		if balls.is_empty():
-			return
-		var total_diameter = 0
-		var position_sum = Vector2.ZERO
-		for ball in balls:
-			ball.disable_collisions()
-			total_diameter += ball.get_diameter()
-			position_sum += ball.global_position
-		var average_position = position_sum / balls.size()
+func can_merge(other_ball) -> bool:
+	# only merge balls of equal size? Suika style?
+	var ok_to_merge = true
+	if (
+			self.get_diameter() != other_ball.get_diameter() # large balls absorb smaller balls
+			or self.get_index() > other_ball.get_index() # ties go to whoever is higher in the tree
+			or size > 256 # very large balls turn into planets instead
+		):
+			ok_to_merge = false
+	return ok_to_merge
+
+
+func absorb_sand_ball(smaller_ball):
+	# TODO: resize yourself by adding the smaller ball size,
+	# then queue_free the smaller ball and offset your position a bit?
+	var new_diameter = self.get_diameter() + smaller_ball.get_diameter()
+	set_size(new_diameter)
+	smaller_ball.queue_free()
 			
-			
-		var new_sand_ball = preload("res://falling_materials/FallingSand.tscn").instantiate()
-		new_sand_ball.global_position = average_position
-		new_sand_ball.set_size( total_diameter )
-		call_deferred("add_sibling", new_sand_ball)
-		
-		for ball in balls:
-			ball.queue_free()

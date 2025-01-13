@@ -1,3 +1,5 @@
+## DEPRECATED: We'll use the button bar instead.
+
 extends HBoxContainer
 
 var materials = [
@@ -14,7 +16,7 @@ signal material_changed(new_material) #connected from parent
 func _ready():
 	current_material_scene = materials[current_material_idx]
 	$MaterialLabel.grab_focus()
-	material_changed.connect()
+	#material_changed.connect()
 
 func _on_next_button_pressed() -> void:
 	switch_material(1)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://omnsk31lqmu5"]
+
+[ext_resource type="Script" path="res://Components/ball_merger.gd" id="1_qhlrp"]
+
+[node name="BallMerger" type="Node"]
+script = ExtResource("1_qhlrp")

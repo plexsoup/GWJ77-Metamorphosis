@@ -3,7 +3,7 @@ extends Control
 signal material_changed(new_material)
 signal hud_ready(hud)
 
-var current_material : # phantom - passthru var
+var current_material : 
 	set(v): # nothing to set
 		current_material = v
 		material_changed.emit(current_material)
