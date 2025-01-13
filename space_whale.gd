@@ -36,6 +36,10 @@ func _process(delta: float) -> void:
 		else:
 			velocity = lerp(velocity, Vector2.ZERO, 10.0 * delta)
 		move_through_particles(velocity)
+		if velocity.length_squared() > 0.2 :
+			$GPUParticles2D.emitting = true
+		else:
+			$GPUParticles2D.emitting = false
 	elif state == states.LANDED:
 		pass
 
@@ -66,19 +70,23 @@ func take_off():
 func _unhandled_input(_event: InputEvent) -> void:
 	if state in [ states.FLYING, states.LANDED ]:
 		if Input.is_action_pressed("shoot"):
-			var current_time = Time.get_ticks_msec()
-			if current_time > time_of_last_shot + interval_between_shots:
-				time_of_last_shot = current_time
-				spawn_projectile(get_current_material())
+			shoot()
 	if state == states.LANDED:
 		if Input.is_action_just_pressed("move_forward"):
 			take_off()
 
+func shoot():
+	var current_time = Time.get_ticks_msec()
+	if current_time > time_of_last_shot + interval_between_shots:
+		time_of_last_shot = current_time
+		spawn_projectile(get_current_material())
+		$ShootNoise.play()
+
 func get_current_material():
-	var material = Globals.current_hud.current_material
-	if material == null:
-		material = load("res://falling_materials/FallingSand.tscn")
-	return material
+	var projectile_material = Globals.current_hud.current_material
+	if projectile_material == null:
+		projectile_material = load("res://falling_materials/FallingSand.tscn")
+	return projectile_material
 
 func spawn_projectile(projectile_scene):
 	$AnimationPlayer.play("shoot")

@@ -1,15 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy6nlmgt1ughn"]
+[gd_scene load_steps=6 format=3 uid="uid://cy6nlmgt1ughn"]
 
 [ext_resource type="PackedScene" uid="uid://cy277iegdegrc" path="res://falling_materials/falling_material.tscn" id="1_1t8vy"]
 [ext_resource type="Script" path="res://falling_materials/falling_sand.gd" id="2_4da2g"]
 [ext_resource type="Texture2D" uid="uid://cxlrsgeah3amg" path="res://assets/images/dirt_ball_01.png" id="2_p7me0"]
+[ext_resource type="AudioStream" uid="uid://cfu0u3bh62vos" path="res://assets/audio/thumpyNoise.wav" id="4_gq2d7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dyg6r"]
+resource_local_to_scene = true
+radius = 32.0
 
 [node name="Sand" groups=["SandBall"] instance=ExtResource("1_1t8vy")]
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("2_4da2g")
 
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_dyg6r")
+
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_p7me0")
+
+[node name="MergeNoise" type="AudioStreamPlayer2D" parent="." index="2"]
+stream = ExtResource("4_gq2d7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,13 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqkaox8s44rxi"]
+[gd_scene load_steps=6 format=3 uid="uid://cqkaox8s44rxi"]
 
 [ext_resource type="PackedScene" uid="uid://cy277iegdegrc" path="res://falling_materials/falling_material.tscn" id="1_mhuow"]
 [ext_resource type="Script" path="res://falling_materials/falling_seed.gd" id="2_itvdk"]
 [ext_resource type="Texture2D" uid="uid://cfrwr71t1srge" path="res://assets/images/seed_01.png" id="3_jgu7i"]
+[ext_resource type="PackedScene" uid="uid://bmp4pvbgwyeqs" path="res://Objects/growing_trees.tscn" id="3_jmgea"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0d4qq"]
+resource_local_to_scene = true
+radius = 32.0
 
 [node name="Seed" groups=["seeds"] instance=ExtResource("1_mhuow")]
 script = ExtResource("2_itvdk")
+tree_scene = ExtResource("3_jmgea")
 short_name = "Seed"
 color = Color(0, 0.72549, 0, 1)
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_0d4qq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 scale = Vector2(0.6, 0.6)

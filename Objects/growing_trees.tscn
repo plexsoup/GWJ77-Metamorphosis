@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmp4pvbgwyeqs"]
+
+[ext_resource type="Script" path="res://Objects/growing_trees.gd" id="1_3258e"]
+[ext_resource type="Texture2D" uid="uid://brnh6hx4g667x" path="res://assets/images/three_trees.png" id="1_nx01v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7826"]
+size = Vector2(76, 12)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ukb63"]
+particle_flag_disable_z = true
+initial_velocity_max = 190.86
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 5.0
+hue_variation_min = 0.78
+hue_variation_max = 0.78
+
+[node name="Tree" type="Node2D"]
+script = ExtResource("1_3258e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 1)
+rotation = 1.5708
+texture = ExtResource("1_nx01v")
+offset = Vector2(-1.71312, -54.1003)
+hframes = 3
+
+[node name="WaterDetector" type="Area2D" parent="."]
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterDetector"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_u7826")
+
+[node name="LakeDrinkingTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="WaterParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 14
+process_material = SubResource("ParticleProcessMaterial_ukb63")
+one_shot = true
+
+[connection signal="body_entered" from="WaterDetector" to="." method="_on_water_detector_body_entered"]
+[connection signal="timeout" from="LakeDrinkingTimer" to="." method="_on_lake_drinking_timer_timeout"]

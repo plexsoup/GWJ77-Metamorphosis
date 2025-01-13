@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://c44n3b33v6mob"]
+[gd_scene load_steps=19 format=3 uid="uid://c44n3b33v6mob"]
 
 [ext_resource type="Script" path="res://space_whale.gd" id="1_rbohq"]
 [ext_resource type="PackedScene" uid="uid://bicayb7c0ulgb" path="res://camera_2d.tscn" id="2_ktu2y"]
 [ext_resource type="Texture2D" uid="uid://co1qbxio8ys8x" path="res://assets/images/whale_pieces.png" id="2_m8b3q"]
 [ext_resource type="PackedScene" uid="uid://bg5h6abeoai34" path="res://Components/disappear_after_delay.tscn" id="4_y7tlb"]
 [ext_resource type="PackedScene" uid="uid://by12awp5qpoce" path="res://Components/autolevel_rotation.tscn" id="5_k3bs2"]
+[ext_resource type="AudioStream" uid="uid://5a3pxucaumxv" path="res://assets/audio/mouth/phoo.wav" id="6_cnh1l"]
+[ext_resource type="AudioStream" uid="uid://b24te5ylbeuad" path="res://assets/audio/mouth/phu.wav" id="7_k043m"]
+[ext_resource type="AudioStream" uid="uid://c1dqsungt3c5w" path="res://assets/audio/mouth/whoo.wav" id="8_o20dp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gcg5"]
 size = Vector2(72, 72)
@@ -199,6 +202,39 @@ _data = {
 "swim": SubResource("Animation_j62lo")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8bbw1"]
+random_volume_offset_db = 5.0
+streams_count = 3
+stream_0/stream = ExtResource("6_cnh1l")
+stream_1/stream = ExtResource("7_k043m")
+stream_2/stream = ExtResource("8_o20dp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u7pvo"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 0.7
+direction = Vector3(-1, 0, 0)
+initial_velocity_max = 68.99
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.5
+turbulence_noise_strength = 0.2
+turbulence_noise_scale = 0.684
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.009
+
+[sub_resource type="Gradient" id="Gradient_ripf3"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.402597, 0.516234, 0.555195, 0.63961)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b7bhh"]
+gradient = SubResource("Gradient_ripf3")
+width = 24
+height = 24
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="SpaceWhale" type="CharacterBody2D"]
 z_index = 1
 motion_mode = 1
@@ -325,6 +361,16 @@ horizontal_alignment = 1
 [node name="disappear_after_delay" parent="Instructions" instance=ExtResource("4_y7tlb")]
 
 [node name="autolevel_rotation" parent="Instructions" instance=ExtResource("5_k3bs2")]
+
+[node name="ShootNoise" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_8bbw1")
+volume_db = -9.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-90, 1)
+process_material = SubResource("ParticleProcessMaterial_u7pvo")
+texture = SubResource("GradientTexture2D_b7bhh")
+lifetime = 2.0
 
 [connection signal="area_entered" from="BiosphereDetector" to="." method="_on_biosphere_detector_area_entered"]
 [connection signal="area_exited" from="BiosphereDetector" to="." method="_on_biosphere_detector_area_exited"]

@@ -62,6 +62,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 toggle_mode = true
+button_pressed = true
 shortcut = SubResource("Shortcut_cx7tp")
 texture_normal = ExtResource("2_xyiho")
 texture_pressed = ExtResource("3_drc5y")

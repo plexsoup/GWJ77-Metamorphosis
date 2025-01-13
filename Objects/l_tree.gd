@@ -37,7 +37,7 @@ func generate_tree():
 	iterations = randi_range(1,3)
 	segment_length = randf_range(10.0, 30.0)
 	var sentence = process_l_system(axiom, rules, iterations)
-	draw_tree(sentence, tree_root)
+	draw_tree_new(sentence, tree_root)
 
 
 func process_l_system(initial, rules, system_iterations):
@@ -61,7 +61,7 @@ func delete_tree():
 	for child in get_children():
 		child.queue_free()
 
-func draw_tree(sentence : String, root_node : Node2D):
+func draw_tree_old(sentence : String, root_node : Node2D):
 	var stack = []
 	var pos = Vector2.ZERO
 	var dir = Vector2.RIGHT
@@ -91,3 +91,42 @@ func draw_tree(sentence : String, root_node : Node2D):
 				pos = state[0]
 				dir = state[1]
 				current_line = state[2]  # Continue with the line from before branching
+
+
+func draw_tree_new(sentence : String, root_node : Node2D):
+	print("Tree drawing: ", sentence)
+	var stack = []
+	var pos = Vector2.ZERO
+	var dir = Vector2.RIGHT
+	var current_line : Line2D = null
+	
+	for character in sentence:
+		match character:
+			"F", "B", "X":  # Handle all drawing characters here
+				if current_line == null:
+					current_line = Line2D.new()
+					current_line.default_color = Color.WHITE
+					current_line.width = line_width
+					current_line.add_point(pos)
+					root_node.add_child(current_line)
+				pos += dir * segment_length
+				current_line.add_point(pos)
+			"+":
+				dir = dir.rotated(deg_to_rad(-angle))
+			"-":
+				dir = dir.rotated(deg_to_rad(angle))
+			"[":
+				stack.push_back([pos, dir, current_line])
+				# Continue with the current line for one branch
+			"]":
+				var state = stack.pop_back()
+				pos = state[0]
+				dir = state[1]
+				current_line = state[2]  # Continue with the line from before branching
+				# Create a new line for the other branch
+				var new_line = Line2D.new()
+				new_line.default_color = Color.WHITE
+				new_line.width = line_width
+				new_line.add_point(pos)
+				root_node.add_child(new_line)
+				current_line = new_line

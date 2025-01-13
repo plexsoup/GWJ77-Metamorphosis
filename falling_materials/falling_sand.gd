@@ -59,4 +59,4 @@ func absorb_sand_ball(smaller_ball):
 	var new_diameter = self.get_diameter() + smaller_ball.get_diameter()
 	set_size(new_diameter)
 	smaller_ball.queue_free()
-			
+	$MergeNoise.play()
