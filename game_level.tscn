@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bi1ti5anfdrh2"]
+[gd_scene load_steps=5 format=3 uid="uid://bi1ti5anfdrh2"]
 
 [ext_resource type="Script" path="res://game_level.gd" id="1_4sps6"]
 [ext_resource type="PackedScene" uid="uid://bnciv3ns4hnpe" path="res://solar_system.tscn" id="1_cd1ob"]
 [ext_resource type="PackedScene" uid="uid://dq1k2g4vbkopg" path="res://GUI/hud.tscn" id="2_ao1wb"]
+[ext_resource type="AudioStream" uid="uid://cn1un0o3sddsx" path="res://assets/audio/SpaceWhale_bgMusic.ogg" id="4_6kes6"]
 
 [node name="GameLevel" type="Control"]
 layout_mode = 3
@@ -18,3 +19,8 @@ script = ExtResource("1_4sps6")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("2_ao1wb")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6kes6")
+volume_db = -12.0
+autoplay = true
