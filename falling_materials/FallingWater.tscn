@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://csmamxbnvheki"]
+[gd_scene load_steps=5 format=3 uid="uid://csmamxbnvheki"]
 
 [ext_resource type="PackedScene" uid="uid://cy277iegdegrc" path="res://falling_materials/falling_material.tscn" id="1_4cnja"]
 [ext_resource type="Texture2D" uid="uid://bjnbyy74j66dl" path="res://assets/images/water_droplet_01.png" id="2_ikt17"]
+[ext_resource type="Script" path="res://falling_materials/falling_water.gd" id="2_xd0gp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o04kk"]
 resource_local_to_scene = true
 radius = 32.0
 
 [node name="Water" groups=["water"] instance=ExtResource("1_4cnja")]
+contact_monitor = true
+max_contacts_reported = 5
+script = ExtResource("2_xd0gp")
 short_name = "Water"
 color = Color(0.219627, 0.445709, 1, 1)
 
@@ -18,3 +22,5 @@ shape = SubResource("CircleShape2D_o04kk")
 position = Vector2(0, -2)
 scale = Vector2(1, 0.669811)
 texture = ExtResource("2_ikt17")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

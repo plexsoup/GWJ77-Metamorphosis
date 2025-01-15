@@ -1,5 +1,7 @@
 extends Node2D
 
+func _init():
+	Globals.solar_system = self
 
 func spawn_planet(location):
 	var planet_scene = preload("res://Objects/planet.tscn")

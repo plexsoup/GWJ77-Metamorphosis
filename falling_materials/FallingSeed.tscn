@@ -10,6 +10,8 @@ resource_local_to_scene = true
 radius = 32.0
 
 [node name="Seed" groups=["seeds"] instance=ExtResource("1_mhuow")]
+contact_monitor = true
+max_contacts_reported = 5
 script = ExtResource("2_itvdk")
 tree_scene = ExtResource("3_jmgea")
 short_name = "Seed"
@@ -21,3 +23,5 @@ shape = SubResource("CircleShape2D_0d4qq")
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_jgu7i")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

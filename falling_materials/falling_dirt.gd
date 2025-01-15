@@ -16,6 +16,7 @@ func set_size(diameter):
 		$CollisionShape2D.shape.radius = diameter / 2
 		$Sprite2D.scale = Vector2.ONE * (diameter / $Sprite2D.texture.get_size().x)
 		size = $Sprite2D.scale.x * $Sprite2D.texture.get_size().x
+		mass = diameter * 0.2
 
 func become_planet():
 	disable_collisions()
@@ -34,12 +35,6 @@ func disable_collisions():
 func get_diameter() -> float:
 	return $Sprite2D.scale.x * $Sprite2D.texture.get_size().x
 
-
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("SandBall"):
-		# make a new ball twice as big, and remove the previous two
-		if can_merge(body): # only one of us should make the merge..
-			absorb_sand_ball(body)
 
 func can_merge(other_ball) -> bool:
 	# only merge balls of equal size? Suika style?
@@ -60,3 +55,10 @@ func absorb_sand_ball(smaller_ball):
 	set_size(new_diameter)
 	smaller_ball.queue_free()
 	$MergeNoise.play()
+
+
+func _on_body_entered(body: Node) -> void:
+	if body.is_in_group("dirt") and body.has_method("absorb_sand_ball"):
+		# make a new ball twice as big, and remove the previous two
+		if can_merge(body): # only one of us should make the merge..
+			absorb_sand_ball(body)

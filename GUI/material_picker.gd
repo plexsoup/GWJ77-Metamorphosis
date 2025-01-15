@@ -3,7 +3,7 @@
 extends HBoxContainer
 
 var materials = [
-	preload("res://falling_materials/FallingSand.tscn"),
+	preload("res://falling_materials/FallingDirt.tscn"),
 	preload("res://falling_materials/FallingWater.tscn"),
 	preload("res://falling_materials/FallingSeed.tscn"),
 ]
@@ -33,7 +33,7 @@ func switch_material(direction : int):
 	print(material_changed.get_connections())
 
 func update_material_name_label(index):
-	# Where "material" means sand, water, etc. Not mesh.material or texture
+	# Where "material" means dirt (sand), water, etc. Not mesh.material or texture
 	var packed_material : PackedScene = materials[index]
 	current_material_scene = packed_material
 	var reference_material = packed_material.instantiate()

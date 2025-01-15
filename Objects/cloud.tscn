@@ -1,21 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkfbjakg5mnph"]
+[gd_scene load_steps=3 format=3 uid="uid://dkfbjakg5mnph"]
 
 [ext_resource type="Script" path="res://Objects/cloud.gd" id="1_kawjh"]
-[ext_resource type="Texture2D" uid="uid://60blmbxfrq8r" path="res://assets/images/cloud_01.png" id="2_ux506"]
-[ext_resource type="Texture2D" uid="uid://cx11605giqk1w" path="res://assets/images/cloud_02.png" id="3_52k08"]
-[ext_resource type="Texture2D" uid="uid://b5nk06cxxd2m" path="res://assets/images/cloud_03.png" id="4_brckn"]
+[ext_resource type="Texture2D" uid="uid://jdgsi4fd747a" path="res://assets/images/clouds.png" id="4_brckn"]
 
 [node name="Cloud" type="Node2D"]
 script = ExtResource("1_kawjh")
 
-[node name="ReferenceNodes" type="Node2D" parent="."]
-visible = false
-
-[node name="Cloud_01" type="Sprite2D" parent="ReferenceNodes"]
-texture = ExtResource("2_ux506")
-
-[node name="Cloud_02" type="Sprite2D" parent="ReferenceNodes"]
-texture = ExtResource("3_52k08")
-
-[node name="Cloud_03" type="Sprite2D" parent="ReferenceNodes"]
+[node name="Clouds" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(861, 0)
+rotation = 1.5708
 texture = ExtResource("4_brckn")
+hframes = 2
+vframes = 2
+frame = 2

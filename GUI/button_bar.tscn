@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ts54jk1m00dy" path="res://assets/images/buttons/dirt_normal.png" id="2_xyiho"]
 [ext_resource type="Script" path="res://GUI/material_button.gd" id="3_d3sln"]
 [ext_resource type="Texture2D" uid="uid://mf7bbkev0otp" path="res://assets/images/buttons/dirt_pressed.png" id="3_drc5y"]
-[ext_resource type="PackedScene" uid="uid://cy6nlmgt1ughn" path="res://falling_materials/FallingSand.tscn" id="4_3t81s"]
+[ext_resource type="PackedScene" uid="uid://cy6nlmgt1ughn" path="res://falling_materials/FallingDirt.tscn" id="4_3t81s"]
 [ext_resource type="Texture2D" uid="uid://cbkwwq0lpyvp7" path="res://assets/images/buttons/dirt_hover.png" id="4_ixekl"]
 [ext_resource type="PackedScene" uid="uid://cqkaox8s44rxi" path="res://falling_materials/FallingSeed.tscn" id="5_g8oew"]
 [ext_resource type="Texture2D" uid="uid://bi070kuivonda" path="res://assets/images/buttons/dirt_disabled.png" id="5_roak6"]

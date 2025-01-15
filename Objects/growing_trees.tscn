@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bmp4pvbgwyeqs"]
 
 [ext_resource type="Script" path="res://Objects/growing_trees.gd" id="1_3258e"]
-[ext_resource type="Texture2D" uid="uid://brnh6hx4g667x" path="res://assets/images/three_trees.png" id="1_nx01v"]
+[ext_resource type="Texture2D" uid="uid://cargirconfx14" path="res://assets/images/three_trees_2.png" id="2_q16wk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7826"]
 size = Vector2(76, 12)
@@ -21,7 +21,7 @@ script = ExtResource("1_3258e")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(10, 1)
 rotation = 1.5708
-texture = ExtResource("1_nx01v")
+texture = ExtResource("2_q16wk")
 offset = Vector2(-1.71312, -54.1003)
 hframes = 3
 
@@ -34,6 +34,7 @@ shape = SubResource("RectangleShape2D_u7826")
 
 [node name="LakeDrinkingTimer" type="Timer" parent="."]
 wait_time = 3.0
+autostart = true
 
 [node name="WaterParticles" type="GPUParticles2D" parent="."]
 emitting = false

@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://1xo8d3t1gu6t"]
+[gd_scene load_steps=7 format=3 uid="uid://1xo8d3t1gu6t"]
 
 [ext_resource type="Script" path="res://Objects/planet.gd" id="1_w8dfo"]
 [ext_resource type="Texture2D" uid="uid://gic25jsqv55w" path="res://assets/images/planet_01.png" id="2_xyomn"]
 [ext_resource type="Texture2D" uid="uid://5xj5v6eyhbjo" path="res://assets/images/cloud_rect_03.png" id="3_xdgo0"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_rh6j5"]
-radius = 230.02
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cv07b"]
 radius = 384.0
@@ -16,13 +13,8 @@ radius = 640.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_c3iww"]
 radius = 214.009
 
-[node name="Planet" type="Node2D" groups=["planets"]]
+[node name="Planet" type="StaticBody2D" groups=["dirt", "planets"]]
 script = ExtResource("1_w8dfo")
-
-[node name="Biosphere" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Biosphere"]
-shape = SubResource("CircleShape2D_rh6j5")
 
 [node name="Troposphere" type="Area2D" parent="."]
 gravity_space_override = 2
@@ -44,11 +36,6 @@ gravity = 440.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stratosphere"]
 shape = SubResource("CircleShape2D_ipo4h")
 
-[node name="PlanetStaticBody" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetStaticBody"]
-shape = SubResource("CircleShape2D_c3iww")
-
 [node name="PlanetSprite" type="Sprite2D" parent="."]
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_xyomn")
@@ -63,4 +50,9 @@ position = Vector2(-71, -49)
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("3_xdgo0")
 
-[connection signal="body_entered" from="Biosphere" to="." method="_on_biosphere_body_entered"]
+[node name="Lakes" type="Node2D" parent="."]
+
+[node name="Atmosphere" type="Node2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c3iww")

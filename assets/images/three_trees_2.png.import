@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://60blmbxfrq8r"
-path="res://.godot/imported/cloud_01.png-e065e29ca55ad95a99830a052822688d.ctex"
+uid="uid://cargirconfx14"
+path="res://.godot/imported/three_trees_2.png-7386f9390beb99fe9ffdf2b632355b21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/cloud_01.png"
-dest_files=["res://.godot/imported/cloud_01.png-e065e29ca55ad95a99830a052822688d.ctex"]
+source_file="res://assets/images/three_trees_2.png"
+dest_files=["res://.godot/imported/three_trees_2.png-7386f9390beb99fe9ffdf2b632355b21.ctex"]
 
 [params]
 

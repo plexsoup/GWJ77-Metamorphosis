@@ -7,8 +7,8 @@ var current_material : PackedScene
 var current_planet : Node2D # get this so you know where projectiles go
 
 var rotation_speed : float = 5.0
-var max_velocity : float = 7.5
-var thrust : float = 5.0
+var max_velocity : float = 20.0
+var thrust : float = 1.0
 
 var projectile_charge : float = 500.0 # speed to eject particles out of cannon
 var projectile_jitter : float = 0.2 # radians of aim deviation
@@ -29,31 +29,36 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if state == states.FLYING:
-		var desired_rotation = Input.get_axis("rotate_left", "rotate_right")
-		rotate(desired_rotation * delta * rotation_speed)
-		if Input.is_action_pressed("move_forward"):
-			velocity = lerp(velocity, transform.x * max_velocity, thrust * delta)
-		else:
-			velocity = lerp(velocity, Vector2.ZERO, 10.0 * delta)
-		move_through_particles(velocity)
-		if velocity.length_squared() > 0.2 :
-			$GPUParticles2D.emitting = true
-		else:
-			$GPUParticles2D.emitting = false
-	elif state == states.LANDED:
-		pass
+		rotate_whale(delta)
+		apply_thrust(delta)
+		push_particles(velocity)
 
 
-func move_through_particles(_remaining_velocity):
+func rotate_whale(delta):
+	var desired_rotation = Input.get_axis("rotate_left", "rotate_right")
+	rotate(desired_rotation * delta * rotation_speed)
+
+func apply_thrust(delta):
+	if Input.is_action_pressed("move_forward"):
+		velocity = lerp(velocity, transform.x * max_velocity, thrust * delta)
+	else:
+		velocity = lerp(velocity, Vector2.ZERO, 10.0 * delta)
+	if velocity.length_squared() > 0.2 :
+		$GPUParticles2D.emitting = true
+	else:
+		$GPUParticles2D.emitting = false
+
+
+func push_particles(_remaining_velocity):
 	var collision : KinematicCollision2D = move_and_collide(_remaining_velocity)
+	var mass = 5.0
 	if collision:
 		var collider = collision.get_collider()
 		if collider.is_in_group("particles"):
 			#move_through_particles(_remaining_velocity)
-			var push_force = 10.0 * thrust
+			var push_force = 10.0 * thrust * mass
 			collider.apply_central_impulse(-1*collision.get_normal()*push_force)
-		elif collider.owner.is_in_group("planets"):
-			land_on_planet(collider)
+
 
 
 func land_on_planet(collider):
@@ -85,7 +90,7 @@ func shoot():
 func get_current_material():
 	var projectile_material = Globals.current_hud.current_material
 	if projectile_material == null:
-		projectile_material = load("res://falling_materials/FallingSand.tscn")
+		projectile_material = load("res://falling_materials/FallingDirt.tscn")
 	return projectile_material
 
 func spawn_projectile(projectile_scene):
@@ -115,7 +120,6 @@ func _on_material_changed(new_material):
 	current_material = new_material
 	
 func _on_hud_ready(hud):
-	print("Player sand_cannon thinks hud is ready: ", hud.name)
 	current_material = Globals.current_hud.current_material
 	hud.current_player_controller = self
 

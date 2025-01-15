@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnciv3ns4hnpe"]
+[gd_scene load_steps=7 format=3 uid="uid://bnciv3ns4hnpe"]
 
 [ext_resource type="PackedScene" uid="uid://1xo8d3t1gu6t" path="res://Objects/planet.tscn" id="1_a81uj"]
 [ext_resource type="Script" path="res://solar_system.gd" id="1_rltww"]
 [ext_resource type="PackedScene" uid="uid://c44n3b33v6mob" path="res://space_whale.tscn" id="2_r6gnl"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="3_0y0nq"]
+
+[sub_resource type="Gradient" id="Gradient_2mr25"]
+offsets = PackedFloat32Array(0, 0.432971, 0.550725)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5r1gv"]
+gradient = SubResource("Gradient_2mr25")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="SolarSystem" type="Node2D"]
 script = ExtResource("1_rltww")
@@ -12,6 +21,7 @@ script = ExtResource("1_rltww")
 position = Vector2(2325, 496)
 
 [node name="Sun" parent="." instance=ExtResource("3_0y0nq")]
+position = Vector2(-8, -878)
 
 [node name="Planets" type="Node2D" parent="."]
 
@@ -34,3 +44,12 @@ position = Vector2(-1543, -78)
 position = Vector2(-2880, -79)
 
 [node name="Helpers" type="Node2D" parent="."]
+
+[node name="Extents" type="ReferenceRect" parent="."]
+offset_left = -12126.0
+offset_top = -5339.0
+offset_right = 12043.0
+offset_bottom = 5317.0
+
+[node name="OriginMarker" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_5r1gv")
