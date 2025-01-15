@@ -2,6 +2,8 @@ extends Control
 
 var game_scene = preload("res://game_level.tscn")
 
+func _ready():
+	%PlayButton.grab_focus()
 
 func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_packed(game_scene)

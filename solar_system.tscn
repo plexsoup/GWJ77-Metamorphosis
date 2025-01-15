@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnciv3ns4hnpe"]
+[gd_scene load_steps=8 format=3 uid="uid://bnciv3ns4hnpe"]
 
 [ext_resource type="PackedScene" uid="uid://1xo8d3t1gu6t" path="res://Objects/planet.tscn" id="1_a81uj"]
 [ext_resource type="Script" path="res://solar_system.gd" id="1_rltww"]
 [ext_resource type="PackedScene" uid="uid://c44n3b33v6mob" path="res://space_whale.tscn" id="2_r6gnl"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="3_0y0nq"]
+[ext_resource type="PackedScene" uid="uid://dp667gm1sla5" path="res://Objects/space_ship.tscn" id="5_pcv3k"]
 
 [sub_resource type="Gradient" id="Gradient_2mr25"]
 offsets = PackedFloat32Array(0, 0.432971, 0.550725)
@@ -53,3 +54,11 @@ offset_bottom = 5317.0
 
 [node name="OriginMarker" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_5r1gv")
+
+[node name="Aliens" type="Node2D" parent="."]
+
+[node name="SpaceShip" parent="Aliens" instance=ExtResource("5_pcv3k")]
+position = Vector2(355, 286)
+
+[node name="SpaceShip2" parent="Aliens" instance=ExtResource("5_pcv3k")]
+position = Vector2(665, -410)

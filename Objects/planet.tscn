@@ -4,17 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://gic25jsqv55w" path="res://assets/images/planet_01.png" id="2_xyomn"]
 [ext_resource type="Texture2D" uid="uid://5xj5v6eyhbjo" path="res://assets/images/cloud_rect_03.png" id="3_xdgo0"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_c3iww"]
+radius = 214.009
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_cv07b"]
 radius = 384.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ipo4h"]
 radius = 640.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_c3iww"]
-radius = 214.009
-
 [node name="Planet" type="StaticBody2D" groups=["dirt", "planets"]]
 script = ExtResource("1_w8dfo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c3iww")
 
 [node name="Troposphere" type="Area2D" parent="."]
 gravity_space_override = 2
@@ -54,5 +57,12 @@ texture = ExtResource("3_xdgo0")
 
 [node name="Atmosphere" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_c3iww")
+[node name="Animals" type="Node2D" parent="."]
+
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

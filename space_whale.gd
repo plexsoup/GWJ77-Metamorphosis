@@ -51,7 +51,7 @@ func apply_thrust(delta):
 
 func push_particles(_remaining_velocity):
 	var collision : KinematicCollision2D = move_and_collide(_remaining_velocity)
-	var mass = 5.0
+	var mass = 25.0
 	if collision:
 		var collider = collision.get_collider()
 		if collider.is_in_group("particles"):

@@ -42,5 +42,10 @@ amount = 14
 process_material = SubResource("ParticleProcessMaterial_ukb63")
 one_shot = true
 
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [connection signal="body_entered" from="WaterDetector" to="." method="_on_water_detector_body_entered"]
 [connection signal="timeout" from="LakeDrinkingTimer" to="." method="_on_lake_drinking_timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -5,6 +5,9 @@ var size = 32
 
 signal request_planet(location)
 
+var animal_scenes : Array = [
+	preload("res://Objects/bird.tscn"),
+]
 
 func set_size(diameter):
 	if diameter > 256:

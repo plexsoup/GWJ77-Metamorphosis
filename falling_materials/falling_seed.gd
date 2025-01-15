@@ -18,7 +18,7 @@ func germinate(planet, collision_point, collision_normal): # in global coords
 	var new_tree = tree_scene.instantiate()
 	new_tree.planet = planet
 	
-	planet.call_deferred("add_child", new_tree)
+	planet.get_node("Trees").call_deferred("add_child", new_tree)
 	await new_tree.ready
 
 	new_tree.global_position = collision_point

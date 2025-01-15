@@ -11,6 +11,9 @@ var planet
 var clouds_spawned : int = 0
 var max_clouds : int = 2
 
+var animals_spawned : int = 0
+var max_animals : int = 2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -37,6 +40,17 @@ func spawn_clouds():
 			planet.spawn_cloud(global_position)
 			clouds_spawned += 1
 
+func spawn_animal():
+	if planet.get("Animals") or planet.animal_scenes.is_empty():
+		return
+
+	var location = self.global_position
+	var new_animal = planet.animal_scenes.pick_random().instantiate()
+	planet.get_node("Animals").add_child(new_animal)
+	new_animal.global_position = planet.global_position
+	new_animal.rotation = (location - planet.global_position).angle()
+	animals_spawned += 1
+
 
 func is_near_lake(location : Vector2) -> bool:
 	if not planet.has_node("Lakes"):
@@ -47,6 +61,9 @@ func is_near_lake(location : Vector2) -> bool:
 			return true
 	return false
 
+func is_full_grown():
+	var sprite : Sprite2D = $Sprite2D
+	return sprite.frame == (sprite.hframes * sprite.vframes) - 1
 
 func _on_water_detector_body_entered(body: Node2D) -> void:
 	if body.is_in_group("water"):
@@ -57,5 +74,15 @@ func _on_water_detector_body_entered(body: Node2D) -> void:
 
 
 func _on_lake_drinking_timer_timeout() -> void:
-	if is_near_lake(planet, global_position):
+	if is_near_lake(global_position):
 		water_tree(10)
+
+func _on_spawn_timer_timeout() -> void:
+	if not (planet.has_node("Animals") or planet.has_node("Trees")):
+		push_warning("Planet needs Animals or Trees node as a folder for organizing objects")
+		return
+	elif is_full_grown() and animals_spawned < max_animals:
+		if randf() < 0.33:
+			spawn_animal()
+			$SpawnTimer.set_wait_time(randf_range(2.0,5.0))
+		

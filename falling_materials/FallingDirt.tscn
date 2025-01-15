@@ -9,7 +9,7 @@
 resource_local_to_scene = true
 radius = 32.0
 
-[node name="Sand" groups=["dirt"] instance=ExtResource("1_gucu7")]
+[node name="Dirt" groups=["dirt"] instance=ExtResource("1_gucu7")]
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("2_7rf43")
@@ -22,5 +22,11 @@ texture = ExtResource("3_hylk1")
 
 [node name="MergeNoise" type="AudioStreamPlayer2D" parent="." index="2"]
 stream = ExtResource("4_4yeko")
+
+[node name="Trees" type="Node2D" parent="." index="3"]
+
+[node name="Animals" type="Node2D" parent="." index="4"]
+
+[node name="Lakes" type="Node2D" parent="." index="5"]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
