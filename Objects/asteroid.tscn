@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://clxo3y0u8lscw"]
+
+[ext_resource type="Script" path="res://Objects/asteroid.gd" id="1_bnldr"]
+[ext_resource type="Texture2D" uid="uid://c1uoopcgkkl0k" path="res://assets/images/asteroid.png" id="1_cpea1"]
+[ext_resource type="PackedScene" uid="uid://by12awp5qpoce" path="res://Components/autolevel_rotation.tscn" id="2_uwr0e"]
+
+[sub_resource type="Curve" id="Curve_tw661"]
+max_value = 12.0
+_data = [Vector2(0, 8.94479), 0.0, 0.0, 0, 0, Vector2(1, 0.00565577), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_r80fw"]
+offsets = PackedFloat32Array(0, 0.132353, 1)
+colors = PackedColorArray(0.52549, 0.643137, 0.827451, 0.368627, 0.588235, 0.690196, 0.85098, 1, 1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_at70a"]
+radius = 62.9542
+height = 183.99
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uy44v"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 76, 1)
+inherit_velocity_ratio = 0.676
+direction = Vector3(-1, 0, 0)
+initial_velocity_max = 87.56
+gravity = Vector3(0, 0, 0)
+
+[node name="Asteroid" type="RigidBody2D" groups=["asteroids"]]
+mass = 30.0
+script = ExtResource("1_bnldr")
+
+[node name="CometTrail" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, -256, 0)
+width_curve = SubResource("Curve_tw661")
+gradient = SubResource("Gradient_r80fw")
+
+[node name="autolevel_rotation" parent="CometTrail" instance=ExtResource("2_uwr0e")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_cpea1")
+offset = Vector2(0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.58137
+shape = SubResource("CapsuleShape2D_at70a")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-69, 1)
+process_material = SubResource("ParticleProcessMaterial_uy44v")
+
+[node name="TrailProcessTimer" type="Timer" parent="."]
+wait_time = 0.33
+autostart = true
+
+[connection signal="timeout" from="TrailProcessTimer" to="." method="_on_trail_process_timer_timeout"]

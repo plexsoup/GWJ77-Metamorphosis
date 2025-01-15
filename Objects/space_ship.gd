@@ -8,7 +8,7 @@ extends Node2D
 var speed = 200
 var amplitude = 128
 var frequency = randf_range(0.003, 0.01)
-var start_y : int
+var start_y : float
 
 enum states { IDLE, SEEKING, BEAMING, FIGHTING, DYING, DEAD }
 var state = states.IDLE

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnciv3ns4hnpe"]
+[gd_scene load_steps=9 format=3 uid="uid://bnciv3ns4hnpe"]
 
 [ext_resource type="PackedScene" uid="uid://1xo8d3t1gu6t" path="res://Objects/planet.tscn" id="1_a81uj"]
 [ext_resource type="Script" path="res://solar_system.gd" id="1_rltww"]
 [ext_resource type="PackedScene" uid="uid://c44n3b33v6mob" path="res://space_whale.tscn" id="2_r6gnl"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="3_0y0nq"]
 [ext_resource type="PackedScene" uid="uid://dp667gm1sla5" path="res://Objects/space_ship.tscn" id="5_pcv3k"]
+[ext_resource type="PackedScene" uid="uid://clxo3y0u8lscw" path="res://Objects/asteroid.tscn" id="6_u4fsu"]
 
 [sub_resource type="Gradient" id="Gradient_2mr25"]
 offsets = PackedFloat32Array(0, 0.432971, 0.550725)
@@ -62,3 +63,17 @@ position = Vector2(355, 286)
 
 [node name="SpaceShip2" parent="Aliens" instance=ExtResource("5_pcv3k")]
 position = Vector2(665, -410)
+
+[node name="Asteroids" type="Node2D" parent="."]
+
+[node name="Asteroid" parent="Asteroids" instance=ExtResource("6_u4fsu")]
+position = Vector2(-404, 421)
+
+[node name="Asteroid2" parent="Asteroids" instance=ExtResource("6_u4fsu")]
+position = Vector2(-261, 31)
+
+[node name="Asteroid3" parent="Asteroids" instance=ExtResource("6_u4fsu")]
+position = Vector2(-181, -324)
+
+[node name="Asteroid4" parent="Asteroids" instance=ExtResource("6_u4fsu")]
+position = Vector2(38, 874)

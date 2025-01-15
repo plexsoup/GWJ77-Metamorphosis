@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c44n3b33v6mob"]
+[gd_scene load_steps=18 format=3 uid="uid://c44n3b33v6mob"]
 
 [ext_resource type="Script" path="res://space_whale.gd" id="1_rbohq"]
 [ext_resource type="PackedScene" uid="uid://bicayb7c0ulgb" path="res://camera_2d.tscn" id="2_ktu2y"]
@@ -8,9 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://5a3pxucaumxv" path="res://assets/audio/mouth/phoo.wav" id="6_cnh1l"]
 [ext_resource type="AudioStream" uid="uid://b24te5ylbeuad" path="res://assets/audio/mouth/phu.wav" id="7_k043m"]
 [ext_resource type="AudioStream" uid="uid://c1dqsungt3c5w" path="res://assets/audio/mouth/whoo.wav" id="8_o20dp"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gcg5"]
-size = Vector2(72, 72)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxdwf"]
 radius = 23.0
@@ -248,20 +245,10 @@ polygon = PackedVector2Array(12, -17, 78, -42, 77, 38, 12, 15)
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(83, 6)
 
-[node name="BiosphereDetector" type="Area2D" parent="."]
-position = Vector2(-41, 2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BiosphereDetector"]
-position = Vector2(41, -2)
-shape = SubResource("RectangleShape2D_3gcg5")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(9, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_rxdwf")
-
-[node name="Legs" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-98, -63, -52, -55, -28, -16, -29, 17, -49, 55, -94, 71, -95, 54, -62, 33, -51, 12, -98, 7, -98, -10, -54, -14, -64, -44, -96, -49)
 
 [node name="Camera2D" parent="." instance=ExtResource("2_ktu2y")]
 
@@ -372,6 +359,4 @@ process_material = SubResource("ParticleProcessMaterial_u7pvo")
 texture = SubResource("GradientTexture2D_b7bhh")
 lifetime = 2.0
 
-[connection signal="area_entered" from="BiosphereDetector" to="." method="_on_biosphere_detector_area_entered"]
-[connection signal="area_exited" from="BiosphereDetector" to="." method="_on_biosphere_detector_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
