@@ -1,5 +1,7 @@
 extends Area2D
 
+enum states { READY, ACTIVATED }
+var state = states.READY
 
 func spawn_hyperspace_stars():
 	$Sprite2D.hide()
@@ -9,6 +11,9 @@ func spawn_hyperspace_stars():
 	new_hyperspace.global_position = global_position
 
 func _on_body_entered(body: Node2D) -> void:
+	if not state == states.READY:
+		return
+		
 	if body.is_in_group("player"):
 		body.enter_hyperspace()
 		spawn_hyperspace_stars()

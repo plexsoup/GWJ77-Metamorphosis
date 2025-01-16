@@ -1,12 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://vl3vbblkoi1r"]
+[gd_scene load_steps=3 format=3 uid="uid://vl3vbblkoi1r"]
 
 [ext_resource type="Script" path="res://levels/hyperspace.gd" id="1_n42vk"]
+[ext_resource type="AudioStream" uid="uid://la33efkavy2c" path="res://assets/audio/hyperspace_full.wav" id="2_oraju"]
 
 [node name="Hyperspace" type="Node2D"]
 script = ExtResource("1_n42vk")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="StarTimer" type="Timer" parent="."]
 wait_time = 0.1
-autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="DurationTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_oraju")
+volume_db = -9.0
+autoplay = true
+
+[connection signal="timeout" from="StarTimer" to="." method="_on_star_timer_timeout"]
+[connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]

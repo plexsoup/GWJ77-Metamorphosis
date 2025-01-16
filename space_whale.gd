@@ -29,6 +29,9 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	if not is_visible_in_tree():
+		return # for transitions between scenes
+		
 	if state == states.FLYING:
 		rotate_whale(delta)
 		apply_thrust(delta)
