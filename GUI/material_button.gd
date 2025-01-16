@@ -9,5 +9,6 @@ func _ready():
 func _on_hud_material_changed(new_material):
 	if new_material == material_scene:
 		button_pressed = true
+		grab_focus()
 	else:
 		button_pressed = false

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvcoeh7p40bqd"]
+
+[ext_resource type="Texture2D" uid="uid://d28yjsy7p50tb" path="res://assets/images/city_01.png" id="1_0he6k"]
+
+[node name="City" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.39978, -11.0001)
+rotation = 1.5708
+texture = ExtResource("1_0he6k")
+offset = Vector2(11.0001, -133.6)
