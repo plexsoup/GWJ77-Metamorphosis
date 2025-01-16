@@ -1,9 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://bb8wgqut4ydhh"]
+[gd_scene load_steps=4 format=3 uid="uid://bb8wgqut4ydhh"]
 
 [ext_resource type="Texture2D" uid="uid://dt2k5g307024p" path="res://assets/images/sun_01.png" id="1_3pmjg"]
+
+[sub_resource type="Gradient" id="Gradient_sa0a6"]
+offsets = PackedFloat32Array(0.632246, 0.701087)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eplqh"]
+gradient = SubResource("Gradient_sa0a6")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Sun" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("1_3pmjg")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_eplqh")
+texture_scale = 50.0

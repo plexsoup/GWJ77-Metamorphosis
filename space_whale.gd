@@ -13,12 +13,15 @@ var thrust : float = 20000.0
 var projectile_charge : float = 250.0 # speed to eject particles out of cannon
 var projectile_jitter : float = 0.2 # radians of aim deviation
 
-enum states { FLYING, SWIMMING, DYING, DEAD }
+enum states { FLYING, SWIMMING, HYPERSPACE, DYING, DEAD }
 var state = states.FLYING
 
 var contacts : Array = []
 
-# Called when the node enters the scene tree for the first time.
+
+func _init():
+	Globals.current_player = self
+	
 func _ready() -> void:
 	
 	Globals.current_hud.material_changed.connect(_on_material_changed)
@@ -30,11 +33,17 @@ func _physics_process(delta: float) -> void:
 		rotate_whale(delta)
 		apply_thrust(delta)
 		show_vfx()
+	elif state == states.HYPERSPACE:
+		spin_whale_clockwise(delta)
 
 func rotate_whale(_delta):
 	var desired_rotation = Input.get_axis("rotate_left", "rotate_right")
 	var torque_strength = 100000.0
 	apply_torque(desired_rotation * torque_strength)
+
+func spin_whale_clockwise(_delta):
+	var torque_strength = 100000.0
+	apply_torque(torque_strength)
 
 func apply_thrust(_delta):
 	if Input.is_action_pressed("move_forward"):
@@ -91,6 +100,10 @@ func launch_off_planet(planet):
 	apply_central_impulse(escape_direction * adjusted_boost)
 	# ... rest of the function
 
+func enter_hyperspace():
+	state = states.HYPERSPACE
+	gravity_scale = 0
+	set_deferred("linear_velocity", Vector2.ZERO)
 
 func _on_material_changed(new_material):
 	current_material = new_material

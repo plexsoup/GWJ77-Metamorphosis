@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnjdel2iqvplr"]
+
+[ext_resource type="Script" path="res://Objects/background_star.gd" id="1_a04hl"]
+[ext_resource type="Texture2D" uid="uid://dwer1ry6k1oai" path="res://assets/images/stars_spritesheet.png" id="2_64ll7"]
+
+[node name="BackgroundStar" type="Node2D"]
+script = ExtResource("1_a04hl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_64ll7")
+hframes = 3
+vframes = 2
+
+[node name="TwinkleTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="TwinkleTimer" to="." method="_on_twinkle_timer_timeout"]
