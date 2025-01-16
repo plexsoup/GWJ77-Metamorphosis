@@ -2,7 +2,7 @@ extends Camera2D
 
 var zoom_delay : int = 500 # msec
 var time_out_of_zoom_spec_detected: int = 0
-var zoom_extents = [ Vector2(1,1), Vector2(0.33,0.33) ]
+var zoom_extents = [ Vector2(0.75,0.75), Vector2(0.25,0.25) ]
 
 enum states { IDLE, ZOOMING_IN, ZOOMING_OUT }
 var state = states.IDLE

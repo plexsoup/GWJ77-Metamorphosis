@@ -232,9 +232,13 @@ use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="SpaceWhale" type="CharacterBody2D"]
+[node name="SpaceWhale" type="RigidBody2D"]
 z_index = 10
-motion_mode = 1
+mass = 10.0
+contact_monitor = true
+max_contacts_reported = 5
+linear_damp = 0.67
+angular_damp = 0.67
 script = ExtResource("1_rbohq")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
@@ -359,4 +363,5 @@ process_material = SubResource("ParticleProcessMaterial_u7pvo")
 texture = SubResource("GradientTexture2D_b7bhh")
 lifetime = 2.0
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

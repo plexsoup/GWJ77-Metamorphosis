@@ -24,7 +24,7 @@ func update_material_label():
 	var reference_material = current_material.instantiate()
 	var material_name = reference_material.short_name
 	reference_material.queue_free()
-	$VBoxContainer/MaterialLabel.text = material_name
+	%MaterialLabel.text = "Space to shoot: " + material_name
 	
 
 func _on_material_button_pressed(new_material):
