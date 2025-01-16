@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 	Globals.current_hud.material_changed.connect(_on_material_changed)
 	Globals.current_hud.hud_ready.connect(_on_hud_ready)
-	
+	state = states.FLYING
 
 func _physics_process(delta: float) -> void:
 	if not is_visible_in_tree():
@@ -107,6 +107,10 @@ func enter_hyperspace():
 	state = states.HYPERSPACE
 	gravity_scale = 0
 	set_deferred("linear_velocity", Vector2.ZERO)
+
+func exit_hyperspace():
+	state = states.FLYING
+	gravity_scale = 1
 
 func _on_material_changed(new_material):
 	current_material = new_material

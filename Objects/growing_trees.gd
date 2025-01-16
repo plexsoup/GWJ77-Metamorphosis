@@ -14,15 +14,24 @@ var max_clouds : int = 2
 var animals_spawned : int = 0
 var max_animals : int = 2
 
+enum ages { sapling, immature, mature }
+var age = ages.sapling
+
+signal grown
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	grown.connect(Globals.current_level._on_tree_grown)
 
 func grow():
 	# 3 scales per sprite frame, 3 sprite frames.
 	
 	var sprite : Sprite2D = $Sprite2D
-	sprite.frame = min(floor(water/max_water * (sprite.hframes-1)), sprite.hframes-1)
+	var new_frame = min(floor(water/max_water * (sprite.hframes-1)), sprite.hframes-1)
+	if sprite.frame != new_frame:
+		sprite.frame = new_frame
+		age = ages.values()[sprite.frame]
+		grown.emit()
 	sprite.scale = 3* Vector2.ONE * ( water/max_water - sprite.frame / max_water ) * (sprite.hframes -1)
 	
 

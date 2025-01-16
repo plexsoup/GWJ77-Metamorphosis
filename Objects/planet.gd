@@ -11,11 +11,12 @@ var animal_scenes : Array = [
 	
 ]
 
+signal atmosphere_created
 
 func _ready():
 	rotation_speed = randf_range(0.2, 0.4)
 	$Troposphere/TroposphereBG.hide()
-	
+	atmosphere_created.connect(Globals.current_level._on_atmosphere_created)
 
 func spawn_cloud(location):
 	var new_cloud = preload("res://Objects/cloud.tscn").instantiate()
@@ -24,8 +25,11 @@ func spawn_cloud(location):
 	new_cloud.rotation = Vector2.RIGHT.angle_to(location - global_position)
 	new_cloud.adjust_height(randi_range(-128, 128))
 
-	if $Atmosphere.get_child_count() > 12:
-		$Troposphere/TroposphereBG.show()
+	if $Atmosphere.get_child_count() >= 12:
+		var atmos_sprite = $Troposphere/TroposphereBG
+		if not atmos_sprite.is_visible(): # only send signal once
+			$Troposphere/TroposphereBG.show()
+			atmosphere_created.emit()
 		
 		
 

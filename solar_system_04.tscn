@@ -18,6 +18,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="SolarSystem" type="Node2D"]
 script = ExtResource("1_bjxkf")
+goal = 3
 
 [node name="Sun" parent="." instance=ExtResource("2_sct5t")]
 position = Vector2(-8, -878)

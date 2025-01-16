@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnciv3ns4hnpe"]
+
+[ext_resource type="Script" path="res://solar_system.gd" id="1_ro5l3"]
+[ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="3_yixqd"]
+[ext_resource type="PackedScene" uid="uid://1xo8d3t1gu6t" path="res://Objects/planet.tscn" id="4_dqbs5"]
+[ext_resource type="PackedScene" uid="uid://dp667gm1sla5" path="res://Objects/space_ship.tscn" id="5_sv0mm"]
+[ext_resource type="PackedScene" uid="uid://clxo3y0u8lscw" path="res://Objects/asteroid.tscn" id="6_1a7de"]
+[ext_resource type="PackedScene" uid="uid://dici5hlk748wr" path="res://Objects/stars.tscn" id="7_y3v51"]
+[ext_resource type="PackedScene" uid="uid://6cr4d3f0d4q7" path="res://Objects/black_hole.tscn" id="8_c4b7h"]
+
+[sub_resource type="Gradient" id="Gradient_2mr25"]
+offsets = PackedFloat32Array(0, 0.432971, 0.550725)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5r1gv"]
+gradient = SubResource("Gradient_2mr25")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="SolarSystem" type="Node2D"]
+script = ExtResource("1_ro5l3")
+goal = 0
+
+[node name="Sun" parent="." instance=ExtResource("3_yixqd")]
+position = Vector2(-8, -878)
+
+[node name="Planets" type="Node2D" parent="."]
+
+[node name="Planet" parent="Planets" instance=ExtResource("4_dqbs5")]
+position = Vector2(3142, 488)
+
+[node name="Planet2" parent="Planets" instance=ExtResource("4_dqbs5")]
+position = Vector2(7040, 923)
+
+[node name="Planet3" parent="Planets" instance=ExtResource("4_dqbs5")]
+position = Vector2(5249, -301)
+
+[node name="Planet4" parent="Planets" instance=ExtResource("4_dqbs5")]
+position = Vector2(-4987, 710)
+
+[node name="Planet5" parent="Planets" instance=ExtResource("4_dqbs5")]
+position = Vector2(-1543, -78)
+
+[node name="Planet6" parent="Planets" instance=ExtResource("4_dqbs5")]
+position = Vector2(-2880, -79)
+
+[node name="Helpers" type="Node2D" parent="."]
+
+[node name="OriginMarker" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_5r1gv")
+
+[node name="Aliens" type="Node2D" parent="."]
+
+[node name="SpaceShip" parent="Aliens" instance=ExtResource("5_sv0mm")]
+position = Vector2(355, 286)
+
+[node name="SpaceShip2" parent="Aliens" instance=ExtResource("5_sv0mm")]
+position = Vector2(665, -410)
+
+[node name="Asteroids" type="Node2D" parent="."]
+
+[node name="Asteroid" parent="Asteroids" instance=ExtResource("6_1a7de")]
+position = Vector2(-404, 421)
+
+[node name="Asteroid2" parent="Asteroids" instance=ExtResource("6_1a7de")]
+position = Vector2(-261, 31)
+
+[node name="Asteroid3" parent="Asteroids" instance=ExtResource("6_1a7de")]
+position = Vector2(-181, -324)
+
+[node name="Asteroid4" parent="Asteroids" instance=ExtResource("6_1a7de")]
+position = Vector2(38, 874)
+
+[node name="Stars" parent="." instance=ExtResource("7_y3v51")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.0748453, 0.0748453, 0.0748453, 1)
+
+[node name="Extents" type="ReferenceRect" parent="."]
+offset_left = -12126.0
+offset_top = -5339.0
+offset_right = 12043.0
+offset_bottom = 5317.0
+
+[node name="BlackHoles" type="Node2D" parent="."]
+
+[node name="BlackHole" parent="BlackHoles" instance=ExtResource("8_c4b7h")]
+position = Vector2(2549, -3707)

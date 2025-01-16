@@ -14,6 +14,8 @@ var current_material :
 var current_player_controller
 
 
+
+
 func _init() -> void:
 	Globals.current_hud = self
 
@@ -25,7 +27,9 @@ func update_material_label():
 	var material_name = reference_material.short_name
 	reference_material.queue_free()
 	%MaterialLabel.text = "Space to shoot: " + material_name
-	
+
+func update_goal(text):
+	%Goal.text = text
 
 func _on_material_button_pressed(new_material):
 	current_material = new_material

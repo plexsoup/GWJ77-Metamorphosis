@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 func enter_hyperspace():
 	state = states.HYPERSPACE
 	#direction = Vector2.ONE.rotated(randf()*TAU)
-	direction = (global_position - Globals.current_player.global_position).normalized()
+	direction = position.normalized()
 	spawn_trail()
 	
 func spawn_trail():

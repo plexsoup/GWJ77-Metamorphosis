@@ -12,7 +12,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n11ch")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="Goal" type="Label" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Goal: Have fun!"
+horizontal_alignment = 1
+
+[node name="Footer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -23,10 +37,10 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Footer"]
 layout_mode = 2
 
-[node name="MaterialLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="MaterialLabel" type="Label" parent="Footer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -35,11 +49,11 @@ theme_type_variation = &"HeaderLarge"
 text = "Space to shoot: Dirt"
 horizontal_alignment = 1
 
-[node name="ButtonBar" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_visj4")]
+[node name="ButtonBar" parent="Footer/HBoxContainer" instance=ExtResource("3_visj4")]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MoveLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="MoveLabel" type="Label" parent="Footer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
