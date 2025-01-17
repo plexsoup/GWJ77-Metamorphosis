@@ -11,6 +11,7 @@ func _ready() -> void:
 	velocity.y = randf_range(-10, 10)
 	velocity *= randf_range(5.0, 10.0)
 	linear_velocity = velocity
+	last_pos = global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

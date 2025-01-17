@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c44n3b33v6mob"]
+[gd_scene load_steps=21 format=3 uid="uid://c44n3b33v6mob"]
 
 [ext_resource type="Script" path="res://space_whale.gd" id="1_rbohq"]
 [ext_resource type="PackedScene" uid="uid://bicayb7c0ulgb" path="res://camera_2d.tscn" id="2_ktu2y"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://5a3pxucaumxv" path="res://assets/audio/mouth/phoo.wav" id="6_cnh1l"]
 [ext_resource type="AudioStream" uid="uid://b24te5ylbeuad" path="res://assets/audio/mouth/phu.wav" id="7_k043m"]
 [ext_resource type="AudioStream" uid="uid://c1dqsungt3c5w" path="res://assets/audio/mouth/whoo.wav" id="8_o20dp"]
+[ext_resource type="PackedScene" uid="uid://dwnvwgckqwcw4" path="res://Components/return_arrow.tscn" id="10_x1g6k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxdwf"]
 radius = 23.0
@@ -408,6 +409,8 @@ position = Vector2(-90, 1)
 process_material = SubResource("ParticleProcessMaterial_u7pvo")
 texture = SubResource("GradientTexture2D_b7bhh")
 lifetime = 2.0
+
+[node name="ReturnArrow" parent="." instance=ExtResource("10_x1g6k")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

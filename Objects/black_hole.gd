@@ -4,6 +4,7 @@ enum states { READY, ACTIVATED }
 var state = states.READY
 
 func spawn_hyperspace_stars():
+	state = states.ACTIVATED
 	$Sprite2D.hide()
 	var new_hyperspace = preload("res://levels/hyperspace.tscn").instantiate()
 	

@@ -36,6 +36,7 @@ func _physics_process(delta: float) -> void:
 		rotate_whale(delta)
 		apply_thrust(delta)
 		show_vfx()
+		#wrap_around_map_if_necessary() # Broken
 	elif state == states.HYPERSPACE:
 		spin_whale_clockwise(delta)
 
@@ -79,6 +80,26 @@ func show_vfx():
 		$GPUParticles2D.emitting = false
 
 
+	
+
+func wrap_around_map_if_necessary():
+	# DO NOT USE: this works once, but fails the second time?!
+	if not Globals.current_solar_system or not is_instance_valid(Globals.current_solar_system):
+		return
+	
+	var tolerance = 1024 * 4
+	var vector_to_sun = Globals.current_solar_system.sun.global_position - global_transform.origin
+	# cheat an ellipse by doubling our apparent y position
+	#vector_to_sun.y *= 2.0
+	
+	if vector_to_sun.length_squared() > tolerance * tolerance:
+		var new_virtual_position = global_position + (2.0 * vector_to_sun)
+		new_virtual_position.y /= 2.0
+		Globals.teleport_rigid_body(self, new_virtual_position)
+		#Globals.teleport_rigid_body(self, Vector2.ZERO)
+		
+		$Camera2D.global_position = global_position
+
 func _unhandled_input(_event: InputEvent) -> void:
 	if state in [ states.FLYING ]:
 		if Input.is_action_pressed("shoot"):
@@ -104,10 +125,12 @@ func spawn_projectile(projectile_scene):
 
 	var muzzle : Marker2D
 	if new_projectile.is_in_group("water"):
-		muzzle = $MuzzleWater
+		#muzzle = $MuzzleWater
+		muzzle = $Muzzle # wasn't fun to shoot from blow-hole
 		$AnimationPlayer.play("blow_water")
 	elif new_projectile.is_in_group("dirt"):
-		muzzle = $MuzzleDirt
+		#muzzle = $MuzzleDirt
+		muzzle = $Muzzle # wasn't fun to shoot backwards
 	else:
 		muzzle = $Muzzle
 		$AnimationPlayer.play("shoot")
@@ -118,8 +141,15 @@ func spawn_projectile(projectile_scene):
 	var dir_vector = muzzle.get_global_transform().x
 	#var dir_vector = Vector2.RIGHT.rotated(rotation)
 	
-	Globals.current_solar_system.get_node("Projectiles").add_child(new_projectile) 
-	new_projectile.linear_velocity = dir_vector * projectile_charge + linear_velocity
+	if Globals.current_solar_system != null and is_instance_valid(Globals.current_solar_system):
+		if Globals.current_solar_system.has_node("Projectiles"):
+			Globals.current_solar_system.get_node("Projectiles").add_child(new_projectile) 
+			new_projectile.linear_velocity = dir_vector * projectile_charge + linear_velocity
+		else:
+			push_warning("Solar System requires Projectiles node.")
+	else: # Between solar systems.
+		new_projectile.queue_free()
+		
 	
 func launch_off_planet(planet):
 	if planet == null:

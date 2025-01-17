@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwnvwgckqwcw4"]
+
+[ext_resource type="Texture2D" uid="uid://br5v5eobr5bhx" path="res://assets/images/arrow_to_sun_01.png" id="1_iwkst"]
+[ext_resource type="Script" path="res://Components/return_arrow.gd" id="1_rdapv"]
+
+[sub_resource type="Animation" id="Animation_au8rw"]
+resource_name = "flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_u6va7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lquio"]
+_data = {
+"RESET": SubResource("Animation_u6va7"),
+"flash": SubResource("Animation_au8rw")
+}
+
+[node name="ReturnArrow" type="Node2D"]
+script = ExtResource("1_rdapv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(183, 0)
+texture = ExtResource("1_iwkst")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lquio")
+}

@@ -146,3 +146,5 @@ mouse_filter = 2
 
 [node name="BlackHole" parent="BlackHoles" instance=ExtResource("8_2thed")]
 position = Vector2(5056, 1451)
+
+[node name="Projectiles" type="Node2D" parent="."]
