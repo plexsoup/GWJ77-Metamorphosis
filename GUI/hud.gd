@@ -21,6 +21,9 @@ func _init() -> void:
 
 func _ready():
 	hud_ready.emit(self) # for the player controller
+	for button in find_children("", "Button"):
+		button.focus_mode = Button.FOCUS_NONE
+
 
 func update_material_label():
 	var reference_material = current_material.instantiate()
@@ -33,3 +36,13 @@ func update_goal(text):
 
 func _on_material_button_pressed(new_material):
 	current_material = new_material
+
+
+func _on_control_switch_button_toggled(toggled_on: bool) -> void:
+	match toggled_on:
+		true:
+			%ControlSwitchButton.text = "WASD + Space (click to change)"
+			Globals.control_scheme = Globals.control_schemes.WASD
+		false:
+			%ControlSwitchButton.text = "Mouse + L Button (click to change)"
+			Globals.control_scheme = Globals.control_schemes.MOUSE

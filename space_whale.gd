@@ -40,7 +40,16 @@ func _physics_process(delta: float) -> void:
 		spin_whale_clockwise(delta)
 
 func rotate_whale(_delta):
-	var desired_rotation = Input.get_axis("rotate_left", "rotate_right")
+	var desired_rotation : float
+	match Globals.control_scheme:
+		Globals.control_schemes.WASD:
+			desired_rotation = Input.get_axis("rotate_left", "rotate_right")
+		Globals.control_schemes.MOUSE:
+			# with our position and forward vector, we can dot product the perpendicular
+			var vector_to_mouse = get_global_mouse_position() - global_position
+			var angle_to_mouse = transform.x.angle_to(vector_to_mouse)
+			desired_rotation = clamp(angle_to_mouse, -PI, PI) / PI
+
 	var torque_strength = 100000.0
 	apply_torque(desired_rotation * torque_strength)
 
@@ -49,7 +58,14 @@ func spin_whale_clockwise(_delta):
 	apply_torque(torque_strength)
 
 func apply_thrust(_delta):
-	if Input.is_action_pressed("move_forward"):
+	var thrusting = false
+	match Globals.control_scheme:
+		Globals.control_schemes.WASD:
+			thrusting = Input.is_action_pressed("move_forward")
+		Globals.control_schemes.MOUSE:
+			var void_distance = 96 / get_viewport().get_camera_2d().zoom.x
+			thrusting = global_position.distance_squared_to(get_global_mouse_position()) > pow(void_distance, 2)
+	if thrusting:
 		var forward_dir = transform.x.normalized()
 		# Apply a continuous force forward
 		if linear_velocity.length_squared() < max_velocity * max_velocity:

@@ -6,7 +6,8 @@ var zoom_extents = [ Vector2(0.5,0.5), Vector2(0.125,0.125) ]
 
 enum states { IDLE, ZOOMING_IN, ZOOMING_OUT }
 var state = states.IDLE
-
+var position_last_frame : Vector2
+var velocity_last_frame : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,23 +17,17 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("move_forward"):
-		state = states.ZOOMING_OUT
-		time_out_of_zoom_spec_detected = Time.get_ticks_msec()
-	elif Input.is_action_just_released("move_forward"):
-		state = states.ZOOMING_IN
-		time_out_of_zoom_spec_detected = Time.get_ticks_msec()
-
-	if state in [states.ZOOMING_IN, states.ZOOMING_OUT] and zoom_delay_finished():
-		var desired_zoom
-		if Input.is_action_pressed("move_forward"):
-			desired_zoom = zoom_extents[1]
-		else:
-			desired_zoom = zoom_extents[0]
-		zoom_camera(desired_zoom, delta)
+func _physics_process(delta: float) -> void:
+	if (not Globals.current_player) or (not is_instance_valid(Globals.current_player)):
+		return
 		
-
+	var inv_vel_ratio = max(1 - (Globals.current_player.get_linear_velocity() / Globals.current_player.max_velocity).length(), 0) 
+	# 0.25 for high speed, 1.0 for low speed
+	var max = 1.0
+	var min = 0.25
+	var adjusted_zoom = (max-min) * inv_vel_ratio + min
+	
+	zoom_camera(Vector2.ONE * adjusted_zoom, delta)
 
 
 func zoom_delay_finished():

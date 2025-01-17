@@ -140,6 +140,7 @@ offset_left = -12126.0
 offset_top = -5339.0
 offset_right = 12043.0
 offset_bottom = 5317.0
+mouse_filter = 2
 
 [node name="BlackHoles" type="Node2D" parent="."]
 
