@@ -15,7 +15,7 @@ scale_max = 5.0
 hue_variation_min = 0.78
 hue_variation_max = 0.78
 
-[node name="Tree" type="Node2D"]
+[node name="Tree" type="Node2D" groups=["trees"]]
 script = ExtResource("1_3258e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

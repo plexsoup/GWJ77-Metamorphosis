@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://solar_system.gd" id="1_bjxkf"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="2_sct5t"]
-[ext_resource type="PackedScene" uid="uid://dp667gm1sla5" path="res://Objects/space_ship.tscn" id="4_lus3g"]
+[ext_resource type="PackedScene" uid="uid://dp667gm1sla5" path="res://Objects/alien_space_ship.tscn" id="4_lus3g"]
 [ext_resource type="PackedScene" uid="uid://clxo3y0u8lscw" path="res://Objects/asteroid.tscn" id="5_44fy2"]
 [ext_resource type="PackedScene" uid="uid://dici5hlk748wr" path="res://Objects/stars.tscn" id="6_17i4e"]
 [ext_resource type="PackedScene" uid="uid://6cr4d3f0d4q7" path="res://Objects/black_hole.tscn" id="7_ubtt0"]

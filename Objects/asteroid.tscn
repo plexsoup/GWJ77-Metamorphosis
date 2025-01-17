@@ -27,7 +27,8 @@ initial_velocity_max = 87.56
 gravity = Vector3(0, 0, 0)
 
 [node name="Asteroid" type="RigidBody2D" groups=["asteroids"]]
-mass = 30.0
+mass = 10.0
+linear_damp_mode = 1
 script = ExtResource("1_bnldr")
 
 [node name="CometTrail" type="Line2D" parent="."]

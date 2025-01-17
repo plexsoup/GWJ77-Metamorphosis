@@ -2,10 +2,14 @@ class_name solar_system extends Node2D
 
 @export var goal = Globals.goals.planets
 @export var goal_quantity : int = 3
+
+@onready var sun = $Sun
+
 signal goal_updated(goal, quantity)
 
+
 func _init():
-	Globals.solar_system = self
+	Globals.current_solar_system = self
 
 
 

@@ -44,7 +44,7 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Bird" type="Node2D"]
+[node name="Bird" type="Node2D" groups=["animals"]]
 script = ExtResource("1_neu07")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

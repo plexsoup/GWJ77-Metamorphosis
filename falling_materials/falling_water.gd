@@ -25,11 +25,14 @@ func spawn_lake(planet, location, normal): # global coords
 	if is_near_lake(planet, location):
 		return # don't spawn multiple lakes on top of each other
 	var new_lake = preload("res://Objects/lake.tscn").instantiate()
+	new_lake.planet = planet
 	planet.get_node("Lakes").add_child(new_lake)
 	var offset_distance = 76.0 * (planet.size / 256)
 	var offset = location.direction_to(planet.global_position) * offset_distance
 	new_lake.global_position = location + offset
 	new_lake.global_rotation = normal.angle()
+	new_lake.add_shadow()
+	
 	if planet.get("size"):
 		new_lake.scale = Vector2.ONE * (float(planet.size) / 256.0)
 	

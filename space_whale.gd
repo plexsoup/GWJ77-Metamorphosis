@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var interval_between_shots : int = 200 #msec
+var interval_between_shots : int = 250 #msec
 var time_of_last_shot : int = 0
 var current_material : PackedScene
 
@@ -10,7 +10,7 @@ var rotation_speed : float = 5.0
 var max_velocity : float = 800.0
 var thrust : float = 20000.0
 
-var projectile_charge : float = 250.0 # speed to eject particles out of cannon
+var projectile_charge : float = 300.0 # speed to eject particles out of cannon
 var projectile_jitter : float = 0.2 # radians of aim deviation
 
 enum states { FLYING, SWIMMING, HYPERSPACE, DYING, DEAD }
@@ -98,12 +98,25 @@ func get_current_material():
 	return projectile_material
 
 func spawn_projectile(projectile_scene):
-	$AnimationPlayer.play("shoot")
+	
 	# drop falling sand/water/fire/plant toward planet
 	var new_projectile : Node2D = projectile_scene.instantiate()
-	new_projectile.global_position = $Muzzle.global_position
-	new_projectile.rotation = rotation + randf_range(-projectile_jitter, projectile_jitter) #in radians
-	var dir_vector = Vector2.RIGHT.rotated(rotation)
+
+	var muzzle : Marker2D
+	if new_projectile.is_in_group("water"):
+		muzzle = $MuzzleWater
+		$AnimationPlayer.play("blow_water")
+	elif new_projectile.is_in_group("dirt"):
+		muzzle = $MuzzleDirt
+	else:
+		muzzle = $Muzzle
+		$AnimationPlayer.play("shoot")
+
+	new_projectile.global_position = muzzle.global_position
+	new_projectile.global_rotation = muzzle.global_rotation + randf_range(-projectile_jitter, projectile_jitter) #in radians
+	
+	var dir_vector = muzzle.get_global_transform().x
+	#var dir_vector = Vector2.RIGHT.rotated(rotation)
 	add_sibling(new_projectile) # sibling, not child: projectiles shouldn't inherit subsequent spaceship transforms
 	new_projectile.linear_velocity = dir_vector * projectile_charge + linear_velocity
 	

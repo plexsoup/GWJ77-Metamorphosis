@@ -31,7 +31,7 @@ func spawn_hyperspace():
 		player.enter_hyperspace()
 		
 	var hyperspace = preload("res://levels/hyperspace.tscn").instantiate()
-	Globals.solar_system.add_child(hyperspace)
+	Globals.current_solar_system.add_child(hyperspace)
 	hyperspace.global_position = player_pos
 	
 	
@@ -42,7 +42,7 @@ func spawn_new_solar_system():
 	level_index += 1
 	level_index = level_index % levels.size()
 	
-	var old_solar_system = Globals.solar_system
+	var old_solar_system = Globals.current_solar_system
 	if old_solar_system:
 		old_solar_system.queue_free()
 	var new_solar_system = levels[level_index].instantiate()
@@ -78,7 +78,7 @@ func create_goal_hint(system):
 	
 
 func _on_new_planet_requested(location):
-	Globals.solar_system.spawn_planet(location)
+	Globals.current_solar_system.spawn_planet(location)
 	planets_spawned += 1
 
 func _on_tree_grown():
@@ -106,7 +106,7 @@ func reset_win_conditions():
 	aliens_destroyed = 0
 
 func detect_win_condition() -> bool:
-	var system : solar_system = Globals.solar_system
+	var system : solar_system = Globals.current_solar_system
 	var win = false
 	match system.goal:
 		Globals.goals.trees:
@@ -127,4 +127,4 @@ func detect_win_condition() -> bool:
 func _on_win_condition_monitor_timeout() -> void:
 	if detect_win_condition() == true:
 		spawn_hyperspace()
-	create_goal_hint(Globals.solar_system)
+	create_goal_hint(Globals.current_solar_system)
