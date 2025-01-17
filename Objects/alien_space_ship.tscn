@@ -1,7 +1,72 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp667gm1sla5"]
+[gd_scene load_steps=9 format=3 uid="uid://dp667gm1sla5"]
 
 [ext_resource type="Script" path="res://Objects/alien_space_ship.gd" id="1_gc3vy"]
-[ext_resource type="Texture2D" uid="uid://drk8m6mvpq3ri" path="res://assets/images/spaceship.png" id="2_o55ri"]
+[ext_resource type="Texture2D" uid="uid://byygph821p2bq" path="res://assets/images/spaceship_spritesheet.png" id="2_3njmc"]
+
+[sub_resource type="Animation" id="Animation_3vwbw"]
+resource_name = "tractor_beam"
+length = 2.0
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TractorBeam:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75, 1.875, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [64.0, 96.0, 64.0, 48.0, 64.0, 96.0, 64.0, 48.0, 64.0, 96.0, 64.0, 48.0, 64.0, 96.0, 64.0, 48.0, 64.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TractorBeam:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_afjy0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TractorBeam:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [64.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TractorBeam:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7k13"]
+_data = {
+"RESET": SubResource("Animation_afjy0"),
+"tractor_beam": SubResource("Animation_3vwbw")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itb2o"]
+size = Vector2(314.045, 130.031)
 
 [sub_resource type="Curve" id="Curve_hyxup"]
 max_value = 2.0
@@ -12,32 +77,37 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.98827)
 colors = PackedColorArray(0, 0, 0, 0.631373, 0.345595, 0.654762, 0.421409, 0.741176)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_itb2o"]
-size = Vector2(314.045, 130.031)
-
 [node name="SpaceShip" type="Node2D"]
 script = ExtResource("1_gc3vy")
 
-[node name="TractorBeam" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 512, 0)
-width = 64.0
-width_curve = SubResource("Curve_hyxup")
-gradient = SubResource("Gradient_1be0k")
-
-[node name="VacuumArea" type="Area2D" parent="TractorBeam"]
-unique_name_in_owner = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TractorBeam/VacuumArea"]
-position = Vector2(353.054, -1.04548)
-rotation = 0.00919545
-shape = SubResource("RectangleShape2D_itb2o")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_o55ri")
+texture = ExtResource("2_3njmc")
+hframes = 2
 
 [node name="DecisionTimer" type="Timer" parent="."]
 wait_time = 3.5
 autostart = true
 
-[connection signal="body_entered" from="TractorBeam/VacuumArea" to="." method="_on_vacuum_area_body_entered"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y7k13")
+}
+
+[node name="VacuumArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VacuumArea"]
+position = Vector2(353.054, -1.04548)
+rotation = 0.00919545
+shape = SubResource("RectangleShape2D_itb2o")
+
+[node name="TractorBeam" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 512, 0)
+width = 64.0
+width_curve = SubResource("Curve_hyxup")
+gradient = SubResource("Gradient_1be0k")
+
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="VacuumArea" to="." method="_on_vacuum_area_body_entered"]

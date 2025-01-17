@@ -117,7 +117,8 @@ func spawn_projectile(projectile_scene):
 	
 	var dir_vector = muzzle.get_global_transform().x
 	#var dir_vector = Vector2.RIGHT.rotated(rotation)
-	add_sibling(new_projectile) # sibling, not child: projectiles shouldn't inherit subsequent spaceship transforms
+	
+	Globals.current_solar_system.get_node("Projectiles").add_child(new_projectile) 
 	new_projectile.linear_velocity = dir_vector * projectile_charge + linear_velocity
 	
 func launch_off_planet(planet):

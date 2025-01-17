@@ -7,7 +7,7 @@ func _ready() -> void:
 	$StarTimer.start()
 	$DurationTimer.start()
 	completed.connect(Globals.current_level._on_hyperspace_completed)
-
+	$AnimationPlayer.play("hyperspace")
 
 
 func spawn_stars(num):

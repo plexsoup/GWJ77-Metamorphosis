@@ -15,6 +15,8 @@ var atmospheres_created : int = 0
 var aliens_destroyed : int = 0
 var civilizations_built : int = 0
 
+enum states { PLAYING, HYPERSPACE }
+var state = states.PLAYING
 
 func _init():
 	Globals.current_level = self
@@ -23,7 +25,8 @@ func _ready():
 	spawn_new_solar_system()
 
 func spawn_hyperspace():
-# go to next level.
+	# go to next level.
+	state = states.HYPERSPACE
 	var player = Globals.current_player
 	var player_pos : Vector2 = Vector2.ZERO
 	if player and is_instance_valid(player):
@@ -97,6 +100,7 @@ func _on_hyperspace_completed():
 	reset_win_conditions()
 	spawn_new_solar_system()
 	Globals.current_player.exit_hyperspace()
+	state = states.PLAYING
 
 func reset_win_conditions():
 	trees_grown = 0
@@ -125,6 +129,7 @@ func detect_win_condition() -> bool:
 
 
 func _on_win_condition_monitor_timeout() -> void:
-	if detect_win_condition() == true:
-		spawn_hyperspace()
-	create_goal_hint(Globals.current_solar_system)
+	if state == states.PLAYING:
+		if detect_win_condition() == true:
+			spawn_hyperspace()
+		create_goal_hint(Globals.current_solar_system)

@@ -12,7 +12,13 @@ func _init():
 	Globals.current_solar_system = self
 
 
+func _ready():
+	validate_dependencies()
 
+func validate_dependencies():
+	if not has_node("Projectiles"):
+		var projectiles_folder = Node2D.new()
+		add_child(projectiles_folder)
 
 func spawn_planet(location):
 	var planet_scene = preload("res://Objects/planet.tscn")
