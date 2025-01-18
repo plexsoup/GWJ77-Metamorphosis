@@ -23,9 +23,9 @@ func _physics_process(delta: float) -> void:
 		
 	var inv_vel_ratio = max(1 - (Globals.current_player.get_linear_velocity() / Globals.current_player.max_velocity).length(), 0) 
 	# 0.25 for high speed, 1.0 for low speed
-	var max = 1.0
-	var min = 0.25
-	var adjusted_zoom = (max-min) * inv_vel_ratio + min
+	var maximum_zoom = 1.0
+	var minimum_zoom = 0.25
+	var adjusted_zoom = (maximum_zoom - minimum_zoom) * inv_vel_ratio + minimum_zoom
 	
 	zoom_camera(Vector2.ONE * adjusted_zoom, delta)
 

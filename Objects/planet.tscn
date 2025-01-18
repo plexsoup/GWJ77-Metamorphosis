@@ -85,4 +85,8 @@ texture = ExtResource("3_xdgo0")
 wait_time = 3.0
 autostart = true
 
+[node name="Cities" type="Node2D" parent="."]
+
+[node name="Cracks" type="Node2D" parent="."]
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

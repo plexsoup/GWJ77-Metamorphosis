@@ -5,7 +5,6 @@ class_name solar_system extends Node2D
 
 @onready var sun = $Sun
 
-signal goal_updated(goal, quantity)
 
 
 func _init():

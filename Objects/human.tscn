@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cevocouw0nvgt"]
+[gd_scene load_steps=7 format=3 uid="uid://cevocouw0nvgt"]
 
 [ext_resource type="Texture2D" uid="uid://bf7oqedcmqp02" path="res://assets/images/humans_01.png" id="1_enjjd"]
+[ext_resource type="Script" path="res://Objects/human.gd" id="1_grs16"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yuyl"]
 atlas = ExtResource("1_enjjd")
@@ -35,6 +36,7 @@ animations = [{
 }]
 
 [node name="Human" type="Node2D"]
+script = ExtResource("1_grs16")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rnntp")

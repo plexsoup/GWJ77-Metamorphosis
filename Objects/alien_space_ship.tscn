@@ -1,7 +1,59 @@
-[gd_scene load_steps=9 format=3 uid="uid://dp667gm1sla5"]
+[gd_scene load_steps=12 format=3 uid="uid://dp667gm1sla5"]
 
 [ext_resource type="Script" path="res://Objects/alien_space_ship.gd" id="1_gc3vy"]
-[ext_resource type="Texture2D" uid="uid://byygph821p2bq" path="res://assets/images/spaceship_spritesheet.png" id="2_3njmc"]
+[ext_resource type="Texture2D" uid="uid://dswjckl6jljf3" path="res://assets/Game/assets/images/spaceship_spritesheet.png" id="2_x21ku"]
+[ext_resource type="Texture2D" uid="uid://s5otcob1bjaq" path="res://assets/images/alien_spritesheet.png" id="3_208lc"]
+
+[sub_resource type="Animation" id="Animation_afjy0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TractorBeam:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [64.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TractorBeam:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpaceshipSprite/AlienSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SpaceshipSprite/AlienSprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_3vwbw"]
 resource_name = "tractor_beam"
@@ -32,36 +84,39 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_afjy0"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_xbxyl"]
+resource_name = "fly"
+loop_mode = 1
+step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TractorBeam:width")
+tracks/0/path = NodePath("SpaceshipSprite/AlienSprite:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [64.0]
+"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TractorBeam:visible")
+tracks/1/path = NodePath("SpaceshipSprite/AlienSprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.8), Vector2(1, 1), Vector2(1, 0.8), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y7k13"]
 _data = {
 "RESET": SubResource("Animation_afjy0"),
+"fly": SubResource("Animation_xbxyl"),
 "tractor_beam": SubResource("Animation_3vwbw")
 }
 
@@ -77,11 +132,19 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.98827)
 colors = PackedColorArray(0, 0, 0, 0.631373, 0.345595, 0.654762, 0.421409, 0.741176)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_k54y6"]
+radius = 168.0
+
 [node name="SpaceShip" type="Node2D"]
 script = ExtResource("1_gc3vy")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_3njmc")
+[node name="SpaceshipSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_x21ku")
+hframes = 2
+
+[node name="AlienSprite" type="Sprite2D" parent="SpaceshipSprite"]
+position = Vector2(0, -28)
+texture = ExtResource("3_208lc")
 hframes = 2
 
 [node name="DecisionTimer" type="Timer" parent="."]
@@ -92,6 +155,7 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_y7k13")
 }
+autoplay = "fly"
 
 [node name="VacuumArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -108,6 +172,17 @@ width = 64.0
 width_curve = SubResource("Curve_hyxup")
 gradient = SubResource("Gradient_1be0k")
 
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_k54y6")
+
+[node name="IframesTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="VacuumArea" to="." method="_on_vacuum_area_body_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]

@@ -60,17 +60,22 @@ func spin_whale_clockwise(_delta):
 
 func apply_thrust(_delta):
 	var thrusting = false
+	var desired_thrust = thrust
 	match Globals.control_scheme:
 		Globals.control_schemes.WASD:
 			thrusting = Input.is_action_pressed("move_forward")
 		Globals.control_schemes.MOUSE:
 			var void_distance = 96 / get_viewport().get_camera_2d().zoom.x
-			thrusting = global_position.distance_squared_to(get_global_mouse_position()) > pow(void_distance, 2)
+			var dist_to_mouse = global_position.distance_to(get_global_mouse_position())
+			var normalized_dist = dist_to_mouse * get_viewport().get_camera_2d().scale.x
+			desired_thrust = dist_to_mouse / get_viewport_rect().size.y * thrust
+			if normalized_dist > void_distance:
+				thrusting = true
 	if thrusting:
 		var forward_dir = transform.x.normalized()
 		# Apply a continuous force forward
 		if linear_velocity.length_squared() < max_velocity * max_velocity:
-			apply_central_force(forward_dir * thrust)
+			apply_central_force(forward_dir * desired_thrust)
 
 func show_vfx():
 	# turn on effects at an arbitrary speed: near half of max?

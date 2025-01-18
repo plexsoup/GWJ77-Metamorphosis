@@ -19,7 +19,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="SolarSystem" type="Node2D"]
 script = ExtResource("1_48jnh")
-goal = 2
+goal = 3
 
 [node name="Sun" parent="." instance=ExtResource("2_ddo0h")]
 position = Vector2(-8, -878)
@@ -102,13 +102,6 @@ position = Vector2(3523, -1469)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.0748453, 0.0748453, 0.0748453, 1)
-
-[node name="Extents" type="ReferenceRect" parent="."]
-offset_left = -12126.0
-offset_top = -5339.0
-offset_right = 12043.0
-offset_bottom = 5317.0
-mouse_filter = 2
 
 [node name="BlackHoles" type="Node2D" parent="."]
 

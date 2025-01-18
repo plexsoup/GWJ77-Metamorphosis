@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnciv3ns4hnpe"]
+[gd_scene load_steps=11 format=3 uid="uid://bnciv3ns4hnpe"]
 
 [ext_resource type="Script" path="res://solar_system.gd" id="1_ro5l3"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="3_yixqd"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://clxo3y0u8lscw" path="res://Objects/asteroid.tscn" id="6_1a7de"]
 [ext_resource type="PackedScene" uid="uid://dici5hlk748wr" path="res://Objects/stars.tscn" id="7_y3v51"]
 [ext_resource type="PackedScene" uid="uid://6cr4d3f0d4q7" path="res://Objects/black_hole.tscn" id="8_c4b7h"]
+[ext_resource type="PackedScene" uid="uid://b4rgjc81bc640" path="res://Components/asteroid_spawner.tscn" id="8_gyogk"]
 
 [sub_resource type="Gradient" id="Gradient_2mr25"]
 offsets = PackedFloat32Array(0, 0.432971, 0.550725)
@@ -19,7 +20,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="SolarSystem" type="Node2D"]
 script = ExtResource("1_ro5l3")
-goal = 0
+goal = 4
 
 [node name="Sun" parent="." instance=ExtResource("3_yixqd")]
 position = Vector2(-8, -878)
@@ -76,16 +77,12 @@ position = Vector2(38, 874)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.0748453, 0.0748453, 0.0748453, 1)
 
-[node name="Extents" type="ReferenceRect" parent="."]
-offset_left = -12126.0
-offset_top = -5339.0
-offset_right = 12043.0
-offset_bottom = 5317.0
-mouse_filter = 2
-
 [node name="BlackHoles" type="Node2D" parent="."]
 
 [node name="BlackHole" parent="BlackHoles" instance=ExtResource("8_c4b7h")]
 position = Vector2(2549, -3707)
 
 [node name="Projectiles" type="Node2D" parent="."]
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource("8_gyogk")]
+position = Vector2(-4733, -3327)

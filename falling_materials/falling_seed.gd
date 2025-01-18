@@ -33,7 +33,7 @@ func germinate(planet, collision_point, collision_normal): # in global coords
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("dirt") or body.is_in_group("planets"):
-		var colliding_dirt = get_colliding_bodies()[0]
+		var colliding_dirt = body
 		var collision_index = 0
 		for contact in contacts:
 			if contact[0] == colliding_dirt:

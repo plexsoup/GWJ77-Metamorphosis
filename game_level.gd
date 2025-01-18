@@ -1,6 +1,7 @@
 extends Control
 
 const levels = [
+	preload("res://solar_system_tutorial.tscn"),
 	preload("res://solar_system_01.tscn"),
 	preload("res://solar_system_02.tscn"),
 	preload("res://solar_system_03.tscn"),
@@ -23,6 +24,12 @@ func _init():
 
 func _ready():
 	spawn_new_solar_system()
+
+func spawn_black_hole():
+	var black_hole = preload("res://Objects/black_hole.tscn").instantiate()
+	Globals.current_solar_system.get_node("BlackHoles").add_child(black_hole)
+	var player = Globals.current_player
+	black_hole.global_position = player.global_position + player.linear_velocity
 
 func spawn_hyperspace():
 	# go to next level.
@@ -60,6 +67,8 @@ func create_goal_hint(system):
 	var verb = ""
 	var remaining = system.goal_quantity
 	match system.goal:
+		Globals.goals.move:
+			verb = "WASD"
 		Globals.goals.trees:
 			verb = "Grow"
 			remaining -= trees_grown
@@ -90,7 +99,7 @@ func _on_tree_grown():
 func _on_alien_destroyed():
 	aliens_destroyed += 1
 	
-func _on_civilization_built():
+func _on_civilization_created():
 	civilizations_built += 1
 
 func _on_atmosphere_created():
@@ -101,6 +110,7 @@ func _on_hyperspace_completed():
 	spawn_new_solar_system()
 	Globals.current_player.exit_hyperspace()
 	state = states.PLAYING
+	$WinConditionMonitor.start()
 
 func reset_win_conditions():
 	trees_grown = 0
@@ -131,5 +141,7 @@ func detect_win_condition() -> bool:
 func _on_win_condition_monitor_timeout() -> void:
 	if state == states.PLAYING:
 		if detect_win_condition() == true:
-			spawn_hyperspace()
+			spawn_black_hole() # put a black hole in front of the player, so they can enter it if they want to.
+			#spawn_hyperspace()
+			$WinConditionMonitor.stop()
 		create_goal_hint(Globals.current_solar_system)

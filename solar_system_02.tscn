@@ -135,13 +135,6 @@ position = Vector2(3523, -1469)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.0748453, 0.0748453, 0.0748453, 1)
 
-[node name="Extents" type="ReferenceRect" parent="."]
-offset_left = -12126.0
-offset_top = -5339.0
-offset_right = 12043.0
-offset_bottom = 5317.0
-mouse_filter = 2
-
 [node name="BlackHoles" type="Node2D" parent="."]
 
 [node name="BlackHole" parent="BlackHoles" instance=ExtResource("8_2thed")]

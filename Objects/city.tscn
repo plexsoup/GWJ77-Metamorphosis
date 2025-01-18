@@ -1,11 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvcoeh7p40bqd"]
+[gd_scene load_steps=4 format=3 uid="uid://bvcoeh7p40bqd"]
 
 [ext_resource type="Texture2D" uid="uid://d28yjsy7p50tb" path="res://assets/images/city_01.png" id="1_0he6k"]
+[ext_resource type="Script" path="res://Objects/city.gd" id="1_o47ke"]
 
-[node name="City" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8awe"]
+radius = 107.0
+
+[node name="City" type="Node2D" groups=["buildings", "cities"]]
+script = ExtResource("1_o47ke")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2.39978, -11.0001)
+position = Vector2(206, 0)
 rotation = 1.5708
+scale = Vector2(0.363539, 0.546385)
 texture = ExtResource("1_0he6k")
 offset = Vector2(11.0001, -133.6)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(203, -1)
+shape = SubResource("CircleShape2D_w8awe")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://clxo3y0u8lscw"]
+[gd_scene load_steps=10 format=3 uid="uid://clxo3y0u8lscw"]
 
 [ext_resource type="Script" path="res://Objects/asteroid.gd" id="1_bnldr"]
 [ext_resource type="Texture2D" uid="uid://c1uoopcgkkl0k" path="res://assets/images/asteroid.png" id="1_cpea1"]
@@ -25,9 +25,20 @@ inherit_velocity_ratio = 0.676
 direction = Vector3(-1, 0, 0)
 initial_velocity_max = 87.56
 gravity = Vector3(0, 0, 0)
+scale_max = 5.0
+
+[sub_resource type="Animation" id="Animation_60nvj"]
+resource_name = "explode"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4udtl"]
+_data = {
+"explode": SubResource("Animation_60nvj")
+}
 
 [node name="Asteroid" type="RigidBody2D" groups=["asteroids"]]
 mass = 10.0
+contact_monitor = true
+max_contacts_reported = 5
 linear_damp_mode = 1
 script = ExtResource("1_bnldr")
 
@@ -53,7 +64,13 @@ position = Vector2(-69, 1)
 process_material = SubResource("ParticleProcessMaterial_uy44v")
 
 [node name="TrailProcessTimer" type="Timer" parent="."]
-wait_time = 0.33
+wait_time = 0.15
 autostart = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4udtl")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="TrailProcessTimer" to="." method="_on_trail_process_timer_timeout"]
