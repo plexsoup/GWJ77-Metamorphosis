@@ -32,14 +32,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [node name="Human" type="Node2D"]
 script = ExtResource("1_grs16")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.775116, 0.668732)
+rotation = 1.57079
 sprite_frames = SubResource("SpriteFrames_rnntp")
 autoplay = "default"
 frame = 1
 frame_progress = 0.822797
+offset = Vector2(-0.668656, -34.2249)
+
+[node name="DecisionTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]

@@ -5,8 +5,8 @@ const levels = [
 	preload("res://solar_system_01.tscn"),
 	preload("res://solar_system_02.tscn"),
 	preload("res://solar_system_03.tscn"),
-	preload("res://solar_system_04.tscn"),
 	preload("res://solar_system_final.tscn"),
+	#preload("res://solar_system_04.tscn"),
 ]
 var level_index = -1
 
@@ -84,8 +84,13 @@ func create_goal_hint(system):
 		Globals.goals.aliens:
 			verb = "Destroy"
 			remaining -= aliens_destroyed
-			
+		Globals.goals.playing:
+			verb = "Thanks"
+
+	remaining = max(0, remaining)
 	var text = verb + " " + str(remaining) + " " + object_name
+	if remaining == 0:
+		text += ": Level Complete!"
 	Globals.current_hud.update_goal(text)
 	
 

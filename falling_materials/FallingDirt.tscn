@@ -18,6 +18,7 @@ normal_texture = ExtResource("4_0kjfm")
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("2_7rf43")
+short_name = "Dirt"
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_dyg6r")

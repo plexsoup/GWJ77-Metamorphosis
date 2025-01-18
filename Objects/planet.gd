@@ -24,6 +24,8 @@ func _ready():
 	atmosphere_created.connect(Globals.current_level._on_atmosphere_created)
 	civilization_created.connect(Globals.current_level._on_civilization_created)
 
+	
+
 func get_radius():
 	return $CollisionShape2D.shape.radius
 

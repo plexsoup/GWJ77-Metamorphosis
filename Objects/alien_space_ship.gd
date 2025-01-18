@@ -6,8 +6,7 @@
 extends Node2D
 
 var speed = 200
-var amplitude = 128
-var frequency = 0.01
+
 
 
 enum states { IDLE, SEEKING, KNOCKBACK, BEAMING, FIGHTING, DYING, DEAD }
@@ -123,6 +122,9 @@ func _on_hit_box_body_entered(body: Node2D) -> void:
 		var collision_vector = (global_position - body.global_transform.origin).normalized()
 		dir_vector = collision_vector
 		state = states.KNOCKBACK
+		var effect_on_dirt_balls : float = 100
+		if body is RigidBody2D:
+			body.apply_central_impulse(collision_vector.rotated(PI) * effect_on_dirt_balls )
 		show_hitflash()
 		$IframesTimer.start()
 

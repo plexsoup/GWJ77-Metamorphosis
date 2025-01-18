@@ -99,7 +99,7 @@ material_scene = ExtResource("7_40mey")
 
 [node name="SandLabel" type="Label" parent="."]
 layout_mode = 2
-text = "1 Sand"
+text = "1 Dirt"
 
 [node name="SeedLabel" type="Label" parent="."]
 layout_mode = 2

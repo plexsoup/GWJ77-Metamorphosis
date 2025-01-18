@@ -20,6 +20,7 @@ func _init() -> void:
 	Globals.current_hud = self
 
 func _ready():
+	$PauseMenu.hide()
 	hud_ready.emit(self) # for the player controller
 	for button in find_children("", "Button"):
 		button.focus_mode = Button.FOCUS_NONE
@@ -46,3 +47,24 @@ func _on_control_switch_button_toggled(toggled_on: bool) -> void:
 		false:
 			%ControlSwitchButton.text = "Mouse + L Button (click to change)"
 			Globals.control_scheme = Globals.control_schemes.MOUSE
+
+func _process(_delta):
+	if Input.is_action_just_pressed("pause"):
+		match $PauseMenu.visible:
+			false:
+				$PauseMenu.popup_centered_ratio(0.67)
+				get_tree().paused = true
+			true:
+				$PauseMenu.hide()
+				get_tree().paused = false
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
+	
+
+
+func _on_return_button_pressed() -> void:
+	$PauseMenu.hide()
+	get_tree().paused = false
+	

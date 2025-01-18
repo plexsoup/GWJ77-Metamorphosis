@@ -19,7 +19,7 @@ var axiom = "F"
 var angle = 25.7
 var iterations = 3
 var segment_length = 128
-var line_width = 12
+var line_width = 6
 var tree_num : int = -1
 
 func _ready():
@@ -94,7 +94,7 @@ func draw_tree_old(sentence : String, root_node : Node2D):
 
 
 func draw_tree_new(sentence : String, root_node : Node2D):
-	print("Tree drawing: ", sentence)
+	#print("Tree drawing: ", sentence)
 	var stack = []
 	var pos = Vector2.ZERO
 	var dir = Vector2.RIGHT
