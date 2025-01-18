@@ -26,36 +26,32 @@ func set_size(diameter) -> bool: # return success or failure
 
 func become_planet() -> bool: # return success or failure
 	var success : bool = false
-	#var safe_location = get_safe_location_for_planet(global_position)
-	var safe_location = global_position # Hack. We switched planet to rigid body to let the physics engine handle safe locations.
-	if not safe_location:
-		success = false
-	else:
-		disable_collisions()
-		request_planet.connect(Globals.current_level._on_new_planet_requested)
-		request_planet.emit(safe_location)
-		call_deferred("queue_free")
-		success = true
+	disable_collisions()
+	request_planet.connect(Globals.current_level._on_new_planet_requested)
+	request_planet.emit(global_position)
+	call_deferred("queue_free")
+	success = true
 	return success
-	
-func get_safe_location_for_planet(location):
-	var planet_diameter = 428
-	var max_iterations = 25
-	var current_iteration = 0
-	while current_iteration < max_iterations:
-		var overlapping_planets = Globals.current_solar_system.get_nearby_planets(location)
-		if overlapping_planets.size() == 0:
-			return location
-		else:
-			var average_nudge_vector = Vector2.ZERO
-			for planet in overlapping_planets:
-				var push_strength = 1.0
-				var overlap = planet_diameter - planet.global_position.distance_to(location)
-				average_nudge_vector += planet.global_position.direction_to(location) * push_strength * clamp(overlap, 0, planet_diameter)
-			average_nudge_vector /= max(overlapping_planets.size(), 1)
-			location += average_nudge_vector
-		current_iteration += 1
-	push_warning("Max iterations reached in falling_dirt.get_safe_location_for_planet")
+
+## NOTE: Couldn't get suika stuff working manually, so I switched planets to RigidBody2D
+#func get_safe_location_for_planet(location):
+	#var planet_diameter = 428
+	#var max_iterations = 25
+	#var current_iteration = 0
+	#while current_iteration < max_iterations:
+		#var overlapping_planets = Globals.current_solar_system.get_nearby_planets(location)
+		#if overlapping_planets.size() == 0:
+			#return location
+		#else:
+			#var average_nudge_vector = Vector2.ZERO
+			#for planet in overlapping_planets:
+				#var push_strength = 1.0
+				#var overlap = planet_diameter - planet.global_position.distance_to(location)
+				#average_nudge_vector += planet.global_position.direction_to(location) * push_strength * clamp(overlap, 0, planet_diameter)
+			#average_nudge_vector /= max(overlapping_planets.size(), 1)
+			#location += average_nudge_vector
+		#current_iteration += 1
+	#push_warning("Max iterations reached in falling_dirt.get_safe_location_for_planet")
 
 
 func disable_collisions():

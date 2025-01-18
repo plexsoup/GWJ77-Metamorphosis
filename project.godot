@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GWJ77-Metamorphosis"
+config/name="Space Whale"
 run/main_scene="res://game_level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://assets/images/whale_icon.png"
@@ -84,4 +84,5 @@ pause={
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.0159718, 0.0159718, 0.0159718, 1)
