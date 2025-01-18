@@ -4,9 +4,12 @@ enum states { FALLING, IDLE, GERMINATED }
 var state = states.FALLING
 
 
+
 @export var tree_scene: PackedScene = preload("res://Objects/l_tree.tscn")
 
 func germinate(planet, collision_point, collision_normal): # in global coords
+	
+	
 	rotation = 0
 	if state in [states.GERMINATED]:
 		return
@@ -28,8 +31,17 @@ func germinate(planet, collision_point, collision_normal): # in global coords
 	queue_free()
 	
 
+func is_near_tree(planet, location: Vector2) -> bool:
+	if not planet.has_node("Trees"):
+		return false
+	var scan_distance_sq = 32*32
+	for tree in planet.get_node("Trees").get_children():
+		if tree.global_position.distance_squared_to(location) < scan_distance_sq:
+			return true
+	return false
 
-
+func die():
+	call_deferred("queue_free")
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("dirt") or body.is_in_group("planets"):
@@ -41,4 +53,7 @@ func _on_body_entered(body: Node) -> void:
 			collision_index += 1
 		var collision_point = contacts[collision_index][1]
 		var collision_normal = contacts[collision_index][2]
-		germinate(body, collision_point, collision_normal)
+		if not is_near_tree(body, collision_point):
+			germinate(body, collision_point, collision_normal)
+		else:
+			die()

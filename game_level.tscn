@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi1ti5anfdrh2"]
+[gd_scene load_steps=6 format=3 uid="uid://bi1ti5anfdrh2"]
 
 [ext_resource type="Script" path="res://game_level.gd" id="1_4sps6"]
 [ext_resource type="PackedScene" uid="uid://dq1k2g4vbkopg" path="res://GUI/hud.tscn" id="2_ao1wb"]
 [ext_resource type="AudioStream" uid="uid://cn1un0o3sddsx" path="res://assets/audio/SpaceWhale_bgMusic.ogg" id="4_6kes6"]
 [ext_resource type="PackedScene" uid="uid://c44n3b33v6mob" path="res://space_whale.tscn" id="4_ixxt3"]
+[ext_resource type="AudioStream" uid="uid://d0tpyoa0je148" path="res://assets/audio/celebration_noise.mp3" id="5_3qyji"]
 
 [node name="GameLevel" type="Control"]
 layout_mode = 3
@@ -19,7 +20,7 @@ script = ExtResource("1_4sps6")
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("2_ao1wb")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_6kes6")
 volume_db = -12.0
 autoplay = true
@@ -29,5 +30,8 @@ autostart = true
 
 [node name="SpaceWhale" parent="." instance=ExtResource("4_ixxt3")]
 position = Vector2(586, 328)
+
+[node name="WinChingaring" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_3qyji")
 
 [connection signal="timeout" from="WinConditionMonitor" to="." method="_on_win_condition_monitor_timeout"]

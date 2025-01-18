@@ -1,6 +1,6 @@
 ## Planet
 
-extends StaticBody2D
+extends RigidBody2D
 
 
 var rotation_speed : float = 0.25
@@ -89,3 +89,9 @@ func _on_spawn_timer_timeout() -> void:
 	if has_atmosphere:
 		if randf() < 0.2 and $Cities.get_child_count() < 9:
 			spawn_city()
+
+
+func _on_freeze_timer_timeout() -> void:
+	freeze = true
+	
+	

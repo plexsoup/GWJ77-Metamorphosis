@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var interval_between_shots : int = 250 #msec
+var interval_between_shots : int = 330 #msec
 var time_of_last_shot : int = 0
 var current_material : PackedScene
 
@@ -36,9 +36,12 @@ func _physics_process(delta: float) -> void:
 		rotate_whale(delta)
 		apply_thrust(delta)
 		show_vfx()
-		#wrap_around_map_if_necessary() # Broken
+		if Input.is_action_pressed("shoot"):
+			attempt_to_shoot()
 	elif state == states.HYPERSPACE:
 		spin_whale_clockwise(delta)
+
+		
 
 func rotate_whale(_delta):
 	var desired_rotation : float
@@ -105,12 +108,9 @@ func wrap_around_map_if_necessary():
 		
 		$Camera2D.global_position = global_position
 
-func _unhandled_input(_event: InputEvent) -> void:
-	if state in [ states.FLYING ]:
-		if Input.is_action_pressed("shoot"):
-			shoot()
 
-func shoot():
+
+func attempt_to_shoot():
 	var current_time = Time.get_ticks_msec()
 	if current_time > time_of_last_shot + interval_between_shots:
 		time_of_last_shot = current_time
@@ -130,13 +130,14 @@ func spawn_projectile(projectile_scene):
 
 	var muzzle : Marker2D
 	if new_projectile.is_in_group("water"):
-		#muzzle = $MuzzleWater
-		muzzle = $Muzzle # wasn't fun to shoot from blow-hole
+		muzzle = $MuzzleWater
+		#muzzle = $Muzzle # wasn't fun to shoot from blow-hole
 		$AnimationPlayer.play("blow_water")
 	elif new_projectile.is_in_group("dirt"):
-		#muzzle = $MuzzleDirt
-		muzzle = $Muzzle # wasn't fun to shoot backwards
-	else:
+		muzzle = $MuzzleDirt
+		#muzzle = $Muzzle # wasn't fun to shoot backwards
+		$AnimationPlayer.play("throw_dirt")
+	else: # seeds
 		muzzle = $Muzzle
 		$AnimationPlayer.play("shoot")
 
@@ -186,7 +187,7 @@ func _on_hud_ready(hud):
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name in ["shoot"]:
+	if anim_name in ["shoot", "blow_water", "throw_dirt"]:
 		$AnimationPlayer.play("swim")
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c44n3b33v6mob"]
+[gd_scene load_steps=22 format=3 uid="uid://c44n3b33v6mob"]
 
 [ext_resource type="Script" path="res://space_whale.gd" id="1_rbohq"]
 [ext_resource type="PackedScene" uid="uid://bicayb7c0ulgb" path="res://camera_2d.tscn" id="2_ktu2y"]
@@ -222,12 +222,41 @@ tracks/5/keys = {
 "values": [0.0, 0.0, -0.0890118, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_bvno5"]
+resource_name = "throw_dirt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WhaleBody/HeadTop/Fin_F:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -2.17119, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WhaleBody/HeadTop/Fin_B:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -1.86227, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqwqh"]
 _data = {
 "RESET": SubResource("Animation_6it82"),
 "blow_water": SubResource("Animation_a38xi"),
 "shoot": SubResource("Animation_bv3aq"),
-"swim": SubResource("Animation_j62lo")
+"swim": SubResource("Animation_j62lo"),
+"throw_dirt": SubResource("Animation_bvno5")
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8bbw1"]
@@ -282,11 +311,11 @@ position = Vector2(83, 6)
 
 [node name="MuzzleWater" type="Marker2D" parent="."]
 position = Vector2(38, -35)
-rotation = -1.47041
+rotation = -0.0625908
 
 [node name="MuzzleDirt" type="Marker2D" parent="."]
-position = Vector2(-60, 19)
-rotation = -4.30917
+position = Vector2(30, 38)
+rotation = -6.36779
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(9, 2)

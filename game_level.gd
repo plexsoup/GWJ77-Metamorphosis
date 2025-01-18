@@ -149,4 +149,5 @@ func _on_win_condition_monitor_timeout() -> void:
 			spawn_black_hole() # put a black hole in front of the player, so they can enter it if they want to.
 			#spawn_hyperspace()
 			$WinConditionMonitor.stop()
+			$WinChingaring.play()
 		create_goal_hint(Globals.current_solar_system)
