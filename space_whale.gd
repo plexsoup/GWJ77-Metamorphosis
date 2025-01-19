@@ -9,7 +9,9 @@ var current_planet : Node2D # get this so you know where projectiles go
 var rotation_speed : float = 5.0
 var max_velocity : float = 800.0
 var thrust : float = 20000.0
+var thrusting = false
 
+var default_projectile_charge : float = 500
 var projectile_charge : float = 500.0 # speed to eject particles out of cannon
 var projectile_jitter : float = 0.2 # radians of aim deviation
 
@@ -17,7 +19,7 @@ enum states { FLYING, SWIMMING, HYPERSPACE, DYING, DEAD }
 var state = states.FLYING
 
 var contacts : Array = []
-
+var in_planetary_atmospheres : Array = []
 
 func _init():
 	Globals.current_player = self
@@ -37,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		apply_thrust(delta)
 		show_vfx()
 		if Input.is_action_pressed("shoot"):
-			attempt_to_shoot()
+			attempt_to_shoot() # after applying thrust, so we know how fast to send.
 	elif state == states.HYPERSPACE:
 		spin_whale_clockwise(delta)
 
@@ -52,7 +54,8 @@ func rotate_whale(_delta):
 			# with our position and forward vector, we can dot product the perpendicular
 			var vector_to_mouse = get_global_mouse_position() - global_position
 			var angle_to_mouse = transform.x.angle_to(vector_to_mouse)
-			desired_rotation = clamp(angle_to_mouse, -PI, PI) / PI
+			var soft_zone = PI/2.0
+			desired_rotation = clamp(angle_to_mouse, -soft_zone, soft_zone) / soft_zone # value from zero to one
 
 	var torque_strength = 100000.0
 	apply_torque(desired_rotation * torque_strength)
@@ -62,17 +65,21 @@ func spin_whale_clockwise(_delta):
 	apply_torque(torque_strength)
 
 func apply_thrust(_delta):
-	var thrusting = false
+	
 	var desired_thrust = thrust
 	match Globals.control_scheme:
 		Globals.control_schemes.WASD:
 			thrusting = Input.is_action_pressed("move_forward")
 		Globals.control_schemes.MOUSE:
 			var void_distance = 96 / get_viewport().get_camera_2d().zoom.x
-			var dist_to_mouse = global_position.distance_to(get_global_mouse_position())
-			var normalized_dist = dist_to_mouse * get_viewport().get_camera_2d().scale.x
-			desired_thrust = dist_to_mouse / get_viewport_rect().size.y * thrust
-			if normalized_dist > void_distance:
+			#var dist_to_mouse = global_position.distance_to(get_global_mouse_position())
+			#var normalized_dist = dist_to_mouse * get_viewport().get_camera_2d().scale.x
+			var viewport_mouse_pos = get_viewport().get_mouse_position()
+			var viewport_center = get_viewport_rect().size / 2.0
+			var dist_to_mouse = viewport_center.distance_to(viewport_mouse_pos)
+			
+			desired_thrust = clamp(dist_to_mouse / get_viewport_rect().size.y,0.0,1.0) * thrust
+			if dist_to_mouse > void_distance:
 				thrusting = true
 	if thrusting:
 		var forward_dir = transform.x.normalized()
@@ -90,23 +97,23 @@ func show_vfx():
 
 	
 
-func wrap_around_map_if_necessary():
-	# DO NOT USE: this works once, but fails the second time?!
-	if not Globals.current_solar_system or not is_instance_valid(Globals.current_solar_system):
-		return
-	
-	var tolerance = 1024 * 4
-	var vector_to_sun = Globals.current_solar_system.sun.global_position - global_transform.origin
-	# cheat an ellipse by doubling our apparent y position
-	#vector_to_sun.y *= 2.0
-	
-	if vector_to_sun.length_squared() > tolerance * tolerance:
-		var new_virtual_position = global_position + (2.0 * vector_to_sun)
-		new_virtual_position.y /= 2.0
-		Globals.teleport_rigid_body(self, new_virtual_position)
-		#Globals.teleport_rigid_body(self, Vector2.ZERO)
-		
-		$Camera2D.global_position = global_position
+#func wrap_around_map_if_necessary():
+	## DO NOT USE: this works once, but fails the second time?!
+	#if not Globals.current_solar_system or not is_instance_valid(Globals.current_solar_system):
+		#return
+	#
+	#var tolerance = 1024 * 4
+	#var vector_to_sun = Globals.current_solar_system.sun.global_position - global_transform.origin
+	## cheat an ellipse by doubling our apparent y position
+	##vector_to_sun.y *= 2.0
+	#
+	#if vector_to_sun.length_squared() > tolerance * tolerance:
+		#var new_virtual_position = global_position + (2.0 * vector_to_sun)
+		#new_virtual_position.y /= 2.0
+		#Globals.teleport_rigid_body(self, new_virtual_position)
+		##Globals.teleport_rigid_body(self, Vector2.ZERO)
+		#
+		#$Camera2D.global_position = global_position
 
 
 
@@ -133,27 +140,37 @@ func spawn_projectile(projectile_scene):
 		muzzle = $MuzzleWater
 		#muzzle = $Muzzle # wasn't fun to shoot from blow-hole
 		$AnimationPlayer.play("blow_water")
-		projectile_charge = 400
+		projectile_charge = default_projectile_charge * 1.5
 	elif new_projectile.is_in_group("dirt"):
 		muzzle = $MuzzleDirt
 		#muzzle = $Muzzle # wasn't fun to shoot backwards
 		$AnimationPlayer.play("throw_dirt")
-		projectile_charge = 300
-	else: # seeds
+		projectile_charge = default_projectile_charge
+	elif new_projectile.is_in_group("seeds"):
 		muzzle = $Muzzle
 		$AnimationPlayer.play("shoot")
-		projectile_charge = 500
+		projectile_charge = default_projectile_charge * 2.0
+	if thrusting:
+		projectile_charge *= 1.5
+	if not in_planetary_atmospheres.is_empty():
+		projectile_charge *= 0.5 # slow down shots inside planets
 
 	new_projectile.global_position = muzzle.global_position
 	new_projectile.global_rotation = muzzle.global_rotation + randf_range(-projectile_jitter, projectile_jitter) #in radians
 	
 	var dir_vector = muzzle.get_global_transform().x
-	#var dir_vector = Vector2.RIGHT.rotated(rotation)
+	if Globals.control_scheme == Globals.control_schemes.MOUSE:
+		dir_vector = muzzle.global_position.direction_to(get_global_mouse_position())
+
 	
 	if Globals.current_solar_system != null and is_instance_valid(Globals.current_solar_system):
 		if Globals.current_solar_system.has_node("Projectiles"):
 			Globals.current_solar_system.get_node("Projectiles").add_child(new_projectile) 
-			new_projectile.linear_velocity = dir_vector * projectile_charge + linear_velocity
+			new_projectile.linear_velocity = dir_vector * projectile_charge
+			# Project player's velocity onto the direction vector
+			var projected_velocity = linear_velocity.project(dir_vector)
+			new_projectile.linear_velocity += projected_velocity
+
 		else:
 			push_warning("Solar System requires Projectiles node.")
 	else: # Between solar systems.
@@ -198,3 +215,11 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("planets"):
 		launch_off_planet(body)
+
+
+func _on_entered_planet_atmosphere(planet):
+	if not in_planetary_atmospheres.has(planet):
+		in_planetary_atmospheres.push_back(planet)
+	
+func _on_exited_planet_atmosphere(planet):
+	in_planetary_atmospheres.erase(planet)

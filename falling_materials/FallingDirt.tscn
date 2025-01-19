@@ -17,6 +17,7 @@ normal_texture = ExtResource("4_0kjfm")
 [node name="Dirt" groups=["dirt"] instance=ExtResource("1_gucu7")]
 contact_monitor = true
 max_contacts_reported = 5
+linear_damp_mode = 1
 script = ExtResource("2_7rf43")
 short_name = "Dirt"
 

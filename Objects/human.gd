@@ -5,6 +5,9 @@ var planet
 var direction : int = 1
 var speed = 10.0
 
+enum states { NORMAL, BEAMING }
+var state = states.NORMAL
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	speed = randf_range(7.5, 15.0)
@@ -12,7 +15,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	walk_randomly(delta)
+	if state == states.NORMAL:
+		walk_randomly(delta)
 
 func walk_randomly(delta):
 	#Find tangent to planet, walk left or right along tangent
@@ -32,3 +36,6 @@ func _on_decision_timer_timeout() -> void:
 	if randf() < 0.5:
 		direction *= -1
 		
+func _on_tractor_beamed(_spaceship):
+	state = states.BEAMING
+	

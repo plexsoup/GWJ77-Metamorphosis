@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cevocouw0nvgt"]
+[gd_scene load_steps=9 format=3 uid="uid://cevocouw0nvgt"]
 
 [ext_resource type="Script" path="res://Objects/human.gd" id="1_grs16"]
 [ext_resource type="Texture2D" uid="uid://bylja100upxyc" path="res://assets/images/humans_03.png" id="2_t5fyw"]
@@ -39,7 +39,11 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="Human" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22cuk"]
+size = Vector2(109, 79)
+
+[node name="Human" type="Node2D" groups=["humans"]]
+z_index = 1
 script = ExtResource("1_grs16")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -52,5 +56,11 @@ offset = Vector2(-0.668656, -34.2249)
 [node name="DecisionTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(24.5, 0.5)
+shape = SubResource("RectangleShape2D_22cuk")
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]

@@ -99,3 +99,14 @@ func _on_freeze_timer_timeout() -> void:
 	freeze = true
 	
 	
+
+
+func _on_troposphere_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		body._on_entered_planet_atmosphere(self)
+
+
+func _on_troposphere_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		body._on_exited_planet_atmosphere(self)
+	

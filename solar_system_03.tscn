@@ -61,21 +61,6 @@ position = Vector2(665, -410)
 [node name="SpaceShip3" parent="Aliens" instance=ExtResource("4_q6p6m")]
 position = Vector2(998, -1872)
 
-[node name="SpaceShip4" parent="Aliens" instance=ExtResource("4_q6p6m")]
-position = Vector2(1308, -2568)
-
-[node name="SpaceShip5" parent="Aliens" instance=ExtResource("4_q6p6m")]
-position = Vector2(-2451, -1260)
-
-[node name="SpaceShip6" parent="Aliens" instance=ExtResource("4_q6p6m")]
-position = Vector2(-2141, -1956)
-
-[node name="SpaceShip7" parent="Aliens" instance=ExtResource("4_q6p6m")]
-position = Vector2(-2554, 1413)
-
-[node name="SpaceShip8" parent="Aliens" instance=ExtResource("4_q6p6m")]
-position = Vector2(-2244, 717)
-
 [node name="Asteroids" type="Node2D" parent="."]
 
 [node name="Asteroid" parent="Asteroids" instance=ExtResource("5_djmtl")]
