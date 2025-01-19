@@ -25,6 +25,8 @@ func walk_randomly(delta):
 		$AnimatedSprite2D.flip_h = true
 	else:
 		$AnimatedSprite2D.flip_h = false
+	global_rotation = vector_to_planet_origin.angle() + PI
+	
 
 func _on_decision_timer_timeout() -> void:
 	if randf() < 0.5:

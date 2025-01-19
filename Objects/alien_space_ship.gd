@@ -126,6 +126,7 @@ func _on_hit_box_body_entered(body: Node2D) -> void:
 		if body is RigidBody2D:
 			body.apply_central_impulse(collision_vector.rotated(PI) * effect_on_dirt_balls )
 		show_hitflash()
+		play_hurtnoise()
 		$IframesTimer.start()
 
 func show_hitflash():
@@ -133,6 +134,10 @@ func show_hitflash():
 	
 func remove_hitflash():
 	$SpaceshipSprite.set_self_modulate(Color.WHITE)
+
+func play_hurtnoise():
+	$HurtNoises.play()
+
 
 func _on_state_changed():
 	match state:

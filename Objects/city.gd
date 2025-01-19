@@ -3,13 +3,13 @@ extends Node2D
 var planet
 
 var humans = 0
-var max_humans = 5
+var max_humans = 3
 var l_trees = 0
 var max_l_trees = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_l_tree()
+	pass
 
 
 

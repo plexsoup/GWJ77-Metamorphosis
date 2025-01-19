@@ -83,8 +83,12 @@ func spawn_crack(collision_point, _collision_normal):
 		# TODO: consider destroying planet altogether.
 		pass
 		
+func wobble():
+	var tween = create_tween()
+	tween.tween_property($PlanetSprite, "scale", Vector2(1.2, 1.2), 0.2).set_ease(Tween.EASE_IN)
+	tween.tween_property($PlanetSprite, "scale", Vector2(1.3, 1.3), 0.1).set_ease(Tween.EASE_OUT)
 
-
+	
 func _on_spawn_timer_timeout() -> void:
 	if has_atmosphere:
 		if randf() < 0.2 and $Cities.get_child_count() < 9:

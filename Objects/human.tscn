@@ -1,34 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://cevocouw0nvgt"]
+[gd_scene load_steps=8 format=3 uid="uid://cevocouw0nvgt"]
 
-[ext_resource type="Texture2D" uid="uid://bf7oqedcmqp02" path="res://assets/images/humans_01.png" id="1_enjjd"]
 [ext_resource type="Script" path="res://Objects/human.gd" id="1_grs16"]
+[ext_resource type="Texture2D" uid="uid://bylja100upxyc" path="res://assets/images/humans_03.png" id="2_t5fyw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3yuyl"]
-atlas = ExtResource("1_enjjd")
-region = Rect2(0, 0, 128, 127)
+[sub_resource type="AtlasTexture" id="AtlasTexture_61jsi"]
+atlas = ExtResource("2_t5fyw")
+region = Rect2(0, 0, 116, 131)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4mi3f"]
-atlas = ExtResource("1_enjjd")
-region = Rect2(0, 127, 128, 127)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwo67"]
+atlas = ExtResource("2_t5fyw")
+region = Rect2(116, 0, 116, 131)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1rhj2"]
-atlas = ExtResource("1_enjjd")
-region = Rect2(0, 254, 128, 127)
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3glk"]
+atlas = ExtResource("2_t5fyw")
+region = Rect2(232, 0, 116, 131)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6i1jj"]
+atlas = ExtResource("2_t5fyw")
+region = Rect2(348, 0, 116, 131)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rnntp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3yuyl")
+"texture": SubResource("AtlasTexture_61jsi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4mi3f")
+"texture": SubResource("AtlasTexture_pwo67")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1rhj2")
+"texture": SubResource("AtlasTexture_t3glk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4mi3f")
+"texture": SubResource("AtlasTexture_6i1jj")
 }],
 "loop": true,
 "name": &"default",
@@ -43,8 +47,6 @@ position = Vector2(0.775116, 0.668732)
 rotation = 1.57079
 sprite_frames = SubResource("SpriteFrames_rnntp")
 autoplay = "default"
-frame = 1
-frame_progress = 0.822797
 offset = Vector2(-0.668656, -34.2249)
 
 [node name="DecisionTimer" type="Timer" parent="."]

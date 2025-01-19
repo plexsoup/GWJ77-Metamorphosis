@@ -15,7 +15,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass # let the physics engine handle asteroid movement
+	if Engine.get_physics_frames() % 30 == 0:
+		free_if_out_of_bounds()
+
+func free_if_out_of_bounds():
+	var tolerance_sq = 8000*8000
+	if global_position.length_squared() > tolerance_sq:
+		call_deferred("queue_free")
 	
 func update_comet_trail():
 	
@@ -39,6 +45,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 
 func explode():
+	
 	set_deferred("contact_monitor", false)
 	var asteroid_bits = preload("res://Objects/asteroid_bits.tscn").instantiate()
 	call_deferred("add_sibling", asteroid_bits)

@@ -1,7 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8r714miwx4u5"]
+[gd_scene load_steps=9 format=3 uid="uid://c8r714miwx4u5"]
 
 [ext_resource type="Script" path="res://Objects/asteroid_bits.gd" id="1_mjlbn"]
 [ext_resource type="Texture2D" uid="uid://bq4va8d221edk" path="res://assets/images/asteroid_bits.png" id="1_uj40f"]
+[ext_resource type="AudioStream" uid="uid://6vxlnjpv1dhe" path="res://assets/audio/conga/conga1.wav" id="3_yqq3k"]
+[ext_resource type="AudioStream" uid="uid://dso6qxcnbhlro" path="res://assets/audio/conga/conga2.wav" id="4_qbjn1"]
+[ext_resource type="AudioStream" uid="uid://c0hg3emuthf5f" path="res://assets/audio/conga/conga3.wav" id="5_32ft7"]
+[ext_resource type="AudioStream" uid="uid://6v2fl418ptb8" path="res://assets/audio/conga/conga4.wav" id="6_f2yun"]
+[ext_resource type="AudioStream" uid="uid://besw2wf4s147t" path="res://assets/audio/conga/conga5.wav" id="7_byq68"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_72it0"]
+random_volume_offset_db = 1.3
+streams_count = 5
+stream_0/stream = ExtResource("3_yqq3k")
+stream_1/stream = ExtResource("4_qbjn1")
+stream_2/stream = ExtResource("5_32ft7")
+stream_3/stream = ExtResource("6_f2yun")
+stream_4/stream = ExtResource("7_byq68")
 
 [node name="AsteroidBits" type="Node2D"]
 script = ExtResource("1_mjlbn")
@@ -48,5 +62,8 @@ polygon = PackedVector2Array(-58, 40, -6, -17, 49, -37, 50, -12, 28, 18, -10, 39
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="CrashNoise" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_72it0")
 
 [connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]

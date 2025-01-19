@@ -165,8 +165,9 @@ func launch_off_planet(planet):
 	var gravity_strength = 9.8
 	# Boost force increases when closer to planet or in stronger gravity
 	var adjusted_boost = escape_boost_force * gravity_strength
-	
+	$BounceNoise.play()
 	apply_central_impulse(escape_direction * adjusted_boost)
+	planet.wobble()
 	# ... rest of the function
 
 func enter_hyperspace():

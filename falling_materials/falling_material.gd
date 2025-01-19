@@ -38,3 +38,16 @@ func is_near_lake(planet, location : Vector2) -> bool:
 		if lake.global_position.distance_squared_to(location) < scan_distance_sq:
 			return true
 	return false
+
+func _process(_delta: float) -> void:
+	if Engine.get_process_frames() % 60 == 0:
+		free_if_out_of_bounds()
+
+
+func free_if_out_of_bounds():
+	if $VisibleOnScreenNotifier2D.is_on_screen():
+		return # don't clear things the player can see.
+	else:
+		var tolerance_sq = 8000*8000
+		if global_position.length_squared() > tolerance_sq:
+			call_deferred("queue_free")

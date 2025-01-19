@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dswjckl6jljf3"
-path="res://.godot/imported/spaceship_spritesheet.png-cc409fe361cb60ccfa00aef02ca9d24b.ctex"
+uid="uid://bylja100upxyc"
+path="res://.godot/imported/humans_03.png-f1dc1945fd077ae7e1c16cb345c22832.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Game/assets/images/spaceship_spritesheet.png"
-dest_files=["res://.godot/imported/spaceship_spritesheet.png-cc409fe361cb60ccfa00aef02ca9d24b.ctex"]
+source_file="res://assets/images/humans_03.png"
+dest_files=["res://.godot/imported/humans_03.png-f1dc1945fd077ae7e1c16cb345c22832.ctex"]
 
 [params]
 

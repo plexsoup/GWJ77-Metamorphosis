@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqawac16mcp8y"]
+[gd_scene load_steps=11 format=3 uid="uid://bqawac16mcp8y"]
 
 [ext_resource type="Script" path="res://solar_system.gd" id="1_48jnh"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="2_ddo0h"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://clxo3y0u8lscw" path="res://Objects/asteroid.tscn" id="5_djmtl"]
 [ext_resource type="PackedScene" uid="uid://dici5hlk748wr" path="res://Objects/stars.tscn" id="6_1ybma"]
 [ext_resource type="PackedScene" uid="uid://6cr4d3f0d4q7" path="res://Objects/black_hole.tscn" id="7_gvcrl"]
+[ext_resource type="PackedScene" uid="uid://b4rgjc81bc640" path="res://Components/asteroid_spawner.tscn" id="8_f815v"]
 
 [sub_resource type="Gradient" id="Gradient_2mr25"]
 offsets = PackedFloat32Array(0, 0.432971, 0.550725)
@@ -109,3 +110,6 @@ color = Color(0.0748453, 0.0748453, 0.0748453, 1)
 position = Vector2(-3308, -3928)
 
 [node name="Projectiles" type="Node2D" parent="."]
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource("8_f815v")]
+position = Vector2(-4733, -3327)

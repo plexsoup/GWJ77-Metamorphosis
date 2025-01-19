@@ -1,8 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dp667gm1sla5"]
+[gd_scene load_steps=18 format=3 uid="uid://dp667gm1sla5"]
 
 [ext_resource type="Script" path="res://Objects/alien_space_ship.gd" id="1_gc3vy"]
-[ext_resource type="Texture2D" uid="uid://dswjckl6jljf3" path="res://assets/Game/assets/images/spaceship_spritesheet.png" id="2_x21ku"]
+[ext_resource type="Texture2D" uid="uid://c0begstomyytl" path="res://assets/images/spaceship_spritesheet_02.png" id="2_0q4c7"]
 [ext_resource type="Texture2D" uid="uid://s5otcob1bjaq" path="res://assets/images/alien_spritesheet.png" id="3_208lc"]
+[ext_resource type="AudioStream" uid="uid://dx46pqjhaohwl" path="res://assets/audio/hurt/oof.wav" id="4_d0qyh"]
+[ext_resource type="AudioStream" uid="uid://c0sdvgt144rm" path="res://assets/audio/hurt/ow.wav" id="5_5smjq"]
+[ext_resource type="AudioStream" uid="uid://be5xwxy753mex" path="res://assets/audio/hurt/oh.wav" id="6_77v1v"]
+[ext_resource type="AudioStream" uid="uid://dxa0w4qpdc6hg" path="res://assets/audio/hurt/hey.wav" id="7_23xwj"]
+[ext_resource type="AudioStream" uid="uid://ddr1oni3ukh4u" path="res://assets/audio/hurt/eee.wav" id="8_nspe4"]
 
 [sub_resource type="Animation" id="Animation_afjy0"]
 length = 0.001
@@ -135,11 +140,21 @@ colors = PackedColorArray(0, 0, 0, 0.631373, 0.345595, 0.654762, 0.421409, 0.741
 [sub_resource type="CircleShape2D" id="CircleShape2D_k54y6"]
 radius = 168.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nnvfs"]
+random_pitch = 1.1
+random_volume_offset_db = 3.0
+streams_count = 5
+stream_0/stream = ExtResource("4_d0qyh")
+stream_1/stream = ExtResource("5_5smjq")
+stream_2/stream = ExtResource("6_77v1v")
+stream_3/stream = ExtResource("7_23xwj")
+stream_4/stream = ExtResource("8_nspe4")
+
 [node name="SpaceShip" type="Node2D"]
 script = ExtResource("1_gc3vy")
 
 [node name="SpaceshipSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_x21ku")
+texture = ExtResource("2_0q4c7")
 hframes = 2
 
 [node name="AlienSprite" type="Sprite2D" parent="SpaceshipSprite"]
@@ -180,6 +195,9 @@ shape = SubResource("CircleShape2D_k54y6")
 [node name="IframesTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_nnvfs")
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
