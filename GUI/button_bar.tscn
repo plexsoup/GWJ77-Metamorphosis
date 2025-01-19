@@ -58,6 +58,7 @@ columns = 3
 script = ExtResource("1_1ethb")
 
 [node name="SandButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(76, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -68,10 +69,12 @@ texture_normal = ExtResource("2_xyiho")
 texture_pressed = ExtResource("3_drc5y")
 texture_hover = ExtResource("4_ixekl")
 texture_disabled = ExtResource("5_roak6")
+stretch_mode = 3
 script = ExtResource("3_d3sln")
 material_scene = ExtResource("4_3t81s")
 
 [node name="SeedButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(76, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -81,10 +84,12 @@ texture_normal = ExtResource("8_86b42")
 texture_pressed = ExtResource("9_sq6ju")
 texture_hover = ExtResource("10_kixgu")
 texture_disabled = ExtResource("11_qtcgv")
+stretch_mode = 3
 script = ExtResource("3_d3sln")
 material_scene = ExtResource("5_g8oew")
 
 [node name="WaterButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(76, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -94,17 +99,24 @@ texture_normal = ExtResource("13_ga25b")
 texture_pressed = ExtResource("14_e4dvk")
 texture_hover = ExtResource("15_cerva")
 texture_disabled = ExtResource("16_naan7")
+stretch_mode = 3
 script = ExtResource("3_d3sln")
 material_scene = ExtResource("7_40mey")
 
 [node name="SandLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "1 Dirt"
+horizontal_alignment = 1
 
 [node name="SeedLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "2 Seed"
+horizontal_alignment = 1
 
 [node name="WaterLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "3 Water"
+horizontal_alignment = 1

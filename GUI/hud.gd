@@ -42,10 +42,10 @@ func _on_material_button_pressed(new_material):
 func _on_control_switch_button_toggled(toggled_on: bool) -> void:
 	match toggled_on:
 		true:
-			%ControlSwitchButton.text = "WASD + Space (click to change)"
+			%ControlSwitchButton.text = "WASD + Space\n(click to change)"
 			Globals.control_scheme = Globals.control_schemes.WASD
 		false:
-			%ControlSwitchButton.text = "Mouse + L Button (click to change)"
+			%ControlSwitchButton.text = "Mouse + L Button\n(click to change)"
 			Globals.control_scheme = Globals.control_schemes.MOUSE
 
 func _process(_delta):

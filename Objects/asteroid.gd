@@ -57,6 +57,8 @@ func explode():
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("planets"):
 		collide_with_planet(body)
+	elif body.is_in_group("seeds"):
+		explode()
 
 func collide_with_planet(colliding_planet):
 		var collision_index = 0

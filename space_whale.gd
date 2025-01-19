@@ -10,7 +10,7 @@ var rotation_speed : float = 5.0
 var max_velocity : float = 800.0
 var thrust : float = 20000.0
 
-var projectile_charge : float = 300.0 # speed to eject particles out of cannon
+var projectile_charge : float = 500.0 # speed to eject particles out of cannon
 var projectile_jitter : float = 0.2 # radians of aim deviation
 
 enum states { FLYING, SWIMMING, HYPERSPACE, DYING, DEAD }
@@ -133,13 +133,16 @@ func spawn_projectile(projectile_scene):
 		muzzle = $MuzzleWater
 		#muzzle = $Muzzle # wasn't fun to shoot from blow-hole
 		$AnimationPlayer.play("blow_water")
+		projectile_charge = 400
 	elif new_projectile.is_in_group("dirt"):
 		muzzle = $MuzzleDirt
 		#muzzle = $Muzzle # wasn't fun to shoot backwards
 		$AnimationPlayer.play("throw_dirt")
+		projectile_charge = 300
 	else: # seeds
 		muzzle = $Muzzle
 		$AnimationPlayer.play("shoot")
+		projectile_charge = 500
 
 	new_projectile.global_position = muzzle.global_position
 	new_projectile.global_rotation = muzzle.global_rotation + randf_range(-projectile_jitter, projectile_jitter) #in radians

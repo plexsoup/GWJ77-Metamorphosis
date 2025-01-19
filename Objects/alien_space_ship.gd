@@ -128,6 +128,10 @@ func _on_hit_box_body_entered(body: Node2D) -> void:
 		show_hitflash()
 		play_hurtnoise()
 		$IframesTimer.start()
+	elif body.is_in_group("seeds"):
+		if state == states.IDLE:
+			state = states.SEEKING
+			$GratitudeNoises.play()
 
 func show_hitflash():
 	$SpaceshipSprite.set_self_modulate(Color.DARK_RED)
@@ -143,8 +147,15 @@ func _on_state_changed():
 	match state:
 		states.IDLE:
 			$AnimationPlayer.play("fly")
+			$SpaceshipSprite.frame = 0
+			$SpaceshipSprite/AlienSprite.frame = 0
+			%VacuumArea.set_deferred("monitoring", false)
 		states.KNOCKBACK:
 			pass
+		states.SEEKING:
+			$SpaceshipSprite.frame = 1
+			$SpaceshipSprite/AlienSprite.frame = 1
+			%VacuumArea.set_deferred("monitoring", true)
 
 
 func _on_iframes_timer_timeout() -> void:
@@ -157,14 +168,9 @@ func _on_decision_timer_timeout() -> void:
 	if state == states.IDLE:
 		if randf() < 0.2:
 			state = states.SEEKING
-			$SpaceshipSprite.frame = 1
-			$SpaceshipSprite/AlienSprite.frame = 1
-			%VacuumArea.set_deferred("monitoring", true)
+
 		else: # change course
 			dir_vector = dir_vector.rotated(randf()*PI/2.0)
 	elif state == states.SEEKING:
 		if randf() < 0.2: # give up
 			state = states.IDLE
-			$SpaceshipSprite.frame = 0
-			$SpaceshipSprite/AlienSprite.frame = 0
-			%VacuumArea.set_deferred("monitoring", false)

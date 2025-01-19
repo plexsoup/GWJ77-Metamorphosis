@@ -329,7 +329,7 @@ rotation = -0.0625908
 
 [node name="MuzzleDirt" type="Marker2D" parent="."]
 position = Vector2(30, 38)
-rotation = -6.36779
+rotation = -6.13099
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(9, 2)
