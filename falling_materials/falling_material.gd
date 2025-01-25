@@ -15,7 +15,6 @@ func _ready() -> void:
 func validate_dependencies():
 	# Needs Sprite2D, because each material has a different color
 	if not has_node("Sprite2D"):
-		print(self.name, " at ", self.scene_file_path, " requires Sprite2D node. queued_free")
 		queue_free()
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
@@ -48,5 +47,5 @@ func free_if_out_of_bounds():
 	if $VisibleOnScreenNotifier2D.is_on_screen():
 		return # don't clear things the player can see.
 	else:
-		if abs(global_position.x) > 3096 or abs(global_position.y) > 1024 * 8:
+		if abs(global_position.y) > 5096 or abs(global_position.x) > 1024 * 12:
 			call_deferred("queue_free")

@@ -30,7 +30,6 @@ func switch_material(direction : int):
 	update_material_name_label(current_material_idx)
 	$MaterialLabel.grab_focus()
 	material_changed.emit(current_material_scene)
-	print(material_changed.get_connections())
 
 func update_material_name_label(index):
 	# Where "material" means dirt (sand), water, etc. Not mesh.material or texture
