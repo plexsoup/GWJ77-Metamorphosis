@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://dp667gm1sla5"]
 
-[ext_resource type="Script" path="res://Objects/alien_space_ship.gd" id="1_gc3vy"]
+[ext_resource type="Script" uid="uid://cjer0mivpiemr" path="res://Objects/alien_space_ship.gd" id="1_gc3vy"]
 [ext_resource type="Texture2D" uid="uid://c0begstomyytl" path="res://assets/images/spaceship_spritesheet_02.png" id="2_0q4c7"]
 [ext_resource type="Texture2D" uid="uid://s5otcob1bjaq" path="res://assets/images/alien_spritesheet.png" id="3_208lc"]
 [ext_resource type="AudioStream" uid="uid://dx46pqjhaohwl" path="res://assets/audio/hurt/oof.wav" id="4_d0qyh"]
@@ -148,16 +148,16 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y7k13"]
 _data = {
-"RESET": SubResource("Animation_afjy0"),
-"fly": SubResource("Animation_xbxyl"),
-"tractor_beam": SubResource("Animation_3vwbw")
+&"RESET": SubResource("Animation_afjy0"),
+&"fly": SubResource("Animation_xbxyl"),
+&"tractor_beam": SubResource("Animation_3vwbw")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_itb2o"]
 size = Vector2(314.045, 130.031)
 
 [sub_resource type="Curve" id="Curve_hyxup"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0.0165485, 0.343487), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -189,7 +189,7 @@ random_pitch = 1.33
 streams_count = 1
 stream_0/stream = ExtResource("12_t6rtg")
 
-[node name="SpaceShip" type="Node2D"]
+[node name="SpaceShip" type="Node2D" groups=["aliens"]]
 script = ExtResource("1_gc3vy")
 
 [node name="SpaceshipSprite" type="Sprite2D" parent="."]
@@ -207,12 +207,13 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_y7k13")
+&"": SubResource("AnimationLibrary_y7k13")
 }
 autoplay = "fly"
 
 [node name="VacuumArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VacuumArea"]
 position = Vector2(353.054, -1.04548)

@@ -188,7 +188,10 @@ func _on_state_changed():
 			dir_vector = Globals.current_player.global_position.direction_to(global_position)
 			$FleeLabel.show()
 			
-			
+func frighten():
+	state = states.FLEEING
+	hits_since_last_flee = 0
+	
 func _on_iframes_timer_timeout() -> void:
 	if state in [states.KNOCKBACK]:
 		remove_hitflash()
