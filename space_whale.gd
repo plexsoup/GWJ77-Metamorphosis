@@ -146,7 +146,7 @@ func spawn_projectile(projectile_scene):
 		#muzzle = $Muzzle # wasn't fun to shoot backwards
 		$AnimationPlayer.play("throw_dirt")
 		projectile_charge = default_projectile_charge
-	elif new_projectile.is_in_group("seeds"):
+	elif new_projectile.is_in_group("seeds") or new_projectile.is_in_group("songs"):
 		muzzle = $Muzzle
 		$AnimationPlayer.play("shoot")
 		projectile_charge = default_projectile_charge * 2.0
@@ -201,6 +201,12 @@ func exit_hyperspace():
 
 func _on_material_changed(new_material):
 	current_material = new_material
+	var ref_material = new_material.instantiate()
+	if ref_material.has_method("get_cooldown"):
+		interval_between_shots = ref_material.get_cooldown()
+	else:
+		interval_between_shots = 330 # third of a second
+	ref_material.queue_free()
 	 
 func _on_hud_ready(hud):
 	current_material = Globals.current_hud.current_material

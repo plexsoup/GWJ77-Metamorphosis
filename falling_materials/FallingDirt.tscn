@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cy6nlmgt1ughn"]
 
 [ext_resource type="PackedScene" uid="uid://cy277iegdegrc" path="res://falling_materials/falling_material.tscn" id="1_gucu7"]
-[ext_resource type="Script" path="res://falling_materials/falling_dirt.gd" id="2_7rf43"]
+[ext_resource type="Script" uid="uid://bxqefy2akq6gs" path="res://falling_materials/falling_dirt.gd" id="2_7rf43"]
 [ext_resource type="Texture2D" uid="uid://cxlrsgeah3amg" path="res://assets/images/dirt_ball_01.png" id="3_hylk1"]
 [ext_resource type="Texture2D" uid="uid://dvjbccko1tt3a" path="res://assets/images/sphere_normal_02.png" id="4_0kjfm"]
 [ext_resource type="AudioStream" uid="uid://cfu0u3bh62vos" path="res://assets/audio/thumpyNoise.wav" id="4_4yeko"]

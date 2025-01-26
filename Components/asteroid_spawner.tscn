@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b4rgjc81bc640"]
 
-[ext_resource type="Script" path="res://Components/asteroid_spawner.gd" id="1_1igrn"]
+[ext_resource type="Script" uid="uid://co3m5rd2b3an8" path="res://Components/asteroid_spawner.gd" id="1_1igrn"]
 [ext_resource type="Texture2D" uid="uid://7man5oic1kr4" path="res://icon.svg" id="2_sdm7x"]
 
 [node name="AsteroidSpawner" type="Node2D"]

@@ -1,8 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://cu54161nvbbk0"]
+[gd_scene load_steps=29 format=3 uid="uid://cu54161nvbbk0"]
 
-[ext_resource type="Script" path="res://GUI/button_bar.gd" id="1_1ethb"]
+[ext_resource type="Script" uid="uid://0g6hsfk5ckvv" path="res://GUI/button_bar.gd" id="1_1ethb"]
 [ext_resource type="Texture2D" uid="uid://ts54jk1m00dy" path="res://assets/images/buttons/dirt_normal.png" id="2_xyiho"]
-[ext_resource type="Script" path="res://GUI/material_button.gd" id="3_d3sln"]
+[ext_resource type="Script" uid="uid://bnwr3muptatfu" path="res://GUI/material_button.gd" id="3_d3sln"]
 [ext_resource type="Texture2D" uid="uid://mf7bbkev0otp" path="res://assets/images/buttons/dirt_pressed.png" id="3_drc5y"]
 [ext_resource type="PackedScene" uid="uid://cy6nlmgt1ughn" path="res://falling_materials/FallingDirt.tscn" id="4_3t81s"]
 [ext_resource type="Texture2D" uid="uid://cbkwwq0lpyvp7" path="res://assets/images/buttons/dirt_hover.png" id="4_ixekl"]
@@ -17,6 +17,11 @@
 [ext_resource type="Texture2D" uid="uid://ocknukolqdou" path="res://assets/images/buttons/water_pressed.png" id="14_e4dvk"]
 [ext_resource type="Texture2D" uid="uid://c46ju3efhbgma" path="res://assets/images/buttons/water_hovered.png" id="15_cerva"]
 [ext_resource type="Texture2D" uid="uid://ccbs166aa6ty2" path="res://assets/images/buttons/water_disabled.png" id="16_naan7"]
+[ext_resource type="Texture2D" uid="uid://csg3saetu8ksf" path="res://assets/images/buttons/song_normal.png" id="18_c3qqt"]
+[ext_resource type="Texture2D" uid="uid://bx1xehow6ik52" path="res://assets/images/buttons/song_pressed.png" id="19_dkh6u"]
+[ext_resource type="Texture2D" uid="uid://h87pcojvut0u" path="res://assets/images/buttons/song_hovered.png" id="20_ey5hh"]
+[ext_resource type="Texture2D" uid="uid://b4e2yple8s21e" path="res://assets/images/buttons/song_disabled.png" id="21_nqd2l"]
+[ext_resource type="PackedScene" uid="uid://cb26tvfhkhf46" path="res://falling_materials/WhaleSong.tscn" id="22_dkh6u"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_iya1n"]
 device = -1
@@ -34,13 +39,13 @@ unicode = 50
 [sub_resource type="Shortcut" id="Shortcut_mvd7y"]
 events = [SubResource("InputEventKey_ltas8")]
 
-[sub_resource type="InputEventKey" id="InputEventKey_q26je"]
+[sub_resource type="InputEventKey" id="InputEventKey_ghkvi"]
 device = -1
-keycode = 51
-unicode = 51
+keycode = 52
+unicode = 52
 
 [sub_resource type="Shortcut" id="Shortcut_2iod2"]
-events = [SubResource("InputEventKey_q26je")]
+events = [SubResource("InputEventKey_ghkvi")]
 
 [node name="ButtonBar" type="GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -54,7 +59,7 @@ offset_top = -91.0
 offset_right = 98.5
 grow_horizontal = 2
 grow_vertical = 0
-columns = 3
+columns = 4
 script = ExtResource("1_1ethb")
 
 [node name="SandButton" type="TextureButton" parent="."]
@@ -103,6 +108,21 @@ stretch_mode = 3
 script = ExtResource("3_d3sln")
 material_scene = ExtResource("7_40mey")
 
+[node name="SingButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+shortcut = SubResource("Shortcut_2iod2")
+texture_normal = ExtResource("18_c3qqt")
+texture_pressed = ExtResource("19_dkh6u")
+texture_hover = ExtResource("20_ey5hh")
+texture_disabled = ExtResource("21_nqd2l")
+stretch_mode = 3
+script = ExtResource("3_d3sln")
+material_scene = ExtResource("22_dkh6u")
+
 [node name="SandLabel" type="Label" parent="."]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
@@ -119,4 +139,10 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "3 Water"
+horizontal_alignment = 1
+
+[node name="CallLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "4 Sing"
 horizontal_alignment = 1

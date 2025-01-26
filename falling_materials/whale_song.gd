@@ -1,0 +1,25 @@
+## Space Whale can sing.
+# if you sing, does it summon asteroids?
+
+extends Node2D
+
+@export var short_name : String
+@export_color_no_alpha var color : Color
+var contacts : Array = []
+var linear_velocity : Vector2 = Vector2.ZERO
+const cooldown: int = 2000 # in msec
+
+func _ready():
+	$AnimationPlayer.play("sing")
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "sing":
+		var asteroid_spawner = Globals.current_solar_system.asteroid_spawner
+		if asteroid_spawner != null:
+			asteroid_spawner.spawn_asteroids(7)
+			
+		call_deferred("queue_free")
+		
+static func get_cooldown():
+	return cooldown

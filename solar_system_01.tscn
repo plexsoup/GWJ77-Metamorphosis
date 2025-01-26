@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bnciv3ns4hnpe"]
 
-[ext_resource type="Script" path="res://solar_system.gd" id="1_ro5l3"]
+[ext_resource type="Script" uid="uid://6fbxgkqg7ddu" path="res://solar_system.gd" id="1_ro5l3"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="3_yixqd"]
 [ext_resource type="PackedScene" uid="uid://1xo8d3t1gu6t" path="res://Objects/planet.tscn" id="4_dqbs5"]
 [ext_resource type="PackedScene" uid="uid://dp667gm1sla5" path="res://Objects/alien_space_ship.tscn" id="5_sv0mm"]

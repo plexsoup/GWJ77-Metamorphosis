@@ -5,7 +5,7 @@ class_name solar_system extends Node2D
 
 @onready var sun = $Sun
 
-
+@onready var asteroid_spawner = $AsteroidSpawner
 
 func _init():
 	Globals.current_solar_system = self

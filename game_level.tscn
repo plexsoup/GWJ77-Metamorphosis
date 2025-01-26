@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bi1ti5anfdrh2"]
 
-[ext_resource type="Script" path="res://game_level.gd" id="1_4sps6"]
+[ext_resource type="Script" uid="uid://dboaqovhywuxo" path="res://game_level.gd" id="1_4sps6"]
 [ext_resource type="PackedScene" uid="uid://dq1k2g4vbkopg" path="res://GUI/hud.tscn" id="2_ao1wb"]
 [ext_resource type="AudioStream" uid="uid://cn1un0o3sddsx" path="res://assets/audio/SpaceWhale_bgMusic.ogg" id="4_6kes6"]
 [ext_resource type="PackedScene" uid="uid://c44n3b33v6mob" path="res://space_whale.tscn" id="4_ixxt3"]
