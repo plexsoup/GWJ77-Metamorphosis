@@ -34,7 +34,8 @@ func spawn_planet(location):
 	new_planet.position = location # I think we have to use position, not global position, if we want to do this before add_child.
 	call_deferred("add_child", new_planet)
 	
-	#new_planet.global_position = location
+	if randf() < 1:
+		new_planet.gestating = true
 	
 func get_nearby_planets(location : Vector2):
 	var nearby_planets = []

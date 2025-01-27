@@ -86,3 +86,5 @@ position = Vector2(2549, -3707)
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("8_gyogk")]
 position = Vector2(-4733, -3327)
+
+[node name="BabyWhales" type="Node2D" parent="."]

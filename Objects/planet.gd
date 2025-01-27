@@ -16,7 +16,13 @@ signal civilization_created
 
 var has_atmosphere : bool = false
 var has_civilization : bool = false
-
+var spawned_by_player : bool = false
+var gestating : bool = false:
+	set(v):
+		gestating = v
+		update_planet_sprite()
+	get:
+		return gestating
 
 func _ready():
 	rotation_speed = randf_range(0.2, 0.4)
@@ -24,7 +30,9 @@ func _ready():
 	atmosphere_created.connect(Globals.current_level._on_atmosphere_created)
 	civilization_created.connect(Globals.current_level._on_civilization_created)
 
-	
+func update_planet_sprite():
+	if gestating:
+		$PlanetSprite.texture = preload("res://assets/images/gestating_planet.png")
 
 func get_radius():
 	return $CollisionShape2D.shape.radius
@@ -75,18 +83,26 @@ func _on_asteroid_impacted(_asteroid, collision_point, collision_normal):
 	spawn_crack(collision_point, collision_normal)
 
 func spawn_crack(collision_point, _collision_normal):
-	if $Cracks.get_child_count() < 12:
+	if $Cracks.get_child_count() < 6:
 		var new_crack = preload("res://Objects/cracks.tscn").instantiate()
 		$Cracks.add_child(new_crack)
 		new_crack.rotation = (collision_point - global_position).angle()
 	else:
-		# TODO: consider destroying planet altogether.
-		pass
+		if gestating:
+			hatch()
 		
 func wobble():
 	var tween = create_tween()
 	tween.tween_property($PlanetSprite, "scale", Vector2(1.2, 1.2), 0.2).set_ease(Tween.EASE_IN)
 	tween.tween_property($PlanetSprite, "scale", Vector2(1.3, 1.3), 0.1).set_ease(Tween.EASE_OUT)
+
+
+func hatch():
+	if not Globals.current_solar_system:
+		return
+		
+	var new_whale = preload("res://Objects/baby_whale.tscn").instantiate()
+	Globals.current_solar_system.get_node("BabyWhales").add_child(new_whale)
 
 	
 func _on_spawn_timer_timeout() -> void:

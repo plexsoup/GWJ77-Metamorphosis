@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cdg8lupbd6hwv"]
 
-[ext_resource type="Script" path="res://solar_system.gd" id="1_jeri3"]
+[ext_resource type="Script" uid="uid://6fbxgkqg7ddu" path="res://solar_system.gd" id="1_jeri3"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="3_7mvpl"]
 [ext_resource type="PackedScene" uid="uid://1xo8d3t1gu6t" path="res://Objects/planet.tscn" id="4_il8by"]
 [ext_resource type="PackedScene" uid="uid://dp667gm1sla5" path="res://Objects/alien_space_ship.tscn" id="5_kvnxp"]
@@ -141,3 +141,5 @@ color = Color(0.0748453, 0.0748453, 0.0748453, 1)
 position = Vector2(5056, 1451)
 
 [node name="Projectiles" type="Node2D" parent="."]
+
+[node name="BabyWhales" type="Node2D" parent="."]

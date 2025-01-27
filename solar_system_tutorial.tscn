@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://brkhjtjpju751"]
 
-[ext_resource type="Script" path="res://solar_system.gd" id="1_tue1h"]
+[ext_resource type="Script" uid="uid://6fbxgkqg7ddu" path="res://solar_system.gd" id="1_tue1h"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="2_8ewxs"]
 [ext_resource type="PackedScene" uid="uid://dici5hlk748wr" path="res://Objects/stars.tscn" id="6_jqogn"]
 [ext_resource type="PackedScene" uid="uid://6cr4d3f0d4q7" path="res://Objects/black_hole.tscn" id="7_w2ssd"]
@@ -47,5 +47,7 @@ position = Vector2(1275, 600)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.0748453, 0.0748453, 0.0748453, 1)
+
+[node name="BabyWhales" type="Node2D" parent="."]
 
 [editable path="Sun"]

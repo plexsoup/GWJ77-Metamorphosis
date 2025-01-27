@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bqawac16mcp8y"]
 
-[ext_resource type="Script" path="res://solar_system.gd" id="1_48jnh"]
+[ext_resource type="Script" uid="uid://6fbxgkqg7ddu" path="res://solar_system.gd" id="1_48jnh"]
 [ext_resource type="PackedScene" uid="uid://bb8wgqut4ydhh" path="res://Objects/sun.tscn" id="2_ddo0h"]
 [ext_resource type="PackedScene" uid="uid://1xo8d3t1gu6t" path="res://Objects/planet.tscn" id="3_tnrug"]
 [ext_resource type="PackedScene" uid="uid://dp667gm1sla5" path="res://Objects/alien_space_ship.tscn" id="4_q6p6m"]
@@ -98,3 +98,5 @@ position = Vector2(-3308, -3928)
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("8_f815v")]
 position = Vector2(-4733, -3327)
+
+[node name="BabyWhales" type="Node2D" parent="."]

@@ -17,7 +17,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "sing":
 		var asteroid_spawner = Globals.current_solar_system.asteroid_spawner
 		if asteroid_spawner != null:
-			asteroid_spawner.spawn_asteroids(7)
+			asteroid_spawner.spawn_asteroids(7, global_position)
 			
 		call_deferred("queue_free")
 		

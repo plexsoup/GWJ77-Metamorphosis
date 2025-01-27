@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cu54161nvbbk0"]
+[gd_scene load_steps=31 format=3 uid="uid://cu54161nvbbk0"]
 
 [ext_resource type="Script" uid="uid://0g6hsfk5ckvv" path="res://GUI/button_bar.gd" id="1_1ethb"]
 [ext_resource type="Texture2D" uid="uid://ts54jk1m00dy" path="res://assets/images/buttons/dirt_normal.png" id="2_xyiho"]
@@ -39,13 +39,21 @@ unicode = 50
 [sub_resource type="Shortcut" id="Shortcut_mvd7y"]
 events = [SubResource("InputEventKey_ltas8")]
 
-[sub_resource type="InputEventKey" id="InputEventKey_ghkvi"]
+[sub_resource type="InputEventKey" id="InputEventKey_dkh6u"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_2iod2"]
+events = [SubResource("InputEventKey_dkh6u")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ey5hh"]
 device = -1
 keycode = 52
 unicode = 52
 
-[sub_resource type="Shortcut" id="Shortcut_2iod2"]
-events = [SubResource("InputEventKey_ghkvi")]
+[sub_resource type="Shortcut" id="Shortcut_nqd2l"]
+events = [SubResource("InputEventKey_ey5hh")]
 
 [node name="ButtonBar" type="GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -114,7 +122,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 toggle_mode = true
-shortcut = SubResource("Shortcut_2iod2")
+shortcut = SubResource("Shortcut_nqd2l")
 texture_normal = ExtResource("18_c3qqt")
 texture_pressed = ExtResource("19_dkh6u")
 texture_hover = ExtResource("20_ey5hh")

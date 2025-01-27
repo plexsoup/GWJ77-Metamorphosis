@@ -19,13 +19,14 @@ func spawn_asteroid():
 	var rand_y = randf_range(-256, 256)
 	new_asteroid.global_position = global_position + Vector2(rand_x, rand_y)
 	Globals.current_solar_system.get_node("Asteroids").add_child(new_asteroid)
-	new_asteroid.linear_velocity = vector_to_sun.rotated(deviation) * asteroid_speed
+	new_asteroid.linear_velocity = transform.x.rotated(deviation) * asteroid_speed
 
-func spawn_asteroids(num):
+func spawn_asteroids(num, location):
+	look_at(location)
 	for i in range(num):
 		spawn_asteroid()
 	
 
 func _on_spawn_timer_timeout() -> void:
 	if randf() < likelihood:
-		spawn_asteroids(num_asteroids_per_spawn + randi_range(-margin_of_error, margin_of_error))
+		spawn_asteroids(num_asteroids_per_spawn + randi_range(-margin_of_error, margin_of_error), Globals.current_solar_system.sun.global_position)

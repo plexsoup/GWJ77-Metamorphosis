@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds8ndrdkq7f2i"]
+
+[ext_resource type="Script" path="res://Objects/baby_whale.gd" id="1_h5xvq"]
+[ext_resource type="Texture2D" uid="uid://dscun6vdihn0a" path="res://assets/images/baby_whale_breakout_paper_doll.png" id="1_w16yc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ykrxs"]
+radius = 57.6882
+height = 166.362
+
+[node name="BabyWhale" type="Node2D"]
+script = ExtResource("1_h5xvq")
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(0.33, 0.33)
+
+[node name="Head" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("1_w16yc")
+region_enabled = true
+region_rect = Rect2(0, 0, 395.978, 381.662)
+
+[node name="Body" type="Sprite2D" parent="Sprites/Head"]
+show_behind_parent = true
+position = Vector2(68, 62)
+texture = ExtResource("1_w16yc")
+offset = Vector2(36, 29)
+region_enabled = true
+region_rect = Rect2(421.718, 89.351, 346.282, 224.58)
+
+[node name="Tail" type="Sprite2D" parent="Sprites/Head/Body"]
+show_behind_parent = true
+position = Vector2(191, 40)
+texture = ExtResource("1_w16yc")
+offset = Vector2(56, -81)
+region_enabled = true
+region_rect = Rect2(533.133, 356.664, 161.667, 244.336)
+
+[node name="Fin_F" type="Sprite2D" parent="Sprites/Head"]
+position = Vector2(59, 179)
+texture = ExtResource("1_w16yc")
+region_enabled = true
+region_rect = Rect2(229.847, 435.688, 101.333, 159.333)
+
+[node name="Fin_B" type="Sprite2D" parent="Sprites/Head"]
+show_behind_parent = true
+position = Vector2(-84, 160)
+texture = ExtResource("1_w16yc")
+region_enabled = true
+region_rect = Rect2(88.4873, 441.489, 86.3333, 130.667)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(15, 5)
+rotation = -1.10781
+shape = SubResource("CapsuleShape2D_ykrxs")
