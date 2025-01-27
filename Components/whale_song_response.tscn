@@ -1,0 +1,244 @@
+[gd_scene load_steps=10 format=3 uid="uid://cub42uxiox12x"]
+
+[ext_resource type="Texture2D" uid="uid://e0aja82wsd5h" path="res://assets/images/song_1.png" id="1_45muc"]
+[ext_resource type="Script" uid="uid://bw2dldprlj2vs" path="res://Components/whale_song_response.gd" id="1_rhe3k"]
+[ext_resource type="AudioStream" uid="uid://cu0hpjuda1ewd" path="res://assets/audio/whale_song_01.wav" id="2_rhe3k"]
+[ext_resource type="AudioStream" uid="uid://doogixuheendi" path="res://assets/audio/whale_song_02.wav" id="3_qb81a"]
+
+[sub_resource type="Animation" id="Animation_qb81a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront3:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rhe3k"]
+resource_name = "respond"
+length = 2.25
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.96),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.25, 1.5, 2.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(3, 3), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 1.75, 2.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(3, 3), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/Path2D/PathFollow2D/Waves/Wavefront3:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.75, 2, 2.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(3, 3), Vector2(1, 1)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"send_asteroids"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ef1wf"]
+_data = {
+&"RESET": SubResource("Animation_qb81a"),
+&"respond": SubResource("Animation_rhe3k")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sjh1r"]
+random_pitch = 1.1
+random_volume_offset_db = 3.0
+streams_count = 2
+stream_0/stream = ExtResource("2_rhe3k")
+stream_1/stream = ExtResource("3_qb81a")
+
+[sub_resource type="Curve2D" id="Curve2D_rhe3k"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 24, 33, 0, 0, 0, 0, 1129, 32, 0, 0, 0, 0, 1135, 640, 0, 0, 0, 0, 29, 643, 0, 0, 0, 0, 25, 55)
+}
+point_count = 5
+
+[node name="WhaleSongResponse" type="Node2D"]
+script = ExtResource("1_rhe3k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_ef1wf")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
+stream = SubResource("AudioStreamRandomizer_sjh1r")
+volume_db = -7.0
+
+[node name="Path2D" type="Path2D" parent="CanvasLayer"]
+curve = SubResource("Curve2D_rhe3k")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="CanvasLayer/Path2D"]
+position = Vector2(190.104, 32.8497)
+rotation = -0.000904977
+progress = 166.11
+rotates = false
+
+[node name="Waves" type="Node2D" parent="CanvasLayer/Path2D/PathFollow2D"]
+modulate = Color(0.816315, 0.126327, 0.398042, 1)
+
+[node name="Wavefront" type="Sprite2D" parent="CanvasLayer/Path2D/PathFollow2D/Waves"]
+visible = false
+position = Vector2(0.235724, -0.764933)
+rotation = 0.881845
+texture = ExtResource("1_45muc")
+offset = Vector2(21.0048, -28.6706)
+
+[node name="Wavefront2" type="Sprite2D" parent="CanvasLayer/Path2D/PathFollow2D/Waves"]
+visible = false
+position = Vector2(-0.339489, 0.0962124)
+rotation = 0.881845
+texture = ExtResource("1_45muc")
+offset = Vector2(20.7057, -29.662)
+
+[node name="Wavefront3" type="Sprite2D" parent="CanvasLayer/Path2D/PathFollow2D/Waves"]
+visible = false
+position = Vector2(0.809651, -0.189972)
+rotation = 0.881845
+texture = ExtResource("1_45muc")
+offset = Vector2(20.1961, -28.5931)
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer"]
+position = Vector2(557, 328)
+
+[connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

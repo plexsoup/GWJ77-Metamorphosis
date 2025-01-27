@@ -8,17 +8,23 @@ extends Node2D
 var contacts : Array = []
 var linear_velocity : Vector2 = Vector2.ZERO
 const cooldown: int = 2000 # in msec
+#var last_response_position : Vector2
+#var last_player_pos : Vector2
 
 func _ready():
 	$AnimationPlayer.play("sing")
+	#trigger_response()
+
+
+func trigger_response():
+	# Set the position of the response
+	var response = preload("res://Components/whale_song_response.tscn").instantiate()
+	add_sibling(response)
+	response.activate()
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "sing":
-		var asteroid_spawner = Globals.current_solar_system.asteroid_spawner
-		if asteroid_spawner != null:
-			asteroid_spawner.spawn_asteroids(7, global_position)
-			
 		call_deferred("queue_free")
 		
 static func get_cooldown():

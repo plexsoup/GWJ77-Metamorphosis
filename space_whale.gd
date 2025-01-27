@@ -165,7 +165,12 @@ func spawn_projectile(projectile_scene):
 	
 	if Globals.current_solar_system != null and is_instance_valid(Globals.current_solar_system):
 		if Globals.current_solar_system.has_node("Projectiles"):
-			Globals.current_solar_system.get_node("Projectiles").add_child(new_projectile) 
+			if new_projectile.is_in_group("songs"):
+				Globals.current_player.add_child(new_projectile)
+				new_projectile.position = Vector2.ZERO
+				new_projectile.rotation = 0.0
+			else:
+				Globals.current_solar_system.get_node("Projectiles").add_child(new_projectile) 
 			new_projectile.linear_velocity = dir_vector * projectile_charge
 			# Project player's velocity onto the direction vector
 			var projected_velocity = linear_velocity.project(dir_vector)
