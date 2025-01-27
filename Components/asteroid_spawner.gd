@@ -30,7 +30,7 @@ func answer_whale_call(num, source_location, target_location):
 	global_position = source_location
 	look_at(target_location)
 	for i in range(num):
-		spawn_asteroid(speed * 5.0)
+		spawn_asteroid(speed * 3.0)
 	global_position = prev_position
 	
 

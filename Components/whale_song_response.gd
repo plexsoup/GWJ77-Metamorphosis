@@ -11,8 +11,9 @@ func send_asteroids():
 	var asteroid_spawner = Globals.current_solar_system.asteroid_spawner
 	if asteroid_spawner != null:
 		var dir = $CanvasLayer/Path2D/PathFollow2D/Waves.global_transform.x
-		var distance = Globals.current_player.linear_velocity.length() * 2.0
-		var spawn_position = Globals.current_player.global_position - (dir * distance)
+		var player_pos = Globals.current_player.global_position
+		var distance_from_player = (get_viewport_rect().size.x / max(get_viewport().get_camera_2d().zoom.x, 0.01)) * 0.67
+		var spawn_position = player_pos - (dir * distance_from_player)
 		asteroid_spawner.answer_whale_call(5, spawn_position, Globals.current_player.global_position)
 
 

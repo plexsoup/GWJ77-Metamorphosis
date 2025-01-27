@@ -8,10 +8,8 @@ script = ExtResource("1_1igrn")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 7.0
-autostart = true
 
 [node name="TemporarySprite" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("2_sdm7x")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

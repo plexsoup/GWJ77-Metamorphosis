@@ -15,13 +15,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if Engine.get_physics_frames() % 30 == 0:
-		free_if_out_of_bounds()
+	pass
+	#if Engine.get_physics_frames() % 60 == 0:
+		#free_if_out_of_bounds()
 
 func free_if_out_of_bounds():
-	var tolerance_sq = 8000*8000
-	if global_position.length_squared() > tolerance_sq:
-		call_deferred("queue_free")
+	if not $VisibleOnScreenEnabler2D.is_on_screen():
+		var tolerance_sq = 12000*12000
+		
+		if global_position.distance_squared_to(Globals.current_player.global_position) > tolerance_sq:
+			call_deferred("queue_free")
 	
 func update_comet_trail():
 	
@@ -70,4 +73,7 @@ func collide_with_planet(colliding_planet):
 		var collision_normal = contacts[collision_index][2]
 		colliding_planet._on_asteroid_impacted(self, collision_point, collision_normal)
 		explode()
-		
+
+
+func _on_offscreen_check_timer_timeout() -> void:
+	free_if_out_of_bounds()

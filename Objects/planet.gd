@@ -83,7 +83,7 @@ func _on_asteroid_impacted(_asteroid, collision_point, collision_normal):
 	spawn_crack(collision_point, collision_normal)
 
 func spawn_crack(collision_point, _collision_normal):
-	if $Cracks.get_child_count() < 6:
+	if $Cracks.get_child_count() < 4:
 		var new_crack = preload("res://Objects/cracks.tscn").instantiate()
 		$Cracks.add_child(new_crack)
 		new_crack.rotation = (collision_point - global_position).angle()
@@ -102,7 +102,12 @@ func hatch():
 		return
 		
 	var new_whale = preload("res://Objects/baby_whale.tscn").instantiate()
-	Globals.current_solar_system.get_node("BabyWhales").add_child(new_whale)
+	Globals.current_solar_system.get_node("BabyWhales").call_deferred("add_child", new_whale)
+	new_whale.global_position = global_position
+	break_planet()
+	
+func break_planet():
+	queue_free()
 
 	
 func _on_spawn_timer_timeout() -> void:
