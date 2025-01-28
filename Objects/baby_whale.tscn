@@ -1,13 +1,148 @@
-[gd_scene load_steps=4 format=3 uid="uid://ds8ndrdkq7f2i"]
+[gd_scene load_steps=7 format=3 uid="uid://ds8ndrdkq7f2i"]
 
-[ext_resource type="Script" path="res://Objects/baby_whale.gd" id="1_h5xvq"]
+[ext_resource type="Script" uid="uid://dad5k4q2s1q3y" path="res://Objects/baby_whale.gd" id="1_h5xvq"]
 [ext_resource type="Texture2D" uid="uid://dscun6vdihn0a" path="res://assets/images/baby_whale_breakout_paper_doll.png" id="1_w16yc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ykrxs"]
 radius = 57.6882
 height = 166.362
 
-[node name="BabyWhale" type="Node2D"]
+[sub_resource type="Animation" id="Animation_h5xvq"]
+resource_name = "swim"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Head/Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.340339, 0.0, -0.511381, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Head/Body/Tail:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.75, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.11287, -0.351676, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Head/Fin_F:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0322719, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.66897, -0.775774, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Head/Fin_B:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.811755, -0.1967, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Head:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.75, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0882694, 0.203617, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ykrxs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Head/Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Head/Body/Tail:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Head/Fin_F:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Head/Fin_B:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Head:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wvwxm"]
+_data = {
+&"RESET": SubResource("Animation_ykrxs"),
+&"swim": SubResource("Animation_h5xvq")
+}
+
+[node name="BabyWhale" type="Node2D" groups=["BabyWhales"]]
 script = ExtResource("1_h5xvq")
 
 [node name="Sprites" type="Node2D" parent="."]
@@ -20,30 +155,31 @@ region_rect = Rect2(0, 0, 395.978, 381.662)
 
 [node name="Body" type="Sprite2D" parent="Sprites/Head"]
 show_behind_parent = true
-position = Vector2(68, 62)
 texture = ExtResource("1_w16yc")
-offset = Vector2(36, 29)
+offset = Vector2(104, 91)
 region_enabled = true
 region_rect = Rect2(421.718, 89.351, 346.282, 224.58)
 
 [node name="Tail" type="Sprite2D" parent="Sprites/Head/Body"]
 show_behind_parent = true
-position = Vector2(191, 40)
+position = Vector2(251.697, 87.8478)
 texture = ExtResource("1_w16yc")
-offset = Vector2(56, -81)
+offset = Vector2(46.7269, -65.8175)
 region_enabled = true
 region_rect = Rect2(533.133, 356.664, 161.667, 244.336)
 
 [node name="Fin_F" type="Sprite2D" parent="Sprites/Head"]
-position = Vector2(59, 179)
+position = Vector2(84.8485, 133.333)
 texture = ExtResource("1_w16yc")
+offset = Vector2(-25.8485, 45.6667)
 region_enabled = true
 region_rect = Rect2(229.847, 435.688, 101.333, 159.333)
 
 [node name="Fin_B" type="Sprite2D" parent="Sprites/Head"]
 show_behind_parent = true
-position = Vector2(-84, 160)
+position = Vector2(-90.9091, 118.182)
 texture = ExtResource("1_w16yc")
+offset = Vector2(6.90908, 41.8182)
 region_enabled = true
 region_rect = Rect2(88.4873, 441.489, 86.3333, 130.667)
 
@@ -53,3 +189,9 @@ region_rect = Rect2(88.4873, 441.489, 86.3333, 130.667)
 position = Vector2(15, 5)
 rotation = -1.10781
 shape = SubResource("CapsuleShape2D_ykrxs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wvwxm")
+}
+autoplay = "swim"
