@@ -56,12 +56,20 @@ func explode():
 	asteroid_bits.global_transform = global_transform
 	call_deferred("queue_free")
 
+func inseminate(planet):
+	var new_sperm = preload("res://Objects/whale_sperm.tscn").instantiate()
+	new_sperm.planet = planet
+	planet.call_deferred("add_child", new_sperm)
+	
+	new_sperm.set_deferred("global_position", global_position)
+	new_sperm.set_deferred("rotation", global_position.angle_to_point(planet.global_position))
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("planets"):
 		collide_with_planet(body)
 	elif body.is_in_group("seeds"):
 		explode()
+		
 
 func collide_with_planet(colliding_planet):
 		var collision_index = 0
@@ -72,6 +80,8 @@ func collide_with_planet(colliding_planet):
 		var collision_point = contacts[collision_index][1]
 		var collision_normal = contacts[collision_index][2]
 		colliding_planet._on_asteroid_impacted(self, collision_point, collision_normal)
+		if colliding_planet.gestating:
+			inseminate(colliding_planet)
 		explode()
 
 

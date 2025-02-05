@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://1xo8d3t1gu6t"]
+[gd_scene load_steps=13 format=3 uid="uid://1xo8d3t1gu6t"]
 
 [ext_resource type="Script" uid="uid://b7evcdicytoxv" path="res://Objects/planet.gd" id="1_w8dfo"]
 [ext_resource type="Texture2D" uid="uid://gic25jsqv55w" path="res://assets/images/planet_01.png" id="2_xyomn"]
 [ext_resource type="Texture2D" uid="uid://5xj5v6eyhbjo" path="res://assets/images/cloud_rect_03.png" id="3_xdgo0"]
 [ext_resource type="Texture2D" uid="uid://dvjbccko1tt3a" path="res://assets/images/sphere_normal_02.png" id="3_yhpef"]
+[ext_resource type="Texture2D" uid="uid://cyt8v5b43xs8q" path="res://assets/images/whale_eggs.png" id="4_y3ikh"]
+[ext_resource type="AudioStream" uid="uid://cu0hpjuda1ewd" path="res://assets/audio/whale_song_01.wav" id="6_r6c6x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c3iww"]
 radius = 214.009
@@ -65,6 +67,10 @@ shape = SubResource("CircleShape2D_ipo4h")
 scale = Vector2(1.3, 1.3)
 texture = SubResource("CanvasTexture_2onwh")
 
+[node name="BabySprite" type="Sprite2D" parent="PlanetSprite"]
+visible = false
+texture = ExtResource("4_y3ikh")
+
 [node name="CloudSprites" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.580392)
 
@@ -99,7 +105,15 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[node name="BabyGrowthTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="HatchNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_r6c6x")
+pitch_scale = 2.0
+
 [connection signal="body_entered" from="Troposphere" to="." method="_on_troposphere_body_entered"]
 [connection signal="body_exited" from="Troposphere" to="." method="_on_troposphere_body_exited"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="FreezeTimer" to="." method="_on_freeze_timer_timeout"]
+[connection signal="timeout" from="BabyGrowthTimer" to="." method="_on_baby_growth_timer_timeout"]

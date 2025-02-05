@@ -23,16 +23,36 @@ var gestating : bool = false:
 		update_planet_sprite()
 	get:
 		return gestating
+var fertilized : bool = false
+
 
 func _ready():
 	rotation_speed = randf_range(0.2, 0.4)
 	$Troposphere/TroposphereBG.hide()
 	atmosphere_created.connect(Globals.current_level._on_atmosphere_created)
 	civilization_created.connect(Globals.current_level._on_civilization_created)
+	update_planet_sprite()
 
 func update_planet_sprite():
 	if gestating:
 		$PlanetSprite.texture = preload("res://assets/images/gestating_planet.png")
+		$PlanetSprite/BabySprite.visible = true
+	else:
+		$PlanetSprite/BabySprite.visible = false
+
+func fertilize_egg():
+	var baby_sprite = $PlanetSprite/BabySprite
+	baby_sprite.texture = preload("res://assets/images/baby_whale_intact.png")
+	baby_sprite.scale = Vector2(0.1, 0.1)
+	fertilized = true
+	$BabyGrowthTimer.start()
+	#hatch()
+
+func advance_trimester():
+	var baby_sprite = $PlanetSprite/BabySprite
+	baby_sprite.scale += Vector2(0.1,0.1)
+	if baby_sprite.scale.x > 0.4:
+		hatch()
 
 func get_radius():
 	return $CollisionShape2D.shape.radius
@@ -88,7 +108,7 @@ func spawn_crack(collision_point, _collision_normal):
 		$Cracks.add_child(new_crack)
 		new_crack.rotation = (collision_point - global_position).angle()
 	else:
-		if gestating:
+		if gestating and fertilized:
 			hatch()
 		
 func wobble():
@@ -104,7 +124,18 @@ func hatch():
 	var new_whale = preload("res://Objects/baby_whale.tscn").instantiate()
 	Globals.current_solar_system.get_node("BabyWhales").call_deferred("add_child", new_whale)
 	new_whale.global_position = global_position
+
+	spawn_hatch_noise()
 	break_planet()
+
+func spawn_hatch_noise():
+	# because we want it to outlast the planet
+	var new_noise = $HatchNoise.duplicate()
+	new_noise.finished.connect(new_noise.queue_free)
+	add_sibling(new_noise)
+	new_noise.global_position = global_position
+	new_noise.play()
+
 	
 func break_planet():
 	queue_free()
@@ -130,4 +161,11 @@ func _on_troposphere_body_entered(body: Node2D) -> void:
 func _on_troposphere_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		body._on_exited_planet_atmosphere(self)
-	
+
+func _on_whale_sperm_reached_center():
+	fertilize_egg()
+
+
+func _on_baby_growth_timer_timeout() -> void:
+	if fertilized:
+		advance_trimester()

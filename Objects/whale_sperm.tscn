@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://fe8tl5pukvev"]
+
+[ext_resource type="Texture2D" uid="uid://dnc21rj1sx7pc" path="res://assets/images/whale_sperm.png" id="1_lgluf"]
+[ext_resource type="Script" uid="uid://bei0tu68mopqr" path="res://Objects/whale_sperm.gd" id="1_uvjjm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uvjjm"]
+radius = 32.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvjjm"]
+atlas = ExtResource("1_lgluf")
+region = Rect2(0, 0, 411, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyf6f"]
+atlas = ExtResource("1_lgluf")
+region = Rect2(0, 159, 411, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nbi0"]
+atlas = ExtResource("1_lgluf")
+region = Rect2(0, 318, 411, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28wfg"]
+atlas = ExtResource("1_lgluf")
+region = Rect2(0, 477, 411, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wy71"]
+atlas = ExtResource("1_lgluf")
+region = Rect2(0, 636, 411, 142)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nnrjx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvjjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyf6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nbi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28wfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wy71")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 6.0
+}]
+
+[node name="WhaleSperm" type="Node2D"]
+z_index = 1
+script = ExtResource("1_uvjjm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_uvjjm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_nnrjx")
+animation = &"swim"
+autoplay = "swim"
+frame_progress = 0.264923
+offset = Vector2(-138, -6)
+flip_h = true
